@@ -1,28 +1,47 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+// Core
+import React, { FunctionComponent, useState, createContext } from 'react';
+import { BrowserRouter as Router, Route, Link, Switch, Redirect } from 'react-router-dom';
+// Styles
+import './styles/normalize.css';
+import './styles/base.scss';
+// Pages
+import LandingPage from './pages/LandingPage';
+import LocationsPage from './pages/LocationsPage';
+import FaqPage from './pages/FaqPage';
+import ContactPage from './pages/ContactPage';
+import ListPage from './pages/ListPage';
+import NondiscriminationPage from './pages/NondiscriminationPage';
+// Layout Components
+import PageWrapper from './layout/PageWrapper';
+import PrimaryNav from './layout/PrimaryNav';
+import MobileNav from './layout/MobileNav';
+// Global Contexts
+export const MobileNavCtx = createContext<any[]>([]);
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.tsx</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
-}
+const App: FunctionComponent = () => {
+  const [mobileNavIsOpen, setMobileNavIsOpen] = useState(false);
+
+  return (
+    <MobileNavCtx.Provider value={[mobileNavIsOpen, setMobileNavIsOpen]}>
+      <Router>
+        <Switch>
+          <PageWrapper>
+            <PrimaryNav />
+            <MobileNav />
+            <Switch>
+              <Route path="/" exact component={LandingPage} />
+              <Route path="/locations/" component={LocationsPage} />
+              <Route path="/faq/" component={FaqPage} />
+              <Route path="/contact/" component={ContactPage} />
+              <Route path="/list/" component={ListPage} />
+              <Route path="/nondiscrimination/" component={NondiscriminationPage} />
+              <Route path="/" component={LandingPage} />
+            </Switch>
+          </PageWrapper>
+        </Switch>
+      </Router>
+    </MobileNavCtx.Provider>
+  );
+};
 
 export default App;

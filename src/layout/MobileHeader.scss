@@ -1,0 +1,47 @@
+@import '../styles/variables.scss';
+
+#MobileHeader {
+  z-index: 800;
+  width: 100%;
+  // min-height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 12px;
+
+  background-color: white;
+  box-shadow: 0px 4px 12px rgba(91, 103, 112, 0.25);
+
+  text-align: center;
+
+  .open-nav-btn {
+    appearance: none;
+    outline: none;
+    padding: 4px;
+    margin: 12px 0;
+    border: none;
+    background: none;
+    flex-shrink: 0;
+
+    i {
+      color: $grey600;
+    }
+  }
+
+  .content {
+    flex: 1;
+
+    h1 {
+      margin-right: -24px;
+      pointer-events: none;
+
+      font-size: 22px;
+      color: $grey700;
+    }
+  }
+
+  // Hide on large screens
+  @media screen and (min-width: $break-md) {
+    display: none;
+  }
+}

@@ -1,0 +1,25 @@
+@import './variables.scss';
+
+html,
+body,
+#root {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  font-family: museo-sans-rounded, sans-serif;
+  background-color: $grey000;
+  color: $grey900;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+  color: $secondary500;
+}
+button {
+  cursor: pointer;
+}

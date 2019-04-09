@@ -1,0 +1,114 @@
+@import '../styles/variables.scss';
+
+#MobileNav {
+  pointer-events: none;
+  &.open {
+    pointer-events: auto;
+  }
+
+  .nav-fader {
+    z-index: 999;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: $grey600;
+    opacity: 0;
+
+    transition: opacity 200ms;
+    &.open {
+      opacity: 0.4;
+      transition: opacity 300ms;
+    }
+  }
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  .nav-wrapper {
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    right: -300px;
+    height: 100%;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: white;
+    box-shadow: 4px 0px 12px rgba(91, 103, 112, 0.25);
+
+    transition: transform 200ms cubic-bezier(0.4, 0, 1, 1);
+    &.open {
+      transform: translateX(-300px);
+      transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);
+    }
+
+    .close-nav-btn {
+      appearance: none;
+      outline: none;
+      padding: 4px;
+      border: none;
+      background: none;
+
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      i {
+        color: $grey600;
+      }
+    }
+
+    .logo-link {
+      img {
+        width: 156px;
+        margin: 32px 0 24px;
+      }
+    }
+
+    .nav-links {
+      flex: 1;
+      width: 100%;
+
+      .nav-link {
+        display: block;
+        width: 100%;
+        padding: 18px 16px 18px 26px;
+
+        font-size: 22px;
+        font-weight: bold;
+        text-decoration: none;
+        color: $grey500;
+        i {
+          margin-right: 8px;
+          color: $grey200;
+        }
+
+        &.active {
+          background-color: $primary500;
+          color: white;
+          i {
+            color: $primary900;
+          }
+        }
+      }
+    }
+
+    .nav-footer {
+      width: 100%;
+      padding: 12px 24px 16px;
+
+      background-color: $grey600;
+      color: white;
+    }
+  }
+
+  // Hide on large screens
+  @media screen and (min-width: $break-md) {
+    display: none;
+  }
+}
