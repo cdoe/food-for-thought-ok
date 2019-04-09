@@ -5,6 +5,8 @@ import { Link, NavLink } from 'react-router-dom';
 import './PrimaryNav.scss';
 // Images
 import logo from '../img/food-for-thought-logo-simple.png';
+// Components
+import LanguageSelector from './LanguageSelector';
 
 // Component
 const PrimaryNav: FunctionComponent = () => {
@@ -29,7 +31,7 @@ const PrimaryNav: FunctionComponent = () => {
           Contact
         </NavLink>
       </div>
-      <div className="language-switcher">Select language</div>
+      <LanguageSelector />
     </div>
   );
 };

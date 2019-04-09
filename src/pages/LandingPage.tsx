@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom';
 // Styles
 import './LandingPage.scss';
 // Components
-import Icon from '../components/Icon';
 import MobileHeader from '../layout/MobileHeader';
+import LanguageSelector from '../layout/LanguageSelector';
 import PageBody from '../layout/PageBody';
+import Icon from '../components/Icon';
 // Images
 import logo from '../img/food-for-thought-logo.png';
 
@@ -14,7 +15,9 @@ import logo from '../img/food-for-thought-logo.png';
 const LandingPage: FunctionComponent = () => {
   return (
     <Fragment>
-      <MobileHeader />
+      <MobileHeader>
+        <LanguageSelector />
+      </MobileHeader>
       <PageBody>
         <div id="LandingPage">
           <img className="logo" src={logo} alt="Food for Thought OK - logo" />

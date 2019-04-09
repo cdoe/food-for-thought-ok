@@ -100,10 +100,14 @@
 
     .nav-footer {
       width: 100%;
-      padding: 12px 24px 16px;
+      padding: 12px 24px 24px;
 
-      background-color: $grey600;
-      color: white;
+      background-color: $grey000;
+      .select-language {
+        color: $grey300;
+        font-size: 14px;
+        margin: 0 0 12px 4px;
+      }
     }
   }
 

@@ -8,6 +8,7 @@ import './MobileNav.scss';
 import Icon from '../components/Icon';
 // Images
 import logo from '../img/food-for-thought-logo.png';
+import LanguageSelector from './LanguageSelector';
 
 // Component
 const MobileNav: FunctionComponent = () => {
@@ -82,7 +83,10 @@ const MobileNav: FunctionComponent = () => {
           </NavLink>
         </div>
         {/* Footer with language selector */}
-        <div className="nav-footer">Select language:</div>
+        <div className="nav-footer">
+          <div className="select-language">Select language:</div>
+          <LanguageSelector />
+        </div>
       </div>
     </div>
   );

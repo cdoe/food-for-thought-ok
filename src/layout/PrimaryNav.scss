@@ -72,10 +72,6 @@
     }
   }
 
-  .language-switcher {
-    flex-shrink: 0;
-  }
-
   // Show on larger screens
   @media screen and (min-width: $break-md) {
     display: flex;

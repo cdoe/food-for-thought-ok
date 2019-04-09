@@ -1,0 +1,46 @@
+@import '../styles/variables.scss';
+
+#LanguageSelector {
+  flex-shrink: 0;
+  text-align: left;
+  button {
+    position: relative;
+    appearance: none;
+    outline: none;
+    padding: 4px;
+    margin: 0 4px;
+
+    border: none;
+    background: none;
+    color: $grey400;
+    font-size: 16px;
+
+    &:hover {
+      color: $grey500;
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background-color: $grey100;
+      }
+    }
+
+    &.active {
+      color: $grey800;
+      font-weight: bold;
+
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 100%;
+        height: 6px;
+        background-color: $secondary500;
+      }
+    }
+  }
+}
