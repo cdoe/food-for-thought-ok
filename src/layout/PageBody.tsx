@@ -5,7 +5,7 @@ import './PageBody.scss';
 
 // Component
 const PageBody: FunctionComponent = props => {
-  return <main id="PageBody">{props.children}</main>;
+  return <main className="PageBody">{props.children}</main>;
 };
 
 // Export

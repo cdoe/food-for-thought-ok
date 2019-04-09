@@ -1,6 +1,7 @@
 // Core
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, Suspense } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 // Styles
 import './PrimaryNav.scss';
 // Images
@@ -10,8 +11,10 @@ import LanguageSelector from './LanguageSelector';
 
 // Component
 const PrimaryNav: FunctionComponent = () => {
+  const { t } = useTranslation();
+
   return (
-    <div id="PrimaryNav">
+    <div className="PrimaryNav">
       {/* Logo */}
       <Link to="/" className="logo-link">
         <img src={logo} alt="Food for Thought OK - logo" />
@@ -20,15 +23,15 @@ const PrimaryNav: FunctionComponent = () => {
       <div className="nav-links">
         {/* Map */}
         <NavLink className="nav-link" to="/locations">
-          Locations
+          {t('nav.locations')}
         </NavLink>
         {/* FAQ */}
         <NavLink className="nav-link" to="/faq">
-          FAQ
+          {t('nav.faq')}
         </NavLink>
         {/* Contact */}
         <NavLink className="nav-link" to="/contact">
-          Contact
+          {t('nav.contact')}
         </NavLink>
       </div>
       <LanguageSelector />

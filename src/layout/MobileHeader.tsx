@@ -14,9 +14,8 @@ const MobileHeader: FunctionComponent<{ hideMenuButton?: boolean }> = ({
   const [mobileNavIsOpen, setMobileNavIsOpen] = useContext(MobileNavCtx);
 
   return (
-    <div id="MobileHeader">
-      {/* Persistent button to open navigation */}
-      <div className="content">{children}</div>
+    <div className="MobileHeader">
+      {/* Button to open navigation */}
       {!hideMenuButton && (
         <button
           className="open-nav-btn"
@@ -28,6 +27,7 @@ const MobileHeader: FunctionComponent<{ hideMenuButton?: boolean }> = ({
           <Icon icon="menu" />
         </button>
       )}
+      <div className="content">{children}</div>
     </div>
   );
 };

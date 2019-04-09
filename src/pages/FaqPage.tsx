@@ -1,5 +1,6 @@
 // Core
 import React, { FunctionComponent, Fragment } from 'react';
+import { useTranslation } from 'react-i18next';
 // Styles
 import './FaqPage.scss';
 // Components
@@ -8,13 +9,15 @@ import PageBody from '../layout/PageBody';
 
 // Component
 const FaqPage: FunctionComponent = () => {
+  const { t } = useTranslation();
+
   return (
     <Fragment>
       <MobileHeader>
-        <h1>FAQ</h1>
+        <h1>{t('nav.faq')}</h1>
       </MobileHeader>
       <PageBody>
-        <div id="FaqPage">
+        <div className="FaqPage">
           <h2>What is the Oklahoma Summer Meals Program?</h2>
           <p>
             The Oklahoma Summer Meals Program is administered by the Oklahoma State Department of

@@ -2,6 +2,7 @@
 import React, { FunctionComponent, useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { MobileNavCtx } from '../App';
+import { useTranslation } from 'react-i18next';
 // Styles
 import './MobileNav.scss';
 // Components
@@ -13,9 +14,10 @@ import LanguageSelector from './LanguageSelector';
 // Component
 const MobileNav: FunctionComponent = () => {
   const [isOpen, setIsOpen] = useContext(MobileNavCtx);
+  const { t } = useTranslation();
 
   return (
-    <div id="MobileNav" className={isOpen ? 'open' : ''}>
+    <div className={isOpen ? 'MobileNav open' : 'MobileNav'}>
       {/* Background Fader (closes menu on click) */}
       <div
         className={isOpen ? 'nav-fader open' : 'nav-fader'}
@@ -57,7 +59,7 @@ const MobileNav: FunctionComponent = () => {
             }}
           >
             <Icon icon="map" />
-            Map
+            {t('nav.locations')}
           </NavLink>
           {/* FAQ */}
           <NavLink
@@ -68,7 +70,7 @@ const MobileNav: FunctionComponent = () => {
             }}
           >
             <Icon icon="help" />
-            FAQ
+            {t('nav.faq')}
           </NavLink>
           {/* Contact */}
           <NavLink
@@ -79,12 +81,12 @@ const MobileNav: FunctionComponent = () => {
             }}
           >
             <Icon icon="call" />
-            Contact
+            {t('nav.contact')}
           </NavLink>
         </div>
         {/* Footer with language selector */}
         <div className="nav-footer">
-          <div className="select-language">Select language:</div>
+          <div className="select-language">{t('nav.selectLanguage')}</div>
           <LanguageSelector />
         </div>
       </div>

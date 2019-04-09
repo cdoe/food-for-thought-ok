@@ -1,30 +1,28 @@
 // Core
-import React, { FunctionComponent, useContext } from 'react';
-import { LanguageCtx } from '../App';
+import React, { FunctionComponent } from 'react';
+import { useTranslation } from 'react-i18next';
 // Styles
 import './LanguageSelector.scss';
-// Components
 
 // Component
-const LanguageSelector: FunctionComponent = () => {
-  const [language, setLanguage] = useContext(LanguageCtx);
-
+const LanguageSelector: FunctionComponent<{ alignRight?: boolean }> = ({ alignRight = false }) => {
+  const { i18n } = useTranslation();
   return (
-    <div id="LanguageSelector">
+    <div className={alignRight ? 'LanguageSelector align-right' : 'LanguageSelector'}>
       <button
-        className={language === 'en' ? 'active' : ''}
+        className={i18n.language === 'en' || i18n.language === 'en-US' ? 'active' : ''}
         onClick={event => {
           event.preventDefault();
-          setLanguage('en');
+          i18n.changeLanguage('en-US');
         }}
       >
         English
       </button>
       <button
-        className={language === 'es' ? 'active' : ''}
+        className={i18n.language === 'es' ? 'active' : ''}
         onClick={event => {
           event.preventDefault();
-          setLanguage('es');
+          i18n.changeLanguage('es');
         }}
       >
         Español

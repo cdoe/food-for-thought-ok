@@ -1,5 +1,6 @@
 // Core
 import React, { FunctionComponent, Fragment } from 'react';
+import { useTranslation } from 'react-i18next';
 // Styles
 import './ContactPage.scss';
 // Components
@@ -8,13 +9,15 @@ import PageBody from '../layout/PageBody';
 
 // Component
 const ContactPage: FunctionComponent = () => {
+  const { t } = useTranslation();
+
   return (
     <Fragment>
       <MobileHeader>
-        <h1>Contact</h1>
+        <h1>{t('nav.contact')}</h1>
       </MobileHeader>
       <PageBody>
-        <div id="ContactPage">Contact Page</div>
+        <div className="ContactPage">{t('nav.contact')}</div>
       </PageBody>
     </Fragment>
   );

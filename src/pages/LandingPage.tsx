@@ -1,6 +1,7 @@
 // Core
 import React, { FunctionComponent, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 // Styles
 import './LandingPage.scss';
 // Components
@@ -13,30 +14,28 @@ import logo from '../img/food-for-thought-logo.png';
 
 // Component
 const LandingPage: FunctionComponent = () => {
+  const { t } = useTranslation();
+
   return (
     <Fragment>
       <MobileHeader>
-        <LanguageSelector />
+        <LanguageSelector alignRight />
       </MobileHeader>
       <PageBody>
-        <div id="LandingPage">
+        <div className="LandingPage">
           <img className="logo" src={logo} alt="Food for Thought OK - logo" />
           <h1>
-            No-cost meals for kids... <span>ALL&nbsp;SUMMER!</span>
+            {t('landing.headline')} <span>{t('landing.headlineBold')}</span>
           </h1>
-          <p>
-            While school is out for the summer, over 100 sponsoring organizations, serving hundreds
-            of sites across the state, provide no-cost meals to kids 18 and younger. Many sites
-            serve both breakfast and lunch or lunch and a snack.
-          </p>
+          <p>{t('landing.supportingCopy')}</p>
           <Link to="/locations">
             <button className="find-location-btn">
               <Icon icon="my_location" />
-              Find a location near me
+              {t('landing.findLocation')}
             </button>
           </Link>
           <Link to="faq" className="learn-more-link">
-            or learn more
+            {t('landing.learnMore')}
           </Link>
         </div>
       </PageBody>

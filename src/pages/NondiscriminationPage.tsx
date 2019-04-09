@@ -5,7 +5,7 @@ import './NondiscriminationPage.scss';
 
 // Component
 const NondiscriminationPage: FunctionComponent = () => {
-  return <div id="NondiscriminationPage">Nondiscrimination Page</div>;
+  return <div className="NondiscriminationPage">Nondiscrimination Page</div>;
 };
 
 // Export

@@ -13,7 +13,7 @@ const LocationsPage: FunctionComponent = () => {
       <MobileHeader />
       <MobileHeader hideMenuButton>nearby | open now</MobileHeader>
       <PageBody>
-        <div id="LocationsPage">Locations Page</div>
+        <div className="LocationsPage">Locations Page</div>
       </PageBody>
     </Fragment>
   );

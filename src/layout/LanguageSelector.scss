@@ -1,8 +1,11 @@
 @import '../styles/variables.scss';
 
-#LanguageSelector {
+.LanguageSelector {
   flex-shrink: 0;
-  text-align: left;
+  &.align-right {
+    text-align: right;
+  }
+
   button {
     position: relative;
     appearance: none;

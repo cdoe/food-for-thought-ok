@@ -5,7 +5,7 @@ import './PageWrapper.scss';
 
 // Component
 const PageWrapper: FunctionComponent = props => {
-  return <div id="PageWrapper">{props.children}</div>;
+  return <div className="PageWrapper">{props.children}</div>;
 };
 
 // Export
