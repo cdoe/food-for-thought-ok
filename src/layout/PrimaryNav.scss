@@ -32,7 +32,7 @@
     text-align: center;
     .nav-link {
       position: relative;
-      margin: 0 8px;
+      margin: 0 4px;
       padding: 8px;
 
       color: $grey400;
@@ -45,16 +45,7 @@
       }
 
       &:hover {
-        color: $grey500;
-        &:after {
-          content: '';
-          position: absolute;
-          bottom: -2px;
-          left: 0;
-          width: 100%;
-          height: 4px;
-          background-color: $grey100;
-        }
+        color: $grey600;
       }
 
       &.active {
@@ -66,7 +57,7 @@
           left: 0;
           width: 100%;
           height: 6px;
-          background-color: $primary500;
+          background-color: $secondary500;
         }
       }
     }

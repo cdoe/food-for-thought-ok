@@ -1,0 +1,31 @@
+export default interface Location {
+  name: string;
+  lat: string | null;
+  lng: string | null;
+  address: string | null;
+  city: string | null;
+  zip: string | null;
+  phone: string | null;
+  phoneExt: string | null;
+  startDate: string | null;
+  endDate: string | null;
+  breakfastStart: string | null;
+  breakfastEnd: string | null;
+  lunchStart: string | null;
+  lunchEnd: string | null;
+  snackStart: string | null;
+  snackEnd: string | null;
+  dinnerStart: string | null;
+  dinnerEnd: string | null;
+  monday: boolean;
+  tuesday: boolean;
+  wednesday: boolean;
+  thursday: boolean;
+  friday: boolean;
+  saturday: boolean;
+  sunday: boolean;
+  servesBreakfast: boolean;
+  servesLunch: boolean;
+  servesSnack: boolean;
+  servesDinner: boolean;
+}

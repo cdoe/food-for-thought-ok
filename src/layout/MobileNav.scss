@@ -90,10 +90,10 @@
         }
 
         &.active {
-          background-color: $primary500;
+          background-color: $secondary500;
           color: white;
           i {
-            color: $primary900;
+            color: $secondary900;
           }
         }
       }
@@ -103,9 +103,9 @@
       width: 100%;
       padding: 12px 24px 24px;
 
-      background-color: $grey000;
+      background-color: $grey100;
       .select-language {
-        color: $grey300;
+        color: $grey400;
         font-size: 14px;
         margin: 0 0 12px 4px;
       }
