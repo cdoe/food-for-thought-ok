@@ -1,0 +1,212 @@
+@import '../../styles/variables.scss';
+
+.LocationDetail {
+  padding: 12px 12px 0;
+
+  .name {
+    margin-bottom: 8px;
+    font-size: 24px;
+    font-weight: bold;
+    color: $primary600;
+  }
+
+  .status {
+    padding-bottom: 24px;
+    color: $grey400;
+
+    strong {
+      // padding: 2px 4px;
+      // background-color: $secondary500;
+      // border-radius: 6px;
+      // color: white;
+      display: block;
+      margin-bottom: 2px;
+
+      font-size: 18px;
+      font-weight: bold;
+      color: $grey700;
+      text-transform: uppercase;
+    }
+  }
+
+  .mobile-expander {
+    display: none;
+    &.expanded {
+      display: block;
+    }
+    // Mobile expander should have no effect on larger screens
+    @media screen and (min-width: $break-md) {
+      display: block;
+    }
+  }
+
+  .schedule-wrapper {
+    display: flex;
+    align-items: stretch;
+    padding-bottom: 24px;
+
+    .cell {
+      flex: 1;
+      padding: 4px 0;
+
+      .summary {
+        margin-bottom: 12px;
+        font-size: 14px;
+        color: $grey400;
+      }
+    }
+
+    .meals {
+      padding-right: 12px;
+      border-right: $defaultBorder;
+      .meal {
+        font-weight: bold;
+      }
+      .time {
+        &:not(:last-child) {
+          margin-bottom: 16px;
+        }
+        font-weight: normal;
+        color: $grey400;
+      }
+    }
+
+    .days {
+      padding-left: 12px;
+      .day {
+        font-weight: bold;
+      }
+      .start-end {
+        margin-top: 16px;
+        font-size: 14px;
+        color: $grey400;
+        .date {
+          font-weight: bold;
+          white-space: nowrap;
+        }
+      }
+    }
+  } // end .schedule-wrapper
+
+  .text-notifications {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: $defaultBorder;
+
+    .header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 6px;
+
+      font-weight: bold;
+      font-size: 18px;
+      color: $grey600;
+      i {
+        margin-right: 4px;
+        color: $grey300;
+      }
+    }
+    .form {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 8px;
+      i {
+        margin-right: 8px;
+        color: $grey300;
+      }
+      input {
+        border-radius: 6px 0 0 6px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+      .submit-phone-btn {
+        appearance: none;
+        outline: none;
+        padding: 13px;
+        height: 100%;
+
+        border: none;
+        border-radius: 0 6px 6px 0;
+        background-color: $secondary600;
+        color: white;
+        font-weight: bold;
+        &:disabled {
+          background-color: $grey200;
+          color: $grey000;
+          font-weight: normal;
+        }
+      }
+    }
+    .description {
+      margin-bottom: 4px;
+      font-size: 13px;
+      color: $grey400;
+    }
+    .disclaimer {
+      font-size: 11px;
+      color: $grey200;
+    }
+  } // end .text-notifications
+
+  .location {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: $defaultBorder;
+    line-height: 1.3;
+    .address {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .city {
+      color: $grey400;
+    }
+    .distance {
+      font-weight: bold;
+      color: $grey400;
+    }
+    .directions-link {
+      display: flex;
+      align-items: center;
+      padding: 4px 0;
+      i {
+        margin-right: 4px;
+        color: $secondary700;
+      }
+    }
+  }
+
+  .contact-phone {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: $defaultBorder;
+    .phone-link {
+      display: flex;
+      align-items: center;
+      padding: 4px 0;
+      i {
+        margin-right: 4px;
+        color: $secondary700;
+      }
+    }
+  }
+
+  .sharing {
+    font-size: 14px;
+    margin-bottom: 36px;
+    a {
+      display: block;
+      margin-bottom: 6px;
+      padding: 6px 0;
+      color: $grey500;
+      strong {
+        color: $grey700;
+      }
+      i {
+        margin-right: 4px;
+        font-size: 18px;
+        color: $grey300;
+      }
+    }
+  }
+}

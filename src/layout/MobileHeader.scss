@@ -5,6 +5,7 @@
   width: 100%;
   // min-height: 56px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   padding: 10px 16px;
@@ -38,6 +39,10 @@
       font-size: 22px;
       color: $grey700;
     }
+  }
+
+  .bottom {
+    width: 100%;
   }
 
   // Hide on large screens

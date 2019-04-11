@@ -36,3 +36,10 @@ $grey300: #929ea7;
 $grey200: #b5bfc7;
 $grey100: #dbe1e5;
 $grey000: #f3f7fa;
+
+// Misc
+$defaultBorder: 2px solid $grey100;
+
+// Animation/Transition
+$easeOpen: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+$easeClose: transform 200ms cubic-bezier(0.4, 0, 1, 1);

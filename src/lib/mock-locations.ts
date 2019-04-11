@@ -2,6 +2,7 @@ import Location from '../types/location';
 
 const locations: Location[] = [
   {
+    id: 'DXwedMkIUB',
     name: 'Pittsburg Es',
     lat: '34.71351',
     lng: '-95.8541',
@@ -33,6 +34,7 @@ const locations: Location[] = [
     servesDinner: false
   },
   {
+    id: 'vnKHdLhOow',
     name: 'Family Life Center',
     lat: '34.80013',
     lng: '-96.6805',
@@ -64,6 +66,7 @@ const locations: Location[] = [
     servesDinner: false
   },
   {
+    id: '0BwUJVXmtz',
     name: 'Wintersmith Park, Fmnp Event',
     lat: '34.76372',
     lng: '-96.6523',
@@ -95,6 +98,7 @@ const locations: Location[] = [
     servesDinner: true
   },
   {
+    id: 'M97zp1D5Nq',
     name: 'Puterbaugh Ms',
     lat: '34.9149',
     lng: '-95.7584',
@@ -126,6 +130,7 @@ const locations: Location[] = [
     servesDinner: false
   },
   {
+    id: '1VHtzO973y',
     name: 'Chickasaw Nation Environmental Camp',
     lat: '34.79611',
     lng: '-96.679',
@@ -157,6 +162,7 @@ const locations: Location[] = [
     servesDinner: false
   },
   {
+    id: 'jIatOOPvr2',
     name: 'Chickasaw Nation Camp Survivor Sp',
     lat: '35.95662',
     lng: '-97.4231',
@@ -188,6 +194,7 @@ const locations: Location[] = [
     servesDinner: true
   },
   {
+    id: 'rfzRmthH2Z',
     name: 'Sapulpa Hs',
     lat: '35.99891',
     lng: '-96.0987',
@@ -219,6 +226,7 @@ const locations: Location[] = [
     servesDinner: false
   },
   {
+    id: 'GqEBMdIkii',
     name: 'Choctaw Nation Head Start - Broken Bow',
     lat: '34.02713',
     lng: '-94.7191',
@@ -250,6 +258,7 @@ const locations: Location[] = [
     servesDinner: false
   },
   {
+    id: 'ZwXniQlJKb',
     name: 'Bishop Public School',
     lat: '34.57624',
     lng: '-98.4178',
@@ -281,6 +290,7 @@ const locations: Location[] = [
     servesDinner: false
   },
   {
+    id: '2Ud5PebDJC',
     name: 'Battiest Es',
     lat: '34.39413',
     lng: '-94.9824',
@@ -312,6 +322,7 @@ const locations: Location[] = [
     servesDinner: false
   },
   {
+    id: '1L6QUA980u',
     name: 'Agra Public School Cafeteria',
     lat: '35.89114',
     lng: '-96.8751',
@@ -343,6 +354,7 @@ const locations: Location[] = [
     servesDinner: false
   },
   {
+    id: 'gA92s12cRH',
     name: 'First Indian Baptist Church',
     lat: '34.77945',
     lng: '-96.6409',
@@ -374,6 +386,7 @@ const locations: Location[] = [
     servesDinner: true
   },
   {
+    id: '7vX3APP7AS',
     name: 'Choctaw Wellness Center Hugo',
     lat: '34.01439',
     lng: '-95.5269',
@@ -405,6 +418,7 @@ const locations: Location[] = [
     servesDinner: false
   },
   {
+    id: 'rdEZ2h94ni',
     name: 'Tulsa Met Hs',
     lat: '36.18462',
     lng: '-95.9087',
@@ -436,6 +450,7 @@ const locations: Location[] = [
     servesDinner: false
   },
   {
+    id: 'KDZDl0xPgD',
     name: 'Ardmore Indian Church Bs',
     lat: '34.18136',
     lng: '-97.1246',
@@ -467,6 +482,7 @@ const locations: Location[] = [
     servesDinner: true
   },
   {
+    id: 'FOvGRhtZx7',
     name: 'Canton Es',
     lat: '36.05344',
     lng: '-98.5884',
@@ -498,6 +514,7 @@ const locations: Location[] = [
     servesDinner: false
   },
   {
+    id: 'GtIQCdcg2y',
     name: 'Hulbert Es',
     lat: '35.93232',
     lng: '-95.145',
@@ -529,6 +546,7 @@ const locations: Location[] = [
     servesDinner: false
   },
   {
+    id: 'W1HSsTnfR4',
     name: 'Hulbert Jr-Sr Hs',
     lat: '35.93232',
     lng: '-95.145',
@@ -560,6 +578,7 @@ const locations: Location[] = [
     servesDinner: false
   },
   {
+    id: 'PplONFJ1Iy',
     name: 'Strother Es',
     lat: '35.36269',
     lng: '-96.5853',
@@ -591,6 +610,7 @@ const locations: Location[] = [
     servesDinner: false
   },
   {
+    id: 'syqlSBFuKW',
     name: 'Central Oak Es',
     lat: '35.45076',
     lng: '-97.4763',

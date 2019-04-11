@@ -7,6 +7,7 @@
   border: 2px solid $grey200;
   border-radius: 6px;
   text-overflow: ellipsis;
+
   &:focus {
     border: 2px solid $secondary500;
     box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.1);

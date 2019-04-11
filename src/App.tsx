@@ -30,7 +30,7 @@ const App: FunctionComponent = () => {
             <MobileNav />
             <Switch>
               <Route path="/" exact component={LandingPage} />
-              <Route path="/locations/" component={LocationsPage} />
+              <Route path="/locations/:locationId?" component={LocationsPage} />
               <Route path="/faq/" component={FaqPage} />
               <Route path="/contact/" component={ContactPage} />
               <Route path="/list/" component={ListPage} />

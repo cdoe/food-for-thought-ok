@@ -1,4 +1,5 @@
 export default interface Location {
+  id: string;
   name: string;
   lat: string | null;
   lng: string | null;

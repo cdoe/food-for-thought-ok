@@ -1,14 +1,17 @@
 // Core
-import React, { FunctionComponent } from 'react';
-import Location from '../types/location';
+import React, { FunctionComponent, AnchorHTMLAttributes } from 'react';
+import Location from '../../types/location';
 // Styles
-import './LocationItem.scss';
-import Icon from './Icon';
+import './LocationItemLink.scss';
+import Icon from '../Icon';
+import { Link } from 'react-router-dom';
 
 // Component
-const LocationItem: FunctionComponent<{ location: Location }> = ({ location, ...props }) => {
+const LocationItemLink: FunctionComponent<
+  { location: Location } & AnchorHTMLAttributes<HTMLAnchorElement>
+> = ({ location, ...rest }) => {
   return (
-    <div className="LocationItem">
+    <Link to={`/locations/${location.id}`} className="LocationItemLink" {...rest}>
       <div className="name">{location.name}</div>
       <div className="location">
         {location.address} · {location.city}
@@ -33,9 +36,9 @@ const LocationItem: FunctionComponent<{ location: Location }> = ({ location, ...
         <span className={location.saturday ? 'active' : ''}>Sat</span>
         <span className={location.sunday ? 'active' : ''}>Sun</span>
       </div>
-    </div>
+    </Link>
   );
 };
 
 // Export
-export default LocationItem;
+export default LocationItemLink;
