@@ -179,7 +179,8 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
               access_token="pk.eyJ1IjoiY2RvZSIsImEiOiJjanVmeGRmaGowZjM3NDlucXNocmZyZmZrIn0.zW5aLSTzrHl5OAx4YF4ETA"
               id="mapbox.streets"
               subdomains="abcd"
-              attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions">CARTO</a>'
+              // From CartoDB free map tiles: https://github.com/CartoDB/basemap-styles
               url={`https://{s}.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}${
                 retina ? '@2x' : ''
               }.png`}
@@ -210,9 +211,12 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
               expanded: mobileDetailsExpanded
             })}
           >
-            <Link to="/locations/" className="back-link">
-              <Icon icon="arrow_back" /> Back
-            </Link>
+            {/* Back arrow (but don't show on mobile expanded) */}
+            {!mobileDetailsExpanded && (
+              <Link to="/locations/" className="back-link">
+                <Icon icon="arrow_back" /> Back
+              </Link>
+            )}
             <LocationDetail
               location={locations.find(
                 location => location.id === locationIdParam || location.id === locationId
@@ -242,16 +246,16 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
         {/* Mobile toggler for expanded vs. collapsed details (when in detail view) */}
         {!!locationIdParam && (
           <div
-            className="mobile-toggle centered"
+            className="mobile-toggle primary"
             onClick={event => {
               event.preventDefault();
               setMobileDetailsExpanded(!mobileDetailsExpanded);
             }}
           >
             {mobileDetailsExpanded ? (
-              <IconText icon="expand_more" text="Collapse details" />
+              <IconText icon="expand_more" text="Show less" />
             ) : (
-              <IconText icon="expand_less" text="Expand details" />
+              <IconText icon="expand_less" text="Show more" />
             )}
           </div>
         )}

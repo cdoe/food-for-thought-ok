@@ -216,11 +216,16 @@ $sidebarWidth-lg: 400px;
       color: $grey300;
     }
 
-    &.centered {
+    &.primary {
       justify-content: center;
       padding-right: 24px;
       box-shadow: none;
       border-top: $defaultBorder;
+      background-color: $secondary600;
+      color: white;
+      i {
+        color: $secondary900;
+      }
     }
 
     // Hide on large screens
