@@ -3,7 +3,8 @@ import React, { FunctionComponent, Fragment, useState, useRef, useEffect } from 
 import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+import { Map as LeafletMap, TileLayer, Marker } from 'react-leaflet';
+import Leaflet, { Map as LeafletElement, IconOptions } from 'leaflet';
 // Styles
 import './LocationsPage.scss';
 // Components
@@ -15,6 +16,19 @@ import LocationDetail from '../components/locations/LocationDetail';
 // MOCK TMP
 // XXX TODO : REMOVE
 import locations from '../lib/mock-locations';
+
+import marker from '../img/marker.png';
+import retinaMarker from '../img/marker@2x.png';
+import markerShadow from '../img/marker-shadow.png';
+const mapIcon: IconOptions = {
+  iconUrl: marker,
+  iconRetinaUrl: retinaMarker,
+  iconSize: [25, 36],
+  iconAnchor: [12.5, 36],
+  shadowUrl: markerShadow,
+  shadowSize: [41, 41],
+  shadowAnchor: [12, 40]
+};
 
 const OpenNowFilter: FunctionComponent = () => {
   const [openNowFilter, setOpenNowFilter] = useState(false);
@@ -43,17 +57,31 @@ const OpenNowFilter: FunctionComponent = () => {
   );
 };
 
-// declare global {
-//   interface Window {
-//     L: L;
-//   }
-// }
-
 // Component
 const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string }>> = ({
   history,
   match
 }) => {
+  // Store references to the leaflet map
+  const leafletRef: React.MutableRefObject<LeafletMap> = useRef({} as LeafletMap);
+  const [map, setMap] = useState<LeafletElement>();
+  useEffect(() => {
+    setMap(leafletRef.current.leafletElement);
+  }, []);
+  // Set bounds to Oklahoma state wide
+  // useEffect(() => {
+  // if (map) {
+  //   // console.log('map', map);
+  //   map.fitBounds([
+  //     [33.61919542, -103.00246156],
+  //     [33.61919542, -94.43121924],
+  //     [37.00229935, -94.43121924],
+  //     [37.00229935, -103.00246156],
+  //     [33.61919542, -103.00246156]
+  //   ]);
+  // }
+  // }, [map]);
+
   const retina = typeof window !== 'undefined' && window.devicePixelRatio >= 2;
   // Mobile list and details states
   const [mobileListIsOpen, setMobileListIsOpen] = useState(false);
@@ -109,24 +137,21 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
     }
   }, []);
 
-  // On load, load leaflet JS and map tiles into div#leaflet-map container
-  // useEffect(() => {
-  // var map = L.map('leaflet-map').setView([36.1522199, -96.0180911], 11);
-  // L.tileLayer(
-  //   'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiY2RvZSIsImEiOiJjanVmeGRmaGowZjM3NDlucXNocmZyZmZrIn0.zW5aLSTzrHl5OAx4YF4ETA',
-  //   {
-  //     attribution:
-  //       'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-  //     maxZoom: 18
-  //     // id: 'mapbox.streets',
-  //     // accessToken: 'pk.eyJ1IjoiY2RvZSIsImEiOiJjanVmeGRmaGowZjM3NDlucXNocmZyZmZrIn0.zW5aLSTzrHl5OAx4YF4ETA'
-  //   }
-  // ).addTo(map);
-  // }, []);
-
-  // const handleLocationSelect = (e: MouseEvent) => {
-  //   console.log('e', e);
-  // };
+  // Get location from IP address and center to that location
+  useEffect(() => {
+    fetch('https://freegeoip.app/json/')
+      .then(resp => {
+        return resp.json();
+      })
+      .then(data => {
+        // If in oklahoma, center
+        console.log('data', data);
+        if (data.region_code === 'OK') {
+          setMapZoom(12);
+          setMapCenter([data.latitude, data.longitude]);
+        }
+      });
+  }, []);
 
   return (
     <Fragment>
@@ -171,20 +196,25 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
           </div>
 
           {/* Embedded map */}
-          {/* <div id="leaflet-map" className="map-embed">
-            Map Placeholder
-          </div> */}
-          <Map className="map-embed" center={mapCenter} zoom={mapZoom} animate={true}>
+          <LeafletMap
+            className={classnames('map-embed', { narrow: locationIdParam })}
+            center={mapCenter}
+            zoom={mapZoom}
+            animate={true}
+            ref={leafletRef}
+            // maxBounds={[[44.6856049, -118.8662969], [30.8917819, -84.2111817]]}
+            // minZoom={5}
+          >
             <TileLayer
-              access_token="pk.eyJ1IjoiY2RvZSIsImEiOiJjanVmeGRmaGowZjM3NDlucXNocmZyZmZrIn0.zW5aLSTzrHl5OAx4YF4ETA"
-              id="mapbox.streets"
-              subdomains="abcd"
-              attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions">CARTO</a>'
+              // access_token="pk.eyJ1IjoiY2RvZSIsImEiOiJjanVmeGRmaGowZjM3NDlucXNocmZyZmZrIn0.zW5aLSTzrHl5OAx4YF4ETA"
+              // id="mapbox.streets"
+              // url="https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={access_token}"
               // From CartoDB free map tiles: https://github.com/CartoDB/basemap-styles
               url={`https://{s}.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}${
                 retina ? '@2x' : ''
               }.png`}
-              // url="https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={access_token}"
+              subdomains="abcd"
+              attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions">CARTO</a>'
             />
             {locations.map(location => {
               if (location.lat && location.lng) {
@@ -196,6 +226,7 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
                   <Marker
                     key={location.id}
                     position={latLng}
+                    icon={new Leaflet.Icon(mapIcon)}
                     onClick={() => {
                       history.push('/locations/' + location.id);
                     }}
@@ -203,7 +234,7 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
                 );
               }
             })}
-          </Map>
+          </LeafletMap>
           {/* Location detail panel */}
           <div
             className={classnames('location-detail-panel', {

@@ -127,6 +127,17 @@ $sidebarWidth-lg: 400px;
       // z-index: -1;
       flex: 1;
       height: 100%;
+      // Narrow mode on mobile when collapsed detail pane is open
+      // to ensure pin is centered vertically (not hidden under pane)
+      &.narrow {
+        height: calc(100% - 140px);
+      }
+      // But always full height otherwise (and always on tablet+)
+      @media screen and (min-width: $break-md) {
+        &.narrow {
+          height: 100%;
+        }
+      }
       // Temporary
       // display: flex;
       // justify-content: center;
