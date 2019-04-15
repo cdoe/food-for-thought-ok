@@ -27,16 +27,18 @@ const LandingPage: FunctionComponent = () => {
           <h1>
             {t('landing.headline')} <span>{t('landing.headlineBold')}</span>
           </h1>
-          <p>{t('landing.supportingCopy')}</p>
-          <Link to="/locations">
-            <button className="find-location-btn">
-              <Icon icon="my_location" />
-              {t('landing.findLocation')}
-            </button>
-          </Link>
-          <Link to="faq" className="learn-more-link">
-            {t('landing.learnMore')}
-          </Link>
+          <div className="inverted-copy">
+            <p>{t('landing.supportingCopy')}</p>
+            <Link to="/locations">
+              <button className="find-location-btn">
+                <Icon icon="my_location" />
+                {t('landing.findLocation')}
+              </button>
+            </Link>
+            <Link to="faq" className="learn-more-link">
+              {t('landing.learnMore')}
+            </Link>
+          </div>
         </div>
       </PageBody>
     </Fragment>
