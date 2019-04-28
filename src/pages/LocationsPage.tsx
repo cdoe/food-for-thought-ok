@@ -13,14 +13,16 @@ import Input from '../components/Input';
 import Icon from '../components/Icon';
 import LocationItemLink from '../components/locations/LocationItemLink';
 import LocationDetail from '../components/locations/LocationDetail';
+import InfiniteScroll from 'react-infinite-scroll-component';
+// Images
+import marker from '../img/marker.png';
+import retinaMarker from '../img/marker@2x.png';
+import markerShadow from '../img/marker-shadow.png';
+
 // MOCK TMP
 // XXX TODO : REMOVE
 import locations from '../lib/mock-locations';
 
-import marker from '../img/marker.png';
-import retinaMarker from '../img/marker@2x.png';
-import markerShadow from '../img/marker-shadow.png';
-import PageFooter from '../layout/PageFooter';
 const mapIcon: IconOptions = {
   iconUrl: marker,
   iconRetinaUrl: retinaMarker,
@@ -64,10 +66,10 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
   match
 }) => {
   // Store references to the leaflet map
-  const leafletRef: React.MutableRefObject<LeafletMap> = useRef({} as LeafletMap);
+  const leafletRef = useRef<LeafletMap>({} as LeafletMap);
   const [map, setMap] = useState<LeafletElement>();
   useEffect(() => {
-    setMap(leafletRef.current.leafletElement);
+    setMap(leafletRef.current && leafletRef.current.leafletElement);
   }, []);
   // Set bounds to Oklahoma state wide
   // useEffect(() => {
@@ -117,7 +119,6 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
     }
     // Close mobile list view if showing location details
     // !!locationIdParam && setMobileListIsOpen(false);
-
     !locationIdParam &&
       setTimeout(() => {
         // If location is removed from url, set delay before removing from state
@@ -129,14 +130,6 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
         setMobileDetailsExpanded(false);
       }, 500);
   }, [locationIdParam]);
-
-  // On load, scroll to first location (past filter/sort)
-  const listScrollRef: any = useRef(null);
-  useEffect(() => {
-    if (listScrollRef.current) {
-      listScrollRef.current.scrollTop = 58;
-    }
-  }, []);
 
   // Get location from IP address and center to that location
   useEffect(() => {
@@ -153,6 +146,8 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
         }
       });
   }, []);
+
+  const [shownLocationCount, setShownLocationCount] = useState(20);
 
   return (
     <Fragment>
@@ -177,23 +172,42 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
                 <Input type="text" placeholder="Enter your address or Zip code" />
                 <OpenNowFilter />
               </div>
+
               {/* Scroller for locations list */}
-              <div className="list-scroll" ref={listScrollRef}>
-                {/* Filter + sort locations  */}
-                <div className="filter-sort-locations">
-                  <div className="filter-locations">
-                    <Icon icon="search" />
-                    Filter locations
+              <div id="list-scroll" className="list-scroll">
+                <InfiniteScroll
+                  scrollableTarget="list-scroll"
+                  dataLength={shownLocationCount} //This is important field to render the next data
+                  next={() => {
+                    setShownLocationCount(shownLocationCount + 20);
+                  }}
+                  hasMore={shownLocationCount < locations.length}
+                  loader={<div className="list-message">Loading...</div>}
+                  endMessage={
+                    <div className="list-message">Showing all {locations.length} locations</div>
+                  }
+                  initialScrollY={58} // Initiall scroll past filter/sort
+                >
+                  {/* Filter + sort locations  */}
+                  <div className="filter-sort-locations">
+                    <div className="filter-locations">
+                      <Icon icon="search" />
+                      Filter locations
+                    </div>
+                    <div className="sort-locations">
+                      <Icon icon="arrow_drop_down" />
+                      Sort by nearby
+                    </div>
                   </div>
-                  <div className="sort-locations">
-                    <Icon icon="arrow_drop_down" />
-                    Sort by nearby
-                  </div>
-                </div>
-                {/* Locations list */}
-                {locations.map(location => (
-                  <LocationItemLink key={location.id} location={location} />
-                ))}
+
+                  {/* Locations list */}
+                  {locations.map(
+                    (location, index) =>
+                      index < shownLocationCount && (
+                        <LocationItemLink key={location.id} location={location} />
+                      )
+                  )}
+                </InfiniteScroll>
               </div>
             </div>
           </div>

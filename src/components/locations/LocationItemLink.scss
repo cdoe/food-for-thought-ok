@@ -9,17 +9,17 @@
 
   &:hover,
   &:focus {
-    // background-color: $grey000;
-    &::after {
-      content: '';
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 6px;
-      background-color: $grey200;
-    }
+    background-color: $offWhite;
+    // &::after {
+    //   content: '';
+    //   display: block;
+    //   position: absolute;
+    //   top: 0;
+    //   right: 0;
+    //   height: 100%;
+    //   width: 4px;
+    //   background-color: $primary600;
+    // }
   }
 
   .name {

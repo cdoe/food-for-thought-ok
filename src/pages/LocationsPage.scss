@@ -85,6 +85,7 @@ $sidebarWidth-lg: 400px;
       }
 
       .list-flex-wrapper {
+        position: relative;
         display: flex;
         width: 100%;
         height: 100%;
@@ -107,8 +108,10 @@ $sidebarWidth-lg: 400px;
         }
 
         .list-scroll {
+          position: relative;
+          height: 100%;
           flex: 1;
-          overflow-y: scroll;
+          overflow-y: auto;
           -webkit-overflow-scrolling: touch;
           padding-bottom: 48px;
 
@@ -130,6 +133,14 @@ $sidebarWidth-lg: 400px;
               font-size: 20px;
               color: $grey200;
             }
+          }
+
+          .list-message {
+            padding: 24px 8px 32px;
+            text-align: center;
+            font-weight: bold;
+            color: $grey200;
+            letter-spacing: 0.02em;
           }
         }
       }

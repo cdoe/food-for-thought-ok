@@ -1038,6 +1038,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-infinite-scroll-component@^4.2.3":
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/@types/react-infinite-scroll-component/-/react-infinite-scroll-component-4.2.3.tgz#4148e2948ad34b8c67dfb10b20e0a7a79f2b917d"
+  integrity sha512-z+OdWU6Uno1QZt0EbQjQA3pWkYByMxvXg0m2j5IG1zqQGRx6InbRDhu3rW4XzmOgHgp6ik5Mw7toCjrfqKxHNw==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-leaflet@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@types/react-leaflet/-/react-leaflet-2.2.1.tgz#21ec6c0995c0da9089c2ec2f257c1fd50eee646a"
@@ -8390,6 +8397,11 @@ react-i18next@^10.6.2:
   dependencies:
     "@babel/runtime" "^7.3.1"
     html-parse-stringify2 "2.0.1"
+
+react-infinite-scroll-component@^4.5.2:
+  version "4.5.2"
+  resolved "https://registry.yarnpkg.com/react-infinite-scroll-component/-/react-infinite-scroll-component-4.5.2.tgz#ebd16195f34a5f191b259ed53d257378b1001c6d"
+  integrity sha512-fkCOsAYDx0IHv7pTl9BzSTlNoaFccDzJ3gi2qNgp/D2GxKZKhGwDxqOnZyvMo5e5FhniQ9yaXsTxh/xZg8LuFQ==
 
 react-is@^16.6.0, react-is@^16.7.0:
   version "16.8.6"
