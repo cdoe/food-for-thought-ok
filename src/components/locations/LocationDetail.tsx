@@ -5,7 +5,6 @@ import classnames from 'classnames';
 import NumberFormat from 'react-number-format';
 // Styles
 import './LocationDetail.scss';
-import Input from '../Input';
 import Icon from '../Icon';
 
 // Component
@@ -27,6 +26,8 @@ const LocationDetail: FunctionComponent<
           </div>
 
           <div className={classnames('mobile-expander', { expanded: mobileExpanded })}>
+            <div className="wavy-line-divider" />
+
             <div className="schedule-wrapper">
               <div className="cell meals">
                 <div className="summary">2 meals</div>
@@ -46,6 +47,8 @@ const LocationDetail: FunctionComponent<
                 </div>
               </div>
             </div>
+
+            <div className="wavy-line-divider" />
 
             <div className="text-notifications">
               <div className="header">

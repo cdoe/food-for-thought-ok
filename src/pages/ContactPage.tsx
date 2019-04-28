@@ -6,6 +6,7 @@ import './ContactPage.scss';
 // Components
 import MobileHeader from '../layout/MobileHeader';
 import PageBody from '../layout/PageBody';
+import PageFooter from '../layout/PageFooter';
 
 // Component
 const ContactPage: FunctionComponent = () => {
@@ -19,6 +20,7 @@ const ContactPage: FunctionComponent = () => {
       <PageBody>
         <div className="ContactPage">{t('nav.contact')}</div>
       </PageBody>
+      <PageFooter />
     </Fragment>
   );
 };

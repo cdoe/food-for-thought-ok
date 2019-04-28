@@ -34,6 +34,21 @@
         width: 100%;
         height: 4px;
         background-color: $grey200;
+        border-radius: 2px;
+      }
+    }
+  }
+
+  &.light button {
+    color: $grey100;
+    &:hover {
+      color: $grey000;
+    }
+
+    &.active {
+      color: white;
+      &:after {
+        background-color: $secondary600;
       }
     }
   }

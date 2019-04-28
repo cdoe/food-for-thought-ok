@@ -6,6 +6,7 @@ import './FaqPage.scss';
 // Components
 import MobileHeader from '../layout/MobileHeader';
 import PageBody from '../layout/PageBody';
+import PageFooter from '../layout/PageFooter';
 
 // Component
 const FaqPage: FunctionComponent = () => {
@@ -83,6 +84,7 @@ const FaqPage: FunctionComponent = () => {
           </p>
         </div>
       </PageBody>
+      <PageFooter />
     </Fragment>
   );
 };

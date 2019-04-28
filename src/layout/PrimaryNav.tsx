@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 // Styles
 import './PrimaryNav.scss';
 // Images
-import logo from '../img/food-for-thought-logo-simple-dark.png';
+import logo from '../img/food-for-thought-logo-simple.png';
 // Components
 import LanguageSelector from './LanguageSelector';
 

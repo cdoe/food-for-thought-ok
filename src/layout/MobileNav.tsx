@@ -87,7 +87,7 @@ const MobileNav: FunctionComponent = () => {
         {/* Footer with language selector */}
         <div className="nav-footer">
           <div className="select-language">{t('nav.selectLanguage')}</div>
-          <LanguageSelector />
+          <LanguageSelector light />
         </div>
       </div>
     </div>

@@ -10,8 +10,8 @@
   align-items: center;
   padding: 10px 16px;
 
-  background-color: white;
-  box-shadow: 0px 4px 12px rgba(91, 103, 112, 0.25);
+  background-color: $navBG;
+  box-shadow: 0px 4px 20px rgba(91, 103, 112, 0.09);
 
   text-align: center;
 
@@ -25,7 +25,7 @@
     flex-shrink: 0;
 
     i {
-      color: $grey600;
+      color: white;
     }
   }
 
@@ -37,7 +37,7 @@
       pointer-events: none;
 
       font-size: 22px;
-      color: $grey700;
+      color: white;
     }
   }
 

@@ -12,13 +12,13 @@ $sidebarWidth-lg: 400px;
     appearance: none;
     outline: none;
     border: none;
-    color: $grey400;
+    color: $grey100;
     background: none;
     &:hover {
-      color: $grey600;
+      color: $grey000;
     }
     &.active {
-      color: $grey900;
+      color: white;
       font-weight: bold;
       &:after {
         content: '';
@@ -27,7 +27,8 @@ $sidebarWidth-lg: 400px;
         left: 0;
         width: 100%;
         height: 4px;
-        background-color: $secondary500;
+        background-color: $navHighlight;
+        border-radius: 2px;
       }
     }
   }
@@ -53,12 +54,9 @@ $sidebarWidth-lg: 400px;
       left: 0;
       width: 100%;
       height: 100%;
-      padding-bottom: 48px;
-      overflow-y: scroll;
-      -webkit-overflow-scrolling: touch;
 
       background-color: white;
-      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
+      box-shadow: 0px -4px 20px rgba(91, 103, 112, 0.075);
 
       // Mobile animation
       transition: $easeClose 50ms; // Slight delay to deal with mobile jitter bugs
@@ -86,42 +84,57 @@ $sidebarWidth-lg: 400px;
         }
       }
 
-      // Manage in-list search for tablets/desktops only
-      .desktop-search {
-        display: none;
-      }
-      @media screen and (min-width: $break-md) {
-        .desktop-search {
-          display: block;
-          position: sticky;
-          top: 0;
-          padding: 16px 16px 10px;
-
-          background-color: white;
-          box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.1);
-        }
-      }
-
-      // Filter and sort locations
-      .filter-sort-locations {
+      .list-flex-wrapper {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 16px;
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
 
-        border-bottom: $defaultBorder;
-        box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.05);
-        background-color: $grey000;
-        color: $grey300;
-        font-size: 14px;
+        // Manage in-list search for tablets/desktops only
+        .desktop-search {
+          display: none;
+        }
+        @media screen and (min-width: $break-md) {
+          .desktop-search {
+            flex-shrink: 0;
+            position: relative;
+            display: block;
+            padding: 16px 16px 10px;
 
-        i {
-          margin-right: 2px;
-          font-size: 20px;
-          color: $grey200;
+            background-color: $navBG;
+            box-shadow: 0px 3px 5px rgba(91, 103, 112, 0.075);
+          }
+        }
+
+        .list-scroll {
+          flex: 1;
+          overflow-y: scroll;
+          -webkit-overflow-scrolling: touch;
+          padding-bottom: 48px;
+
+          // Filter and sort locations
+          .filter-sort-locations {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+
+            border-bottom: $defaultBorder;
+            // box-shadow: 0 3px 5px rgba(91, 103, 112, 0.075);
+            background-color: $grey000;
+            color: $grey300;
+            font-size: 14px;
+
+            i {
+              margin-right: 2px;
+              font-size: 20px;
+              color: $grey200;
+            }
+          }
         }
       }
-    }
+    } // End .locations-list
+
     // Embedded map
     .map-embed {
       // z-index: -1;
@@ -138,19 +151,8 @@ $sidebarWidth-lg: 400px;
           height: 100%;
         }
       }
-      // Temporary
-      // display: flex;
-      // justify-content: center;
-      // align-items: center;
-      // background-image: url('/tmp/blank-map.png');
-      // background-size: cover;
-      // background-position: center;
-      // font-size: 32px;
-      // font-weight: bold;
-      // color: $grey300;
-      // text-align: center;
-      ///
-    }
+    } // End .map-embed
+
     // Location detail panel
     .location-detail-panel {
       z-index: 1900;
@@ -172,7 +174,7 @@ $sidebarWidth-lg: 400px;
       }
 
       background-color: white;
-      box-shadow: 0px -4px 12px rgba(91, 103, 112, 0.25);
+      box-shadow: 0px -4px 20px rgba(91, 103, 112, 0.075);
 
       .back-link {
         color: $grey600;
@@ -202,7 +204,7 @@ $sidebarWidth-lg: 400px;
           transform: translateX($sidebarWidth-lg);
         }
       }
-    }
+    } // end .location-detail-panel
   }
 
   .mobile-toggle {
@@ -217,14 +219,15 @@ $sidebarWidth-lg: 400px;
     padding: 12px;
 
     background-color: white;
-    box-shadow: 0px -4px 12px rgba(91, 103, 112, 0.25);
+    box-shadow: 0px -4px 20px rgba(91, 103, 112, 0.09);
+    border-top: 2px solid $grey000;
     text-align: left;
     font-weight: bold;
-    color: $grey600;
+    color: $secondary600;
 
     i {
       margin-right: 8px;
-      color: $grey300;
+      color: $secondary600;
     }
 
     &.primary {

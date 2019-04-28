@@ -20,6 +20,7 @@ import locations from '../lib/mock-locations';
 import marker from '../img/marker.png';
 import retinaMarker from '../img/marker@2x.png';
 import markerShadow from '../img/marker-shadow.png';
+import PageFooter from '../layout/PageFooter';
 const mapIcon: IconOptions = {
   iconUrl: marker,
   iconRetinaUrl: retinaMarker,
@@ -130,10 +131,10 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
   }, [locationIdParam]);
 
   // On load, scroll to first location (past filter/sort)
-  const locationsListRef: any = useRef(null);
+  const listScrollRef: any = useRef(null);
   useEffect(() => {
-    if (locationsListRef.current) {
-      locationsListRef.current.scrollTop = 58;
+    if (listScrollRef.current) {
+      listScrollRef.current.scrollTop = 58;
     }
   }, []);
 
@@ -168,31 +169,33 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
         <div className="list-and-map-wrapper">
           {/* Locations list side bar (formatted a little different on mobile) */}
           <div
-            ref={locationsListRef}
             className={classnames('locations-list', { open: mobileListIsOpen && !locationIdParam })}
           >
-            {/* Nearby search NOT for mobile */}
-            <div className="desktop-search">
-              <Input type="text" placeholder="Enter your address or Zip code" />
-              <OpenNowFilter />
-            </div>
-
-            {/* Filter + sort locations  */}
-            <div className="filter-sort-locations">
-              <div className="filter-locations">
-                <Icon icon="search" />
-                Filter locations
+            <div className="list-flex-wrapper">
+              {/* Nearby search NOT for mobile */}
+              <div className="desktop-search">
+                <Input type="text" placeholder="Enter your address or Zip code" />
+                <OpenNowFilter />
               </div>
-              <div className="sort-locations">
-                <Icon icon="arrow_drop_down" />
-                Sort by nearby
+              {/* Scroller for locations list */}
+              <div className="list-scroll" ref={listScrollRef}>
+                {/* Filter + sort locations  */}
+                <div className="filter-sort-locations">
+                  <div className="filter-locations">
+                    <Icon icon="search" />
+                    Filter locations
+                  </div>
+                  <div className="sort-locations">
+                    <Icon icon="arrow_drop_down" />
+                    Sort by nearby
+                  </div>
+                </div>
+                {/* Locations list */}
+                {locations.map(location => (
+                  <LocationItemLink key={location.id} location={location} />
+                ))}
               </div>
             </div>
-
-            {/* Locations list */}
-            {locations.map(location => (
-              <LocationItemLink key={location.id} location={location} />
-            ))}
           </div>
 
           {/* Embedded map */}
@@ -245,7 +248,7 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
             {/* Back arrow (but don't show on mobile expanded) */}
             {!mobileDetailsExpanded && (
               <Link to="/locations/" className="back-link">
-                <Icon icon="arrow_back" /> Back
+                <Icon icon="arrow_back_ios" /> Back
               </Link>
             )}
             <LocationDetail

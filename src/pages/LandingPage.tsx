@@ -9,8 +9,7 @@ import MobileHeader from '../layout/MobileHeader';
 import LanguageSelector from '../layout/LanguageSelector';
 import PageBody from '../layout/PageBody';
 import Icon from '../components/Icon';
-// Images
-import logo from '../img/food-for-thought-logo.png';
+import PageFooter from '../layout/PageFooter';
 
 // Component
 const LandingPage: FunctionComponent = () => {
@@ -19,26 +18,27 @@ const LandingPage: FunctionComponent = () => {
   return (
     <Fragment>
       <MobileHeader>
-        <LanguageSelector alignRight />
+        <LanguageSelector alignRight light />
       </MobileHeader>
       <PageBody>
         <div className="LandingPage">
-          <img className="logo" src={logo} alt="Food for Thought OK - logo" />
-          <h1>
-            {t('landing.headline')} <span>{t('landing.headlineBold')}</span>
-          </h1>
-          <div className="inverted-copy">
-            <p>{t('landing.supportingCopy')}</p>
+          <div className="jumbotron">
+            <div className="fader" />
+            <h1>
+              {t('landing.headline')} <span>{t('landing.headlineBold')}</span>
+            </h1>
             <Link to="/locations">
               <button className="find-location-btn">
                 <Icon icon="my_location" />
                 {t('landing.findLocation')}
               </button>
             </Link>
-            <Link to="faq" className="learn-more-link">
-              {t('landing.learnMore')}
-            </Link>
           </div>
+          <div className="wavebg" />
+          <div className="inverted-copy">
+            <p>{t('landing.supportingCopy')}</p>
+          </div>
+          <PageFooter />
         </div>
       </PageBody>
     </Fragment>

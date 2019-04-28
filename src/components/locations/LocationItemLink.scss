@@ -1,20 +1,32 @@
 @import '../../styles/variables.scss';
 
 .LocationItemLink {
+  position: relative;
   display: block;
   padding: 24px;
 
   border-bottom: $defaultBorder;
 
-  &:hover {
-    background-color: $grey000;
+  &:hover,
+  &:focus {
+    // background-color: $grey000;
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 6px;
+      background-color: $grey200;
+    }
   }
 
   .name {
     margin-bottom: 2px;
     font-weight: bold;
     font-size: 20px;
-    color: $primary700;
+    color: $primary600;
   }
 
   .location {
@@ -28,11 +40,6 @@
     color: $grey400;
 
     strong {
-      // padding: 2px 4px;
-      // background-color: $secondary500;
-      // border-radius: 6px;
-      // color: white;
-
       font-size: 16px;
       color: $grey700;
       text-transform: uppercase;
@@ -49,13 +56,13 @@
     i {
       margin-right: 4px;
       font-size: 16px;
-      color: $grey200;
+      color: $secondary600;
     }
     span {
       margin-right: 6px;
       &.active {
         font-weight: bold;
-        color: $secondary800;
+        color: $secondary600;
       }
     }
   }

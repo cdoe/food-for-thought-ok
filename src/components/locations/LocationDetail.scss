@@ -7,7 +7,7 @@
     margin-bottom: 8px;
     font-size: 24px;
     font-weight: bold;
-    color: $primary600;
+    color: $primary500;
   }
 
   .status {
@@ -15,10 +15,6 @@
     color: $grey400;
 
     strong {
-      // padding: 2px 4px;
-      // background-color: $secondary500;
-      // border-radius: 6px;
-      // color: white;
       display: block;
       margin-bottom: 2px;
 
@@ -38,6 +34,16 @@
     @media screen and (min-width: $break-md) {
       display: block;
     }
+  }
+
+  .wavy-line-divider {
+    width: calc(100% + 48px);
+    height: 16px;
+    margin-bottom: 24px;
+    margin-left: -24px;
+    background-image: url('/img/tiled-wavy-line.png');
+    background-size: auto 16px;
+    background-repeat: repeat-x;
   }
 
   .schedule-wrapper {
@@ -79,7 +85,6 @@
       .start-end {
         margin-top: 16px;
         font-size: 14px;
-        color: $grey400;
         .date {
           font-weight: bold;
           white-space: nowrap;
@@ -99,11 +104,10 @@
       margin-bottom: 6px;
 
       font-weight: bold;
-      font-size: 18px;
-      color: $grey600;
+      color: $secondary600;
       i {
         margin-right: 4px;
-        color: $grey300;
+        color: $secondary600;
       }
     }
     .form {
@@ -119,6 +123,9 @@
         border-radius: 6px 0 0 6px;
         font-size: 18px;
         font-weight: bold;
+        &:focus {
+          border-color: $secondary600;
+        }
       }
       .submit-phone-btn {
         appearance: none;
@@ -171,7 +178,7 @@
       padding: 4px 0;
       i {
         margin-right: 4px;
-        color: $secondary700;
+        color: $secondary600;
       }
     }
   }
@@ -186,7 +193,7 @@
       padding: 4px 0;
       i {
         margin-right: 4px;
-        color: $secondary700;
+        color: $secondary600;
       }
     }
   }

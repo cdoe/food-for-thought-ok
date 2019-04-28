@@ -40,7 +40,6 @@
     align-items: center;
 
     background-color: white;
-    box-shadow: 4px 0px 12px rgba(91, 103, 112, 0.25);
 
     transition: $easeClose;
     &.open {
@@ -59,7 +58,7 @@
       top: 12px;
       right: 12px;
       i {
-        color: $grey600;
+        color: $secondary600;
       }
     }
 
@@ -86,14 +85,14 @@
         color: $grey500;
         i {
           margin-right: 8px;
-          color: $grey200;
+          color: $grey500;
         }
 
         &.active {
-          background-color: $secondary500;
+          background-color: $secondary600;
           color: white;
           i {
-            color: $secondary900;
+            color: white;
           }
         }
       }
@@ -103,9 +102,9 @@
       width: 100%;
       padding: 12px 24px 24px;
 
-      background-color: $grey100;
+      background-color: $grey800;
       .select-language {
-        color: $grey400;
+        color: $grey300;
         font-size: 14px;
         margin: 0 0 12px 4px;
       }
