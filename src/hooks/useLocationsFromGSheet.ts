@@ -1,14 +1,13 @@
 // Core
 import { useEffect } from 'react';
 import useLocalState from './useLocalState';
-// import { useEffect } from 'react';
 
 function useLocationsFromGSheet(sheetId: string, sheetName: string, apiKey: string) {
   // Begin benchmark for fetch time
   const benchmark0 = performance.now();
 
   // Stateful object to store locations (with caching in localStorage)
-  const [locations, setLocations] = useLocalState([], 'locations-cache-TMP');
+  const [locations, setLocations] = useLocalState([], 'locations-list-cache');
 
   // URL format that returns Google sheet as JSON data
   const jsonUrl =
@@ -78,7 +77,7 @@ function useLocationsFromGSheet(sheetId: string, sheetName: string, apiKey: stri
     });
   }, []);
 
-  return locations;
+  return locations || [];
 }
 
 export default useLocationsFromGSheet;
@@ -101,6 +100,11 @@ function formatCellData(data: any, key: string) {
     const date = new Date(data);
     // Only assign value if converted to valid date
     returnValue = !!date ? date : returnValue;
+  }
+
+  // Try to convert lat + lng to numbers
+  if (key === 'lat' || key === 'lng') {
+    returnValue = parseFloat(data);
   }
 
   return returnValue;

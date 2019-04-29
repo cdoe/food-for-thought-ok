@@ -1,6 +1,7 @@
 // Core
 import React, { FunctionComponent, AnchorHTMLAttributes } from 'react';
 import Location from '../../types/location';
+import { metersToRoundedMiles } from '../../lib/distanceHelpers';
 // Styles
 import './LocationItemLink.scss';
 import Icon from '../Icon';
@@ -15,6 +16,7 @@ const LocationItemLink: FunctionComponent<
       <div className="name">{location.name}</div>
       <div className="location">
         {location.address} · {location.city}
+        {location.distance && ` · ${metersToRoundedMiles(location.distance)}mi`}
       </div>
       <div className="status">
         <strong>Open Now</strong> Breakfast until 8am

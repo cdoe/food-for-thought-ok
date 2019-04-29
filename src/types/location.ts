@@ -1,8 +1,9 @@
 export default interface Location {
   id: string;
   name: string;
-  lat: string | null;
-  lng: string | null;
+  lat: number | null;
+  lng: number | null;
+  distance?: number;
   address: string | null;
   city: string | null;
   zip: string | null;
@@ -29,4 +30,5 @@ export default interface Location {
   servesLunch: boolean;
   servesSnack: boolean;
   servesDinner: boolean;
+  status?: 'before-start' | 'after-end' | 'open' | 'open-soon' | 'closed';
 }
