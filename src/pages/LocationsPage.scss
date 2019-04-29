@@ -148,9 +148,17 @@ $sidebarWidth-lg: 400px;
 
     // Embedded map
     .map-embed {
-      // z-index: -1;
       flex: 1;
       height: 100%;
+      // Tooltip on hover
+      .location-tooltip {
+        font-family: museo-sans-rounded, sans-serif;
+        font-size: 16px;
+        box-shadow: 1px 1px 8px rgba(91, 103, 112, 0.1), 1px 1px 4px rgba(91, 103, 112, 0.1);
+        padding: 6px 12px;
+        font-weight: bold;
+        border: 1px solid $grey100;
+      }
       // Narrow mode on mobile when collapsed detail pane is open
       // to ensure pin is centered vertically (not hidden under pane)
       &.narrow {

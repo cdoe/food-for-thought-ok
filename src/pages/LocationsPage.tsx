@@ -1,10 +1,11 @@
 // Core
-import React, { FunctionComponent, Fragment, useState, useRef, useEffect } from 'react';
+import React, { FunctionComponent, Fragment, useState, useEffect, useContext } from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
-import { Map as LeafletMap, TileLayer, Marker } from 'react-leaflet';
+import { Map as LeafletMap, TileLayer, CircleMarker, Marker, Tooltip } from 'react-leaflet';
 import Leaflet, { Map as LeafletElement, IconOptions } from 'leaflet';
+import { LocationsCtx } from '../App';
 // Styles
 import './LocationsPage.scss';
 // Components
@@ -18,10 +19,6 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import marker from '../img/marker.png';
 import retinaMarker from '../img/marker@2x.png';
 import markerShadow from '../img/marker-shadow.png';
-
-// MOCK TMP
-// XXX TODO : REMOVE
-import locations from '../lib/mock-locations';
 
 const mapIcon: IconOptions = {
   iconUrl: marker,
@@ -65,12 +62,15 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
   history,
   match
 }) => {
+  // Fetch locations list
+  const locations = useContext(LocationsCtx);
+
   // Store references to the leaflet map
-  const leafletRef = useRef<LeafletMap>({} as LeafletMap);
-  const [map, setMap] = useState<LeafletElement>();
-  useEffect(() => {
-    setMap(leafletRef.current && leafletRef.current.leafletElement);
-  }, []);
+  // const leafletRef = useRef<LeafletMap>({} as LeafletMap);
+  // const [map, setMap] = useState<LeafletElement>();
+  // useEffect(() => {
+  //   setMap(leafletRef.current && leafletRef.current.leafletElement);
+  // }, []);
   // Set bounds to Oklahoma state wide
   // useEffect(() => {
   // if (map) {
@@ -100,6 +100,8 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
   const locationIdParam = match.params.locationId;
   // Store as state to use for details view
   const [locationId, setLocationId] = useState(locationIdParam);
+  // Store hover location to swap pin out
+  const [hoverLocationId, setHoverLocationId] = useState('');
 
   // Effect triggered when locationId in URL changes
   useEffect(() => {
@@ -204,7 +206,16 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
                   {locations.map(
                     (location, index) =>
                       index < shownLocationCount && (
-                        <LocationItemLink key={location.id} location={location} />
+                        <LocationItemLink
+                          key={location.id}
+                          location={location}
+                          onMouseEnter={() => {
+                            setHoverLocationId(location.id);
+                          }}
+                          onMouseLeave={() => {
+                            setHoverLocationId('');
+                          }}
+                        />
                       )
                   )}
                 </InfiniteScroll>
@@ -218,9 +229,16 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
             center={mapCenter}
             zoom={mapZoom}
             animate={true}
-            ref={leafletRef}
-            // maxBounds={[[44.6856049, -118.8662969], [30.8917819, -84.2111817]]}
-            // minZoom={5}
+            // roughly limit map bounds to Oklahoma
+            maxBounds={[[25.4854116799, -110.4392954062], [44.4321412622, -84.98740216]]}
+            minZoom={5}
+            // ref={leafletRef}
+            onclick={() => {
+              // Clear location when not clicking on pin
+              if (locationIdParam) {
+                history.push('/locations/');
+              }
+            }}
           >
             <TileLayer
               // access_token="pk.eyJ1IjoiY2RvZSIsImEiOiJjanVmeGRmaGowZjM3NDlucXNocmZyZmZrIn0.zW5aLSTzrHl5OAx4YF4ETA"
@@ -239,15 +257,37 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
                   parseFloat(location.lat),
                   parseFloat(location.lng)
                 ];
-                return (
+                return locationIdParam === location.id || hoverLocationId === location.id ? (
+                  // Selected... or hovered list item... marker (pin)
                   <Marker
                     key={location.id}
                     position={latLng}
                     icon={new Leaflet.Icon(mapIcon)}
                     onClick={() => {
-                      history.push('/locations/' + location.id);
+                      // This is only to prevent bubbling up to map
+                      // so location doesn't clear when tapping selected location pin
                     }}
                   />
+                ) : (
+                  // Unselected marker (circle)
+                  <CircleMarker
+                    key={location.id}
+                    center={latLng}
+                    radius={locationIdParam ? 6 : 8}
+                    color="#c10f78"
+                    weight={locationIdParam ? 5 : 1}
+                    opacity={locationIdParam || hoverLocationId ? 0.0001 : 1}
+                    fillColor={hoverLocationId ? '#ed589a' : '#da1884'}
+                    fillOpacity={locationIdParam || hoverLocationId ? 0.3 : 0.8}
+                    onClick={() => {
+                      history.push('/locations/' + location.id);
+                    }}
+                    bubblingMouseEvents={false}
+                  >
+                    <Tooltip className="location-tooltip" opacity={1}>
+                      {location.name}
+                    </Tooltip>
+                  </CircleMarker>
                 );
               }
             })}

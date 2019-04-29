@@ -10,23 +10,13 @@
   &:hover,
   &:focus {
     background-color: $offWhite;
-    // &::after {
-    //   content: '';
-    //   display: block;
-    //   position: absolute;
-    //   top: 0;
-    //   right: 0;
-    //   height: 100%;
-    //   width: 4px;
-    //   background-color: $primary600;
-    // }
   }
 
   .name {
     margin-bottom: 2px;
     font-weight: bold;
     font-size: 20px;
-    color: $primary600;
+    color: $primary500;
   }
 
   .location {
