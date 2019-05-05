@@ -1,6 +1,6 @@
 {
-  "name": "food-for-thought-2",
-  "version": "0.1.0",
+  "name": "food-for-thought",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@types/classnames": "^2.2.7",

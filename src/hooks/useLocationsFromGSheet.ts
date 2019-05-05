@@ -3,6 +3,10 @@ import { useEffect } from 'react';
 import useLocalState from './useLocalState';
 
 function useLocationsFromGSheet(sheetId: string, sheetName: string, apiKey: string) {
+  if (!sheetId || !sheetName || !apiKey) {
+    return [];
+  }
+
   // Begin benchmark for fetch time
   const benchmark0 = performance.now();
 

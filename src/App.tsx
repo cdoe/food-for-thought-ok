@@ -22,19 +22,24 @@ import PageWrapper from './layout/PageWrapper';
 import PrimaryNav from './layout/PrimaryNav';
 import MobileNav from './layout/MobileNav';
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Make sure the Google Sheet's sharing settings are set to 'Anyone with the link can view'                       //
-// then REPLACE THIS ID and the individual sheetName is case-sensitive and must be exact (not the document title) //
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const googleSheetId = '1kmjCUPdD64mw1hQnKfG3khwTG9cOGT6W40cT251fAAQ';
-const sheetName = 'Locations';
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Make sure the Google Sheet's sharing settings are set to 'Anyone with the link can view' then update .env.local variables. //
+// The individual sheetName is case-sensitive and must be exact. Note: this is NOT the same as the document title)            //
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const googleSheetId = process.env.REACT_APP_GOOGLE_SHEET_ID || '';
+const sheetName =
+  process.env.NODE_ENV === 'production'
+    ? process.env.REACT_APP_GOOGLE_SHEET_NAME || '' // Should point to the 'Locations_dev' sheet
+    : process.env.REACT_APP_GOOGLE_SHEET_NAME_DEV || ''; // Should point to the 'Locations_dev' sheet
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Generate an API with access to the 'Google Sheets API' within the Google Cloud Console                   //
 // and, for security, ensure application restrictions are set to HTTP referrers and necessary URLS are set  //
 // https://console.cloud.google.com/apis/credentials                                                        //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const googleApiKey = 'AIzaSyDVzWswXNF19_-4CUoQ8V3JXaytAIKw5Dc';
+const googleApiKey =
+  process.env.NODE_ENV === 'production'
+    ? process.env.REACT_APP_GOOGLE_API_KEY || '' // Restricted to meals4kidsok.org
+    : process.env.REACT_APP_GOOGLE_API_KEY_DEV || ''; // Restricted to localhost:3000
 
 // Render very top-level App component
 const App: FunctionComponent = () => {
