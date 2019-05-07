@@ -19,6 +19,22 @@
     },
     "locations": {
       "enterAddressPrompt": "Enter your address or city"
+    },
+    "faq": {
+      "whatIsSfsp": "What is the Summer Food Service Program (SFSP)?",
+      "SfspDescrip": "The Summer Food Service Program (SFSP) provides no-cost meals to children and teens 18 or younger during the summer months when school is not in session. Administered by the Oklahoma State Department of Education (OSDE), more than 100 sponsoring organizations operate hundreds of sites serving no-cost meals across the state each year. Many sites serve a combination breakfast and lunch or lunch and a snack. In addition, many sites also provide education or recreational programming.",
+      "doINeedId": "Do I need to provide any identification or paperwork to receive a meal?",
+      "noIdRequired": "Identification and paperwork is not required. Any child or teen can receive a meal.",
+      "whoIsEligible": "Who is eligible to receive meals?",
+      "childrenAndTeensEligible": "Children and teens 18 and younger may receive no cost meals and snacks through SFSP. Meals and snacks are also available to individuals with disabilities, over age 18, who participate in school programs catered to individuals with disabilities.",
+      "canMealsBeTaken": "Can meals be taken home?",
+      "noMealsTaken": "No, meals must be consumed on-site as outlined in state program guidelines.",
+      "howDoIFindSite": "How do I find a site near me?",
+      "findSiteStep_01": "Allow the map to obtain your location to find the sites closest to you.",
+      "findSiteStep_02": "Select “Find a location near me” or enter your address or zip code in the search bar if location services are not enable on your device. The nearest sites should appear on the map.",
+      "findSiteStep_03": "Select any site on the map by clicking the icon. The column on the left-hand side of the page will display information such as meals served, times, days, and location.",
+      "findSiteStep_04": "Click “Get Directions” to get Google Map directions to the site.",
+      "findSiteStep_05": "To view the full directory of available sites, indicate “All locations” in the left hand column. For mobile users, select “Show list” at the bottom of the screen."
     }
   }
 }
