@@ -248,13 +248,15 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
         ]);
         const nearbyBounds = Leaflet.latLngBounds(currentUser.latLng, nearestLatLng);
         for (let i = 1; i < 15; i++) {
-          const lat = distanceSortedLocations[i].lat;
-          const lng = distanceSortedLocations[i].lng;
-          // Only include locations within 15miles (~24000meters)
-          const distance = distanceSortedLocations[i].distance;
-          if (lat && lng && distance && (distance < 24000 || i < 5)) {
-            const latLng = Leaflet.latLng([lat, lng]);
-            nearbyBounds.extend(latLng);
+          if (distanceSortedLocations[i]) {
+            const lat = distanceSortedLocations[i].lat;
+            const lng = distanceSortedLocations[i].lng;
+            // Only include locations within 15miles (~24000meters)
+            const distance = distanceSortedLocations[i].distance;
+            if (lat && lng && distance && (distance < 24000 || i < 5)) {
+              const latLng = Leaflet.latLng([lat, lng]);
+              nearbyBounds.extend(latLng);
+            }
           }
         }
         setNearbyBounds(nearbyBounds);
