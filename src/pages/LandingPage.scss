@@ -56,6 +56,8 @@
       }
     }
     .find-location-btn {
+      min-width: 287px;
+      min-height: 63px;
       text-align: center;
       position: relative;
       display: flex;
@@ -78,6 +80,7 @@
         background-color: white;
       }
       i {
+        max-width: 24px;
         margin-right: 12px;
         color: $primary500;
         margin-left: -8px;
@@ -87,6 +90,17 @@
       }
       @media screen and (min-width: $break-md) {
         font-size: 22px;
+      }
+    }
+    .location-input {
+      position: relative;
+      max-width: 320px;
+      margin: 0 auto 24px;
+      .label {
+        margin-bottom: 12px;
+        text-align: center;
+        font-weight: bold;
+        color: white;
       }
     }
   }

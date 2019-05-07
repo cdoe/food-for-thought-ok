@@ -7,6 +7,9 @@ import './NondiscriminationPage.scss';
 const NondiscriminationPage: FunctionComponent = () => {
   return <div className="NondiscriminationPage">Nondiscrimination Page</div>;
 };
-
-// Export
 export default NondiscriminationPage;
+
+// Component (spanish)
+export const NondiscriminationPageSpanish: FunctionComponent = () => {
+  return <div className="NondiscriminationPage">Nondiscrimination Page - Spanish</div>;
+};

@@ -1,5 +1,5 @@
 // Core
-import React, { FunctionComponent, Suspense } from 'react';
+import React, { FunctionComponent, memo } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 // Styles
@@ -40,4 +40,4 @@ const PrimaryNav: FunctionComponent = () => {
 };
 
 // Export
-export default PrimaryNav;
+export default memo(PrimaryNav);

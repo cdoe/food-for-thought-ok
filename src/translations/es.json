@@ -6,11 +6,19 @@
       "contact": "Contacto",
       "selectLanguage": "Seleccione el idioma:"
     },
+    "footer": {
+      "nondiscriminationStatement": "Nondiscrimination Statement",
+      "nondiscriminationLink": "/nodiscriminacion"
+    },
     "landing": {
       "headline": "Comidas sin costo para niños...",
       "headlineBold": "TODO EL VERANO!",
       "supportingCopy": "Mientras que la escuela está fuera durante el verano, más de 100 organizaciones patrocinadoras, que atienden a cientos de sitios en todo el estado, proporcionan comidas sin costo para niños de 18 años o menos. Muchos sitios sirven desayuno y almuerzo o almuerzo y una merienda.",
-      "findLocation": "Ubicaciones cercanas a mi"
+      "findLocation": "Ubicaciones cercanas a mi",
+      "couldNotFind": "No pudimos obtener su ubicación. Ingrese su dirección a continuación para ver qué hay cerca."
+    },
+    "locations": {
+      "enterAddressPrompt": "Ingrese su dirección o ciudad"
     }
   }
 }

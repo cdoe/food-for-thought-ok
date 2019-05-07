@@ -1,40 +1,34 @@
 // Core
-import React, {
-  FunctionComponent,
-  Fragment,
-  useState,
-  useEffect,
-  useContext,
-  useRef,
-  ChangeEvent
-} from 'react';
+import React, { FunctionComponent, Fragment, useState, useEffect, useContext, useRef } from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
+import { sortBy } from 'lodash';
+// Mapping
 import Leaflet from 'leaflet';
 import { Map as LeafletMap, TileLayer, CircleMarker, Marker, Tooltip } from 'react-leaflet';
-import { LocationsCtx } from '../App';
-import { sortBy } from 'lodash';
-import useSessionState from '../hooks/useSessionState';
 import { metersToRoundedMiles } from '../lib/distanceHelpers';
-// Types
 import Location from '../types/location';
+// Data
+import { CurrentUserCtx, LocationsCtx } from '../App';
+import useThrottle from '../hooks/useThrottle';
 // Styles
 import './LocationsPage.scss';
 // Components
+import SearchAutocomplete from '../components/locations/SearchAutocomplete';
 import MobileHeader from '../layout/MobileHeader';
 import Input from '../components/Input';
 import Icon from '../components/Icon';
 import LocationItemLink from '../components/locations/LocationItemLink';
 import LocationDetail from '../components/locations/LocationDetail';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import Loader from '../components/Loader';
 // Images
 import pinIcon from '../img/pin.png';
 import retinaPinIcon from '../img/pin@2x.png';
 import pinShadow from '../img/pin-shadow.png';
 import currentLocationIcon from '../img/current-location.png';
 import retinaCurrentLocationIcon from '../img/current-location@2x.png';
-import useLocalState from '../hooks/useLocalState';
 
 const OpenNowFilter: FunctionComponent = () => {
   const [openNowFilter, setOpenNowFilter] = useState(false);
@@ -65,16 +59,22 @@ const OpenNowFilter: FunctionComponent = () => {
 
 // Map Positioning
 //
-// *There's handy tool to find map bounds @  https://boundingbox.klokantech.com/ just note...
+// *There's handy tool to find map bounds @ https://boundingbox.klokantech.com/ just note...
 // the GeoJson it spits out is [lng, lat] counterclockwise starting from lower-left bound
 const maxBounds = Leaflet.latLngBounds(
-  [45.6624166281, -118.5708519356],
-  [23.1320065802, -78.7934776681]
+  [5.621295739, -143.94000019],
+  [56.8537668621, -54.2877861397]
 );
-const oklahomaBounds = Leaflet.latLngBounds(
-  [37.00229935, -103.00246156],
-  [33.61919542, -94.43121924]
+// CENTRAL STATE
+export const oklahomaBounds = Leaflet.latLngBounds(
+  [33.61919542, -99.7839304345],
+  [37.00229935, -94.4470640557]
 );
+// FULL STATE
+// export const oklahomaBounds = Leaflet.latLngBounds(
+//   [33.61919542, -103.00246156],
+//   [37.00229935, -94.43121924]
+// );
 const oklahomaCenter = oklahomaBounds.getCenter();
 const defaultMapZoom = 7;
 // Map icon settings
@@ -99,102 +99,93 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
   history,
   match
 }) => {
-  // Fetch locations list from app-wide context
-  const locations = useContext(LocationsCtx);
-  const [sortedLocations, setSortedLocations] = useState<Location[]>([]);
-  const [searchValue, setSearchValue] = useSessionState('', 'search-value');
+  // currentUser (available app-wide context)
+  ///////////////////////////////////////////
+  const [currentUser, setCurrentUser] = useContext(CurrentUserCtx);
 
+  // locations (available app-wide context)
+  /////////////////////////////////////////
+  const locations = useContext(LocationsCtx);
+  const isLoading = locations.length === 0;
+
+  // Filter for searching location names/cities
+  const [openNowFilter, setOpenNowFilter] = useState(false);
+  const [filterValue, setFilterValue] = useState('');
+  const throttledFilterValue = useThrottle(filterValue, 200);
+  const isFiltering = !!filterValue.trim();
+  // List for alphabetical OR
+  const [sortedLocations, setSortedLocations] = useState<Location[]>(locations);
+  const [displayLocations, setDisplayLocations] = useState<Location[]>(locations);
   // Get locationId from URL (if exists)
   const locationId = match.params.locationId;
-
   // Stateful count to use in virtual scroller
   // (for better performance on 600 items in list)
   const [shownLocationCount, setShownLocationCount] = useState(20);
+
+  // UI States
+  ////////////
+  const [initialLoad, setInitialLoad] = useState(true);
   // Mobile list and details states
   const [mobileListIsOpen, setMobileListIsOpen] = useState(false);
   const [mobileDetailsExpanded, setMobileDetailsExpanded] = useState(false);
   // Store hover location to swap pin out
   const [hoverLocationId, setHoverLocationId] = useState('');
-
   // Determine if screen is retina (to display retina pin graphics)
   const retina = typeof window !== 'undefined' && window.devicePixelRatio >= 2;
   // Determine if device is touch capable
   // so we can disable some hover effects preventing double tap on mobile
   const isTouchDevice = 'ontouchstart' in document.documentElement ? true : false;
-
   // Store references to the leaflet map
   const leafletRef = useRef<LeafletMap>({} as LeafletMap);
-  // const [map, setMap] = useState<Leaflet.Map>();
-  // useEffect(() => {
-  //   leafletRef.current && setMap(leafletRef.current.leafletElement);
-  // }, []);
 
   // Establish map params
-  const [mapZoom, setMapZoom] = useState(defaultMapZoom);
-  const [mapCenter, setMapCenter] = useState<Leaflet.LatLng>(oklahomaCenter);
+  ///////////////////////
+  const [mapZoom, setMapZoom] = useState(currentUser.latLng ? 12 : defaultMapZoom);
+  const [mapCenter, setMapCenter] = useState<Leaflet.LatLng>(
+    currentUser.latLng ? Leaflet.latLng(currentUser.latLng) : oklahomaCenter
+  );
   const [mapBounds, setMapBounds] = useState<Leaflet.LatLngBounds>(oklahomaBounds);
-  const [userLocation, setUserLocation] = useState<Leaflet.LatLng>();
+  // Store a set of bounds as a baseline for locations near them
+  const [nearbyBounds, setNearbyBounds] = useState<Leaflet.LatLngBounds>(oklahomaBounds);
+  const throttledNearbyBounds = useThrottle(nearbyBounds, 300);
   // Store a set of bounds that a user can return to after backing out of location details
   const [historyBounds, setHistoryBounds] = useState<Leaflet.LatLngBounds>();
 
-  // Sort locations by distance
+  // Sort locations based on sortType from currentUser
   useEffect(() => {
-    // Loop through and calculate distance from user's location
-    if (userLocation) {
-      locations.map(location => {
-        if (location.lat && location.lng) {
-          const latLng = Leaflet.latLng([location.lat, location.lng]);
-          location.distance = latLng.distanceTo(userLocation);
-          return location;
-        }
-        return location;
+    if (
+      !isLoading &&
+      currentUser.sortType === 'nearby' &&
+      !!currentUser.latLng &&
+      locations[0].distance
+    ) {
+      setSortedLocations(sortBy(locations, ['distance']));
+    } else {
+      setSortedLocations(locations);
+    }
+  }, [isLoading, locations, currentUser.latLng, currentUser.sortType]);
+
+  // To show or hide locations based on 'open now' and
+  // when user is typing in a location 'filter'
+  useEffect(() => {
+    let filteredLocations = sortedLocations;
+    if (openNowFilter) {
+      // XXX TODO
+      // Restrict list to only those open (or opening soon)
+      filteredLocations = sortedLocations;
+    }
+    if (!!throttledFilterValue.trim()) {
+      // Filter subset of those that match name or city of typed in filter
+      filteredLocations = filteredLocations.filter(location => {
+        const nameMatch = location.name.toLowerCase().includes(throttledFilterValue.toLowerCase());
+        const cityMatch =
+          location.city && location.city.toLowerCase().includes(throttledFilterValue.toLowerCase());
+        return nameMatch || cityMatch;
       });
     }
-    // Set sorted array
-    const distanceSortedLocations = sortBy(locations, ['distance']);
-    setSortedLocations(distanceSortedLocations);
-
-    // Anytime locations or userLocation changes
-    // set map bounds to closest 10 locations
-    if (userLocation && distanceSortedLocations[0].lat && distanceSortedLocations[0].lng) {
-      const nearestLatLng = Leaflet.latLng([
-        distanceSortedLocations[0].lat,
-        distanceSortedLocations[0].lng
-      ]);
-      const nearbyBounds = Leaflet.latLngBounds(userLocation, nearestLatLng);
-      for (let i = 1; i < 15; i++) {
-        const lat = distanceSortedLocations[i].lat;
-        const lng = distanceSortedLocations[i].lng;
-        // Only include locations within 5miles (~8000meters)
-        const distance = distanceSortedLocations[i].distance;
-        if (lat && lng && distance && distance < 8046.72) {
-          const latLng = Leaflet.latLng([lat, lng]);
-          nearbyBounds.extend(latLng);
-        }
-      }
-      setMapBounds(nearbyBounds);
-    }
-  }, [locations, userLocation]);
-
-  // Get location from IP address and center to that location
-  useEffect(() => {
-    fetch('https://freegeoip.app/json/')
-      .then(resp => {
-        return resp.json();
-      })
-      .then(data => {
-        // If in oklahoma, center to general area
-        console.log('data', data);
-        if (data.region_code === 'OK') {
-          setMapZoom(12);
-          const lat = data.latitude;
-          const lng = data.longitude;
-          setMapCenter(Leaflet.latLng({ lat, lng }));
-          setUserLocation(Leaflet.latLng([lat, lng]));
-          setSearchValue(`${data.city}, ${data.region_code} ${data.zip_code}`);
-        }
-      });
-  }, []);
+    // Set the list we end up seeing
+    setDisplayLocations(filteredLocations);
+  }, [sortedLocations, throttledFilterValue]);
 
   // Effect triggered when locationId in URL changes
   useEffect(() => {
@@ -203,16 +194,21 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
     if (!!locationId) {
       // Save current bounds to return to when backing out of location details
       // if not already set (meaning we're navigating from one location detail to another)
-      !historyBounds &&
-        leafletRef.current &&
-        setHistoryBounds(leafletRef.current.leafletElement.getBounds());
-
+      // and not initial load, so we can back out to nearby bounds
+      if (!initialLoad) {
+        !historyBounds &&
+          leafletRef.current &&
+          setHistoryBounds(leafletRef.current.leafletElement.getBounds());
+      } else {
+        setInitialLoad(false);
+      }
+      // Find location in list with ID
       const location = locations.find(location => location.id === locationId);
       if (location && location.lat && location.lng) {
         const latLng = Leaflet.latLng([location.lat, location.lng]);
         // if user's location is set, set bounds to include both
-        if (userLocation) {
-          setMapBounds(Leaflet.latLngBounds([userLocation, latLng]));
+        if (!!currentUser.latLng) {
+          setMapBounds(Leaflet.latLngBounds([currentUser.latLng, latLng]).pad(0.5));
         } else {
           // if user's location isn't set, go ahead and just center around selected location
           setMapCenter(latLng);
@@ -222,13 +218,15 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
         // If couldn't find location, set map to default settings
         setMapBounds(oklahomaBounds);
       }
-    }
-
-    // If historyBounds are set when location is removed
-    // return user to their previous bounds
-    if (!locationId && historyBounds) {
-      setMapBounds(historyBounds);
-      setHistoryBounds(undefined);
+    } else {
+      // If historyBounds are set when location is removed
+      // return user to their previous bounds
+      if (historyBounds) {
+        setMapBounds(historyBounds);
+        setHistoryBounds(undefined);
+      } else {
+        !initialLoad && setMapBounds(nearbyBounds);
+      }
     }
 
     // If location is removed from url, collapse mobile details
@@ -237,13 +235,43 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
     !locationId && setMobileDetailsExpanded(false);
   }, [locationId]);
 
+  // Anytime locations or userLocation changes set nearbyNounds
+  // to closest 15 locations within 15 miles, 5 locations minimum
+  const compareDistance = (locations[0] && locations[0].distance) || 0;
+  useEffect(() => {
+    if (!!currentUser.latLng && !isLoading && locations[0].distance) {
+      const distanceSortedLocations = sortBy(locations, ['distance']);
+      if (distanceSortedLocations[0].lat && distanceSortedLocations[0].lng) {
+        const nearestLatLng = Leaflet.latLng([
+          distanceSortedLocations[0].lat,
+          distanceSortedLocations[0].lng
+        ]);
+        const nearbyBounds = Leaflet.latLngBounds(currentUser.latLng, nearestLatLng);
+        for (let i = 1; i < 15; i++) {
+          const lat = distanceSortedLocations[i].lat;
+          const lng = distanceSortedLocations[i].lng;
+          // Only include locations within 15miles (~24000meters)
+          const distance = distanceSortedLocations[i].distance;
+          if (lat && lng && distance && (distance < 24000 || i < 5)) {
+            const latLng = Leaflet.latLng([lat, lng]);
+            nearbyBounds.extend(latLng);
+          }
+        }
+        setNearbyBounds(nearbyBounds);
+      }
+    }
+  }, [compareDistance, currentUser.latLng]);
+  // Set bounds to nearby with throttled value to avoid race conditions of sorting & setNearbyBounds
+  useEffect(() => {
+    !locationId && setMapBounds(nearbyBounds);
+  }, [throttledNearbyBounds]);
+
   return (
     <Fragment>
       {/* Nearby search on mobile */}
       {/* and the OpenNowFilter only shows on mobile when location detail view isn't active */}
       <MobileHeader bottom={!!locationId ? undefined : <OpenNowFilter />}>
-        {/* <MobileHeader> */}
-        <Input type="text" placeholder="Enter your address or Zip code" />
+        <SearchAutocomplete history={history} redirectOnSuccess={!!locationId} />
       </MobileHeader>
 
       {/* Rest of the locations page */}
@@ -255,73 +283,103 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
             <div className="list-flex-wrapper">
               {/* Nearby search NOT for mobile */}
               <div className="desktop-search">
-                <Input
-                  type="text"
-                  placeholder="Enter your address or Zip code"
-                  value={searchValue}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                    setSearchValue(e.target.value);
-                  }}
-                />
+                <SearchAutocomplete history={history} />
                 <OpenNowFilter />
               </div>
 
+              {/* Loader (But not when filtering) */}
+              {isLoading && <Loader />}
+
               {/* Scroller for locations list */}
               <div id="list-scroll" className="list-scroll">
-                <InfiniteScroll
-                  scrollableTarget="list-scroll"
-                  dataLength={shownLocationCount} //This is important field to render the next data
-                  next={() => {
-                    setShownLocationCount(shownLocationCount + 20);
-                  }}
-                  hasMore={shownLocationCount < sortedLocations.length}
-                  loader={<div className="list-message">Loading...</div>}
-                  endMessage={
-                    <div className="list-message">
-                      Showing all {sortedLocations.length} locations
-                    </div>
-                  }
-                  initialScrollY={58} // Initiall scroll past filter/sort
-                >
-                  {/* Filter + sort locations  */}
-                  <div className="filter-sort-locations">
-                    <div className="filter-locations">
-                      <Icon icon="search" />
-                      Filter locations
-                    </div>
-                    <div className="sort-locations">
-                      <Icon icon="arrow_drop_down" />
-                      Sort by nearby
-                    </div>
-                  </div>
-
-                  {/* Locations list */}
-                  {sortedLocations.map(
-                    (location, index) =>
-                      index < shownLocationCount && (
-                        <LocationItemLink
-                          key={location.id}
-                          location={location}
-                          onMouseEnter={
-                            // This song and dance prevents double tap on some mobile devices
-                            isTouchDevice
-                              ? undefined
-                              : () => {
-                                  setHoverLocationId(location.id);
-                                }
-                          }
-                          onMouseLeave={
-                            // This song and dance prevents double tap on some mobile devices
-                            isTouchDevice
-                              ? undefined
-                              : () => {
-                                  setHoverLocationId('');
-                                }
-                          }
+                {!isLoading && (
+                  <InfiniteScroll
+                    scrollableTarget="list-scroll"
+                    dataLength={shownLocationCount} //This is important field to render the next data
+                    next={() => {
+                      setShownLocationCount(shownLocationCount + 20);
+                    }}
+                    hasMore={shownLocationCount < displayLocations.length}
+                    loader={<div className="list-message">Loading...</div>}
+                    endMessage={
+                      <div className="list-message">
+                        Showing all {displayLocations.length} locations
+                      </div>
+                    }
+                    initialScrollY={54} // Initiall scroll past filter/sort
+                  >
+                    {/* Filter + sort locations  */}
+                    <div className="filter-sort-locations">
+                      {/* Filter by input */}
+                      <div className="filter-wrapper">
+                        <Icon icon="search" className="search-icon" />
+                        <Input
+                          placeholder="Filter locations"
+                          value={filterValue}
+                          onChange={e => {
+                            setFilterValue(e.target.value);
+                          }}
                         />
-                      )
-                  )}
-                </InfiniteScroll>
+                        {isFiltering && (
+                          <button
+                            className="clear-btn"
+                            onClick={e => {
+                              e.preventDefault();
+                              setFilterValue('');
+                            }}
+                          >
+                            <Icon icon="clear" />
+                          </button>
+                        )}
+                      </div>
+                      {/* Sort select (when has user location and isn't filtering) */}
+                      {!!currentUser.latLng && !isFiltering && (
+                        <div className="sort-wrapper">
+                          <select
+                            value={currentUser.sortType}
+                            onChange={e => {
+                              setCurrentUser(currentUser => ({
+                                ...currentUser,
+                                sortType: e.target.value as 'nearby' | 'name'
+                              }));
+                            }}
+                          >
+                            <option value="nearby">Sort by nearby</option>
+                            <option value="name">Sort by name</option>
+                          </select>
+                          <Icon icon="arrow_drop_down" className="dropdown-icon" />
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Locations list */}
+                    {displayLocations.map(
+                      (location, index) =>
+                        index < shownLocationCount && (
+                          <LocationItemLink
+                            key={location.id}
+                            location={location}
+                            onMouseEnter={
+                              // This song and dance prevents double tap on some mobile devices
+                              isTouchDevice
+                                ? undefined
+                                : () => {
+                                    setHoverLocationId(location.id);
+                                  }
+                            }
+                            onMouseLeave={
+                              // This song and dance prevents double tap on some mobile devices
+                              isTouchDevice
+                                ? undefined
+                                : () => {
+                                    setHoverLocationId('');
+                                  }
+                            }
+                          />
+                        )
+                    )}
+                  </InfiniteScroll>
+                )}
               </div>
             </div>
           </div>
@@ -332,9 +390,9 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
             className={classnames('map-embed', { narrow: locationId })}
             ref={leafletRef}
             // These stateful vars allow the map to animate dynamically
-            bounds={mapBounds}
-            center={mapCenter}
             zoom={mapZoom}
+            center={mapCenter}
+            bounds={mapBounds}
             // roughly limit map bounds to Oklahoma
             maxBounds={maxBounds}
             minZoom={5}
@@ -357,10 +415,14 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
               attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions">CARTO</a>'
             />
             {/* Current Location Marker */}
-            {userLocation && (
-              <Marker position={userLocation} icon={Leaflet.icon(currentLocationLeafletIcon)} />
+            {!!currentUser.latLng && (
+              <Marker
+                position={currentUser.latLng}
+                icon={Leaflet.icon(currentLocationLeafletIcon)}
+              />
             )}
-            {sortedLocations.map(location => {
+            {/* All location markers */}
+            {displayLocations.map(location => {
               if (location.lat && location.lng) {
                 const latLng = Leaflet.latLng([location.lat, location.lng]);
                 return locationId === location.id || hoverLocationId === location.id ? (
@@ -417,7 +479,7 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
               </Link>
             )}
             <LocationDetail
-              location={sortedLocations.find(location => location.id === locationId)}
+              location={locations.find(location => location.id === locationId)}
               mobileExpanded={mobileDetailsExpanded}
             />
           </div>

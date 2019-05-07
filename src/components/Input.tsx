@@ -1,12 +1,14 @@
 // Core
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, InputHTMLAttributes, memo, RefObject } from 'react';
 // Styles
 import './Input.scss';
 
 // Component
-const Input: FunctionComponent<any> = props => {
-  return <input className="input" {...props} />;
+const Input: FunctionComponent<
+  InputHTMLAttributes<HTMLInputElement> & { forwardedRef?: RefObject<HTMLInputElement> }
+> = ({ forwardedRef, ...rest }) => {
+  return <input className="input" ref={forwardedRef} {...rest} />;
 };
 
 // Export
-export default Input;
+export default memo(Input);

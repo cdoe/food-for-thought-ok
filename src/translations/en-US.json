@@ -6,11 +6,19 @@
       "contact": "Contact",
       "selectLanguage": "Select language:"
     },
+    "footer": {
+      "nondiscriminationStatement": "Nondiscrimination Statement",
+      "nondiscriminationLink": "/nondiscrimination"
+    },
     "landing": {
       "headline": "No-cost meals for kids...",
       "headlineBold": "ALL SUMMER!",
       "supportingCopy": "While school is out for the summer, over 100 sponsoring organizations, serving hundreds of sites across the state, provide no-cost meals to kids 18 and younger. Many sites serve both breakfast and lunch or lunch and a snack.",
-      "findLocation": "Locations near me"
+      "findLocation": "Locations near me",
+      "couldNotFind": "We could not get your location. Enter your address below to see what's nearby."
+    },
+    "locations": {
+      "enterAddressPrompt": "Enter your address or city"
     }
   }
 }

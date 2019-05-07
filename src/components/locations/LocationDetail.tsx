@@ -1,5 +1,5 @@
 // Core
-import React, { FunctionComponent, HtmlHTMLAttributes, Fragment, useState } from 'react';
+import React, { FunctionComponent, HtmlHTMLAttributes, Fragment, useState, memo } from 'react';
 import Location from '../../types/location';
 import classnames from 'classnames';
 import NumberFormat from 'react-number-format';
@@ -134,4 +134,4 @@ const LocationDetail: FunctionComponent<
 };
 
 // Export
-export default LocationDetail;
+export default memo(LocationDetail);

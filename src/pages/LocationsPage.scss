@@ -107,6 +107,11 @@ $sidebarWidth-lg: 400px;
           }
         }
 
+        // Loader
+        .loader {
+          margin-top: 6px;
+        }
+
         .list-scroll {
           position: relative;
           height: 100%;
@@ -120,18 +125,67 @@ $sidebarWidth-lg: 400px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 16px;
+            padding: 10px 8px;
 
             border-bottom: $defaultBorder;
-            // box-shadow: 0 3px 5px rgba(91, 103, 112, 0.075);
             background-color: $grey000;
             color: $grey300;
             font-size: 14px;
 
-            i {
-              margin-right: 2px;
-              font-size: 20px;
-              color: $grey200;
+            .filter-wrapper {
+              display: flex;
+              align-items: center;
+              position: relative;
+              flex: 1;
+              padding-right: 16px;
+              input {
+                flex: 1;
+                padding: 6px 0 6px 26px;
+                appearance: none;
+                background: none;
+                border: 2px solid $grey000;
+              }
+              input:focus {
+                background-color: white;
+                border: 2px solid $grey200;
+              }
+              i.search-icon {
+                position: relative;
+                z-index: 100;
+                pointer-events: none;
+                margin-right: -24px;
+                margin-left: 12px;
+                font-size: 20px;
+              }
+              .clear-btn {
+                appearance: none;
+                background: none;
+                border: none;
+                outline: none;
+              }
+            }
+
+            .sort-wrapper {
+              position: relative;
+              select {
+                appearance: none;
+                padding: 6px 26px 6px 6px;
+                background: none;
+                border: none;
+                outline: none;
+                color: $grey400;
+                &:hover {
+                  cursor: pointer;
+                }
+              }
+              i.dropdown-icon {
+                position: absolute;
+                top: 0;
+                right: 0;
+                pointer-events: none;
+                font-size: 28px;
+                color: $grey400;
+              }
             }
           }
 

@@ -1,5 +1,5 @@
 // Core
-import React, { FunctionComponent, AnchorHTMLAttributes } from 'react';
+import React, { FunctionComponent, AnchorHTMLAttributes, memo } from 'react';
 import Location from '../../types/location';
 import { metersToRoundedMiles } from '../../lib/distanceHelpers';
 // Styles
@@ -43,4 +43,4 @@ const LocationItemLink: FunctionComponent<
 };
 
 // Export
-export default LocationItemLink;
+export default memo(LocationItemLink);

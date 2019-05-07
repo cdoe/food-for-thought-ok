@@ -1,8 +1,18 @@
 // Core
 import { useEffect } from 'react';
-import useLocalState from './useLocalState';
+import useLocalState from '../hooks/useLocalState';
+import { sortBy } from 'lodash';
+import Location from '../types/location';
 
-function useLocationsFromGSheet(sheetId: string, sheetName: string, apiKey: string) {
+function fetchLocationsFromGSheets({
+  sheetId,
+  sheetName,
+  apiKey
+}: {
+  sheetId: string;
+  sheetName: string;
+  apiKey: string;
+}): Location[] {
   if (!sheetId || !sheetName || !apiKey) {
     return [];
   }
@@ -11,7 +21,7 @@ function useLocationsFromGSheet(sheetId: string, sheetName: string, apiKey: stri
   const benchmark0 = performance.now();
 
   // Stateful object to store locations (with caching in localStorage)
-  const [locations, setLocations] = useLocalState([], 'locations-list-cache');
+  const [locations, setLocations] = useLocalState<Location[]>([], 'locations-list-cache');
 
   // URL format that returns Google sheet as JSON data
   const jsonUrl =
@@ -64,8 +74,8 @@ function useLocationsFromGSheet(sheetId: string, sheetName: string, apiKey: stri
       const benchmark1 = performance.now();
       console.log('Fetched Google Sheet data in ' + Math.round(benchmark1 - benchmark0) + 'ms');
 
-      // Return formatted data
-      return dataList;
+      // Return formatted data sorted by name at default
+      return sortBy(dataList, ['name']);
     } catch (error) {
       // If error, print to console and return empty array
       console.error('Error fetching and formatting Google Sheets data...', error);
@@ -76,7 +86,6 @@ function useLocationsFromGSheet(sheetId: string, sheetName: string, apiKey: stri
   // Fetch Data on load
   useEffect(() => {
     fetchData().then(result => {
-      // console.log('result', result);
       setLocations(result);
     });
   }, []);
@@ -84,7 +93,7 @@ function useLocationsFromGSheet(sheetId: string, sheetName: string, apiKey: stri
   return locations || [];
 }
 
-export default useLocationsFromGSheet;
+export default fetchLocationsFromGSheets;
 
 function formatCellData(data: any, key: string) {
   let returnValue = data;
