@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "food-for-thought-ok"
+  },
+  "targets": {
+    "food-for-thought-ok": {
+      "hosting": {
+        "proof": [
+          "food-for-thought-proof"
+        ],
+        "production": [
+          "food-for-thought-ok"
+        ]
+      }
+    }
   }
 }
