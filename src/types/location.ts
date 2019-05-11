@@ -1,16 +1,16 @@
 export default interface Location {
   id: string;
   name: string;
-  lat: number | null;
-  lng: number | null;
+  lat: number;
+  lng: number;
   distance?: number;
   address: string | null;
   city: string | null;
   zip: string | null;
   phone: string | null;
   phoneExt: string | null;
-  startDate: string | null;
-  endDate: string | null;
+  startDate: Date;
+  endDate: Date;
   breakfastStart: string | null;
   breakfastEnd: string | null;
   lunchStart: string | null;
@@ -19,6 +19,9 @@ export default interface Location {
   snackEnd: string | null;
   dinnerStart: string | null;
   dinnerEnd: string | null;
+  currentMeal: 'breakfast' | 'lunch' | 'snack' | 'dinner' | null;
+  currentMealUntil: string | null;
+  nextMealDate: Date | null;
   monday: boolean;
   tuesday: boolean;
   wednesday: boolean;
@@ -30,5 +33,5 @@ export default interface Location {
   servesLunch: boolean;
   servesSnack: boolean;
   servesDinner: boolean;
-  status?: 'before-start' | 'after-end' | 'open' | 'open-soon' | 'closed';
+  status: 'before-start' | 'after-end' | 'open' | 'open-soon' | 'closed-soon' | 'closed';
 }

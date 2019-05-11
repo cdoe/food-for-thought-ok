@@ -2,7 +2,8 @@
 import React, { FunctionComponent, HtmlHTMLAttributes, Fragment, useState, memo } from 'react';
 import Location from '../../types/location';
 import classnames from 'classnames';
-import NumberFormat from 'react-number-format';
+import { useTranslation } from 'react-i18next';
+// import NumberFormat from 'react-number-format';
 // Styles
 import './LocationDetail.scss';
 import Icon from '../Icon';
@@ -11,23 +12,32 @@ import Icon from '../Icon';
 const LocationDetail: FunctionComponent<
   { location?: Location; mobileExpanded?: boolean } & HtmlHTMLAttributes<HTMLDivElement>
 > = ({ location, mobileExpanded = false, ...rest }) => {
-  const [phoneValue, setPhoneValue] = useState('');
-  const [formattedPhoneValue, setFormattedPhoneValue] = useState('');
+  const { t } = useTranslation();
+
+  // Text notifications not yet wired up
+  // const [phoneValue, setPhoneValue] = useState('');
+  // const [formattedPhoneValue, setFormattedPhoneValue] = useState('');
 
   return (
     <div className="LocationDetail" {...rest}>
       {location && (
         <Fragment>
+          {/* Above the fold on mobile */}
+          {/* Location Name */}
           <div className="name">{location.name}</div>
-
+          {/* Status */}
           <div className="status">
             <strong>Open Now</strong>
             Breakfast until 8am
           </div>
 
+          {/* Below the fold on mobile */}
           <div className={classnames('mobile-expander', { expanded: mobileExpanded })}>
+            {/* Start Date, Mealtimes, Weekdays, and End Date */}
             <div className="wavy-line-divider" />
-
+            <div className="start-end-date">
+              Service begins <span className="date">June 2</span>
+            </div>
             <div className="schedule-wrapper">
               <div className="cell meals">
                 <div className="summary">2 meals</div>
@@ -42,15 +52,15 @@ const LocationDetail: FunctionComponent<
                 <div className="day">Monday</div>
                 <div className="day">Wednesday</div>
                 <div className="day">Friday</div>
-                <div className="start-end">
-                  Service ends <span className="date">July 27</span>
-                </div>
               </div>
             </div>
-
+            <div className="start-end-date">
+              Service ends <span className="date">July 27</span>
+            </div>
             <div className="wavy-line-divider" />
 
-            <div className="text-notifications">
+            {/* Text notification not completed at this time... */}
+            {/* <div className="text-notifications">
               <div className="header">
                 <Icon icon="phonelink_ring" /> Text notifications
               </div>
@@ -77,8 +87,9 @@ const LocationDetail: FunctionComponent<
                 served at this location.
               </div>
               <div className="disclaimer">*Standard messaging rates apply.</div>
-            </div>
+            </div> */}
 
+            {/* Address, Distance, Directions */}
             <div className="location">
               <div className="address">{location.address}</div>
               <div className="city">{location.city}, OK</div>
@@ -96,6 +107,7 @@ const LocationDetail: FunctionComponent<
               </a>
             </div>
 
+            {/* Phone */}
             {location.phone && (
               <div className="contact-phone">
                 <a
@@ -110,6 +122,7 @@ const LocationDetail: FunctionComponent<
               </div>
             )}
 
+            {/* Social */}
             <div className="sharing">
               <a
                 href={

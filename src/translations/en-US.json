@@ -18,7 +18,25 @@
       "couldNotFind": "We could not get your location. Enter your address below to see what's nearby."
     },
     "locations": {
-      "enterAddressPrompt": "Enter your address or city"
+      "enterAddressPrompt": "Enter your address or city",
+      "status": {
+        "open-soon": "Open soon",
+        "open": "Open",
+        "closed-soon": "Closing soon",
+        "closed": "Closed"
+      },
+      "mealsBegin": "Meals begin",
+      "mealsEnd": "Meals end",
+      "mealsEnded": "Meals ended",
+      "until": "until",
+      "startingAt": "starting at",
+      "nextMeal": "Next meal",
+      "tomorrow": "tomorrow",
+      "at": "at",
+      "breakfast": "Breakfast",
+      "lunch": "Lunch",
+      "snack": "Snack",
+      "dinner": "Dinner"
     },
     "faq": {
       "whatIsSfsp": "What is the Summer Food Service Program (SFSP)?",

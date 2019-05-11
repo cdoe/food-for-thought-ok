@@ -3,7 +3,7 @@
 .LocationItemLink {
   position: relative;
   display: block;
-  padding: 24px;
+  padding: 24px 24px 12px;
 
   border-bottom: $defaultBorder;
 
@@ -12,11 +12,26 @@
     background-color: $offWhite;
   }
 
+  &.faded {
+    opacity: 0.75;
+    background-color: $grey000;
+    .name {
+      color: $grey600;
+    }
+  }
+
   .name {
     margin-bottom: 2px;
     font-weight: bold;
     font-size: 20px;
     color: $primary500;
+    // &.faded {
+    //   // color: $grey500;
+    //   color: $primary800;
+    // }
+    // &.dark {
+    //   color: $primary800;
+    // }
   }
 
   .location {
@@ -29,21 +44,55 @@
     font-size: 14px;
     color: $grey400;
 
-    strong {
+    .label {
+      display: inline-block;
+      padding: 6px 8px;
+      margin-right: 8px;
+
+      border-radius: 6px;
+      background-color: $grey100;
+
       font-size: 16px;
-      color: $grey700;
       text-transform: uppercase;
+      font-weight: bold;
+      color: $grey400;
+
+      &.open-soon {
+        background-color: $grey000;
+        color: $secondary600;
+      }
+      &.open {
+        background-color: $secondary600;
+        color: white;
+      }
+      &.closed-soon {
+        background-color: $primary800;
+        color: white;
+      }
     }
+  }
+
+  .meals-begin-end {
+    margin-bottom: 14px;
+    font-size: 16px;
+    font-weight: bold;
+    // color: $primary800;
+    color: $grey600;
+    text-transform: uppercase;
   }
 
   .meals {
     margin-bottom: 4px;
+  }
+  .days {
+    margin-bottom: 12px;
   }
 
   .meals,
   .days {
     color: $grey100;
     i {
+      max-width: 16px;
       margin-right: 4px;
       font-size: 16px;
       color: $secondary600;

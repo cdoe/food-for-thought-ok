@@ -46,14 +46,25 @@
     background-repeat: repeat-x;
   }
 
+  .start-end-date {
+    text-align: center;
+    margin-bottom: 18px;
+    color: $grey400;
+    font-size: 17px;
+    .date {
+      font-weight: bold;
+      white-space: nowrap;
+    }
+  }
+
   .schedule-wrapper {
     display: flex;
     align-items: stretch;
-    padding-bottom: 24px;
+    padding-bottom: 18px;
 
     .cell {
       flex: 1;
-      padding: 4px 0;
+      padding: 12px 0 8px;
 
       .summary {
         margin-bottom: 12px;
@@ -81,14 +92,6 @@
       padding-left: 12px;
       .day {
         font-weight: bold;
-      }
-      .start-end {
-        margin-top: 16px;
-        font-size: 14px;
-        .date {
-          font-weight: bold;
-          white-space: nowrap;
-        }
       }
     }
   } // end .schedule-wrapper

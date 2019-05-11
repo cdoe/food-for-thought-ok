@@ -1,9 +1,19 @@
 // Core
-import React, { FunctionComponent, Fragment, useState, useEffect, useContext, useRef } from 'react';
+import React, {
+  FunctionComponent,
+  Fragment,
+  useState,
+  useEffect,
+  useContext,
+  useRef,
+  Dispatch,
+  SetStateAction
+} from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
 import { sortBy } from 'lodash';
+import { useTranslation } from 'react-i18next';
 // Mapping
 import Leaflet from 'leaflet';
 import { Map as LeafletMap, TileLayer, CircleMarker, Marker, Tooltip } from 'react-leaflet';
@@ -30,8 +40,12 @@ import pinShadow from '../img/pin-shadow.png';
 import currentLocationIcon from '../img/current-location.png';
 import retinaCurrentLocationIcon from '../img/current-location@2x.png';
 
-const OpenNowFilter: FunctionComponent = () => {
-  const [openNowFilter, setOpenNowFilter] = useState(false);
+const OpenNowFilter: FunctionComponent<{
+  openNowFilter: boolean;
+  setOpenNowFilter: Dispatch<SetStateAction<boolean>>;
+}> = ({ openNowFilter, setOpenNowFilter }) => {
+  const { t } = useTranslation();
+  // const [openNowFilter, setOpenNowFilter] = useState(false);
 
   return (
     <div className="open-now-filter">
@@ -70,7 +84,7 @@ export const oklahomaBounds = Leaflet.latLngBounds(
   [33.61919542, -99.7839304345],
   [37.00229935, -94.4470640557]
 );
-// FULL STATE
+// FULL STATE (unused for now)
 // export const oklahomaBounds = Leaflet.latLngBounds(
 //   [33.61919542, -103.00246156],
 //   [37.00229935, -94.43121924]
@@ -99,6 +113,8 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
   history,
   match
 }) => {
+  const { t } = useTranslation();
+
   // currentUser (available app-wide context)
   ///////////////////////////////////////////
   const [currentUser, setCurrentUser] = useContext(CurrentUserCtx);
@@ -172,7 +188,9 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
     if (openNowFilter) {
       // XXX TODO
       // Restrict list to only those open (or opening soon)
-      filteredLocations = sortedLocations;
+      filteredLocations = sortedLocations.filter(location =>
+        ['open-soon', 'open', 'closed-soon'].includes(location.status || '')
+      );
     }
     if (!!throttledFilterValue.trim()) {
       // Filter subset of those that match name or city of typed in filter
@@ -185,7 +203,7 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
     }
     // Set the list we end up seeing
     setDisplayLocations(filteredLocations);
-  }, [sortedLocations, throttledFilterValue]);
+  }, [sortedLocations, openNowFilter, throttledFilterValue]);
 
   // Effect triggered when locationId in URL changes
   useEffect(() => {
@@ -272,7 +290,15 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
     <Fragment>
       {/* Nearby search on mobile */}
       {/* and the OpenNowFilter only shows on mobile when location detail view isn't active */}
-      <MobileHeader bottom={!!locationId ? undefined : <OpenNowFilter />}>
+      <MobileHeader
+        bottom={
+          !!locationId ? (
+            undefined
+          ) : (
+            <OpenNowFilter openNowFilter={openNowFilter} setOpenNowFilter={setOpenNowFilter} />
+          )
+        }
+      >
         <SearchAutocomplete history={history} redirectOnSuccess={!!locationId} />
       </MobileHeader>
 
@@ -286,7 +312,7 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
               {/* Nearby search NOT for mobile */}
               <div className="desktop-search">
                 <SearchAutocomplete history={history} />
-                <OpenNowFilter />
+                <OpenNowFilter openNowFilter={openNowFilter} setOpenNowFilter={setOpenNowFilter} />
               </div>
 
               {/* Loader (But not when filtering) */}
@@ -444,10 +470,18 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
                     key={location.id}
                     center={latLng}
                     radius={locationId ? 6 : 8}
-                    color="#c10f78"
+                    color={
+                      ['open-soon', 'open', 'closed-soon'].includes(location.status || '')
+                        ? '#c10f78'
+                        : '#780353'
+                    }
                     weight={locationId ? 5 : 1}
                     opacity={locationId || hoverLocationId ? 0.0001 : 1}
-                    fillColor={hoverLocationId ? '#ed589a' : '#da1884'}
+                    fillColor={
+                      ['open-soon', 'open', 'closed-soon'].includes(location.status || '')
+                        ? '#da1884'
+                        : '#9d0867'
+                    }
                     fillOpacity={locationId || hoverLocationId ? 0.3 : 0.8}
                     onClick={() => {
                       history.push('/locations/' + location.id);
