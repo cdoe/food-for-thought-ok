@@ -78,7 +78,6 @@ const App: FunctionComponent = () => {
         })
         .then(data => {
           // If in oklahoma, center to general area
-          console.log('data', data);
           if (data.region_code === 'OK' && data.latitude && data.longitude) {
             setCurrentUser(currentUser => ({
               ...currentUser,

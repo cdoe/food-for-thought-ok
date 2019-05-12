@@ -1,0 +1,73 @@
+@import '../../styles/variables.scss';
+
+.LocationStatus {
+  margin-bottom: 12px;
+  .status {
+    .label {
+      display: inline-block;
+      padding: 6px 8px;
+      margin-right: 8px;
+
+      border-radius: 6px;
+      background-color: $grey100;
+
+      font-size: 16px;
+      text-transform: uppercase;
+      font-weight: bold;
+      color: $grey400;
+
+      &.open-soon {
+        background-color: $grey000;
+        color: $secondary600;
+      }
+      &.open {
+        background-color: $secondary600;
+        color: white;
+      }
+      &.closed-soon {
+        background-color: $primary800;
+        color: white;
+      }
+    }
+
+    .meal-context {
+      font-size: 14px;
+      color: $grey400;
+    }
+  }
+
+  .meals-begin-end {
+    margin-bottom: 14px;
+    font-size: 16px;
+    font-weight: bold;
+    color: $grey600;
+    text-transform: uppercase;
+  }
+
+  // Small variant
+  &.small .status .label {
+    padding: 2px 4px;
+    font-size: 14px;
+  }
+
+  // Large variant
+  &.large {
+    margin-bottom: 24px;
+    .status .label {
+      font-size: 18px;
+    }
+    .status .meal-context {
+      font-size: 16px;
+    }
+  }
+
+  // Line-wrapped variant
+  &.line-wrapped .status {
+    .label {
+      margin-bottom: 8px;
+    }
+    .meal-context {
+      display: block;
+    }
+  }
+}

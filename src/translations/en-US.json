@@ -19,20 +19,29 @@
     },
     "locations": {
       "enterAddressPrompt": "Enter your address or city",
+
       "status": {
         "open-soon": "Open soon",
         "open": "Open",
         "closed-soon": "Closing soon",
         "closed": "Closed"
       },
+
       "mealsBegin": "Meals begin",
       "mealsEnd": "Meals end",
       "mealsEnded": "Meals ended",
+      "mealsCount": "{{count}} meal",
+      "mealsCount_plural": "{{count}} meals",
+
+      "weekdaysCount": "{{count}} day a week",
+      "weekdaysCount_plural": "{{count}} days a week",
+
       "until": "until",
       "startingAt": "starting at",
       "nextMeal": "Next meal",
       "tomorrow": "tomorrow",
       "at": "at",
+
       "breakfast": "Breakfast",
       "lunch": "Lunch",
       "snack": "Snack",

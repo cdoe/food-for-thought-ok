@@ -106,7 +106,6 @@ const SearchAutocomplete: FunctionComponent<{
                 }));
               },
               onFocus: e => {
-                console.log('focus');
                 // Select all text
                 e.target.select();
                 e.target.setSelectionRange(0, e.target.value.length);

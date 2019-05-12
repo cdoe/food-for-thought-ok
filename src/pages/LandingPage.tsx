@@ -25,7 +25,6 @@ const LandingPage: FunctionComponent<RouteComponentProps> = ({ history }) => {
   const handleGetGeo = () => {
     navigator.geolocation.getCurrentPosition(
       function(position) {
-        console.log('position', position);
         // Found! Set user's location in latLng
         setCurrentUser(currentUser => ({
           ...currentUser,

@@ -39,6 +39,7 @@ import retinaPinIcon from '../img/pin@2x.png';
 import pinShadow from '../img/pin-shadow.png';
 import currentLocationIcon from '../img/current-location.png';
 import retinaCurrentLocationIcon from '../img/current-location@2x.png';
+import LocationStatus from '../components/locations/LocationStatus';
 
 const OpenNowFilter: FunctionComponent<{
   openNowFilter: boolean;
@@ -489,7 +490,8 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
                     bubblingMouseEvents={false}
                   >
                     <Tooltip className="location-tooltip" opacity={1}>
-                      {location.name}
+                      <div className="name">{location.name}</div>
+                      <LocationStatus location={location} small />
                       {location.distance && (
                         <div className="distance">
                           {metersToRoundedMiles(location.distance)} miles away

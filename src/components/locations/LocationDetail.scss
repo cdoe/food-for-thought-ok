@@ -10,21 +10,6 @@
     color: $primary500;
   }
 
-  .status {
-    padding-bottom: 24px;
-    color: $grey400;
-
-    strong {
-      display: block;
-      margin-bottom: 2px;
-
-      font-size: 18px;
-      font-weight: bold;
-      color: $grey700;
-      text-transform: uppercase;
-    }
-  }
-
   .mobile-expander {
     display: none;
     &.expanded {

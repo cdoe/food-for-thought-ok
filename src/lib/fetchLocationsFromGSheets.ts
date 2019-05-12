@@ -142,11 +142,32 @@ function fetchLocationsFromGSheets({
           // No status found, so we're closed!
           if (!rowObject.status) {
             rowObject.status = 'closed';
-            // XXX TODO
-            // Need to find next open date
-            rowObject.nextMealDate = DateTime.local()
-              .plus({ day: 2 })
-              .toJSDate();
+            // Loop through the following days to find next meal,
+            // then save and exit
+            for (let addDays = 1; addDays <= 7; addDays++) {
+              let nextMealDate = now.plus({ day: addDays }).endOf('day');
+              if (openDays[nextMealDate.weekday]) {
+                // Found next day, now loop through meals to find next time
+                meals.forEach(meal => {
+                  const startString = rowObject[meal + 'Start'];
+                  if (startString) {
+                    const startTime = timeStringToDateTime(startString).set({
+                      day: nextMealDate.day
+                    });
+                    // Is soonest upcoming
+                    if (startTime < nextMealDate) {
+                      // Modify time of next meal date
+                      nextMealDate = nextMealDate.set({
+                        hour: startTime.hour,
+                        minute: startTime.minute
+                      });
+                      rowObject.nextMealDate = nextMealDate.toJSDate();
+                    }
+                  }
+                });
+                break;
+              }
+            }
           }
         }
         rowObject.status; // Finish status

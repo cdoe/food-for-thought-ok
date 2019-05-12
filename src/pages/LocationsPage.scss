@@ -206,16 +206,23 @@ $sidebarWidth-lg: 400px;
       height: 100%;
       // Tooltip on hover
       .location-tooltip {
-        padding: 6px 12px;
+        padding: 12px 16px;
         box-shadow: 1px 1px 8px rgba(91, 103, 112, 0.1), 1px 1px 4px rgba(91, 103, 112, 0.1);
         border: 1px solid $grey100;
         font-family: museo-sans-rounded, sans-serif;
-        color: $primary500;
-        font-size: 16px;
-        font-weight: bold;
+        .name {
+          margin-bottom: 4px;
+          max-width: 384px;
+          overflow: hidden;
+
+          text-overflow: ellipsis;
+          color: $primary500;
+          font-size: 20px;
+          line-height: 1.25;
+          font-weight: bold;
+        }
         .distance {
           font-size: 14px;
-          font-weight: normal;
           color: $grey600;
         }
       }

@@ -3,20 +3,61 @@ import React, { FunctionComponent, HtmlHTMLAttributes, Fragment, useState, memo 
 import Location from '../../types/location';
 import classnames from 'classnames';
 import { useTranslation } from 'react-i18next';
+import { compact } from 'lodash';
 // import NumberFormat from 'react-number-format';
 // Styles
 import './LocationDetail.scss';
 import Icon from '../Icon';
+import LocationStatus from './LocationStatus';
+import { DateTime } from 'luxon';
+import { timeStringToDateTime } from '../../lib/dateTimeHelpers';
 
 // Component
 const LocationDetail: FunctionComponent<
   { location?: Location; mobileExpanded?: boolean } & HtmlHTMLAttributes<HTMLDivElement>
 > = ({ location, mobileExpanded = false, ...rest }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   // Text notifications not yet wired up
   // const [phoneValue, setPhoneValue] = useState('');
   // const [formattedPhoneValue, setFormattedPhoneValue] = useState('');
+
+  // Meal/Days helpers
+  const activeMeals = location
+    ? compact([
+        location.servesBreakfast && 'breakfast',
+        location.servesLunch && 'lunch',
+        location.servesSnack && 'snack',
+        location.servesDinner && 'dinner'
+      ])
+    : [];
+
+  const formatTime = (timeString: string | null) => {
+    if (timeString) {
+      return timeStringToDateTime(timeString)
+        .setLocale(i18n.language)
+        .toFormat('t');
+    }
+    return '';
+  };
+
+  const formatWeekday = (weekday: number) => {
+    return DateTime.fromObject({ weekday })
+      .setLocale(i18n.language)
+      .toFormat('EEEE');
+  };
+
+  const activeWeekdays = location
+    ? compact([
+        location.monday && formatWeekday(1),
+        location.tuesday && formatWeekday(2),
+        location.wednesday && formatWeekday(3),
+        location.thursday && formatWeekday(4),
+        location.friday && formatWeekday(5),
+        location.saturday && formatWeekday(6),
+        location.sunday && formatWeekday(7)
+      ])
+    : [];
 
   return (
     <div className="LocationDetail" {...rest}>
@@ -26,38 +67,66 @@ const LocationDetail: FunctionComponent<
           {/* Location Name */}
           <div className="name">{location.name}</div>
           {/* Status */}
-          <div className="status">
-            <strong>Open Now</strong>
-            Breakfast until 8am
-          </div>
+          <LocationStatus location={location} lineWrapped large />
 
           {/* Below the fold on mobile */}
           <div className={classnames('mobile-expander', { expanded: mobileExpanded })}>
-            {/* Start Date, Mealtimes, Weekdays, and End Date */}
-            <div className="wavy-line-divider" />
-            <div className="start-end-date">
-              Service begins <span className="date">June 2</span>
-            </div>
-            <div className="schedule-wrapper">
-              <div className="cell meals">
-                <div className="summary">2 meals</div>
-                <div className="meal">Breakfast</div>
-                <div className="time">8:00 - 8:30am</div>
-                <div className="meal">Lunch</div>
-                <div className="time">11:30 - 12:00pm</div>
-              </div>
+            {/* Mealtimes, Weekdays, and End Date (if not past end-date) */}
+            {location.status !== 'after-end' && (
+              <Fragment>
+                <div className="wavy-line-divider" />
 
-              <div className="cell days">
-                <div className="summary">3 days a week</div>
-                <div className="day">Monday</div>
-                <div className="day">Wednesday</div>
-                <div className="day">Friday</div>
-              </div>
-            </div>
-            <div className="start-end-date">
-              Service ends <span className="date">July 27</span>
-            </div>
-            <div className="wavy-line-divider" />
+                {/* Meals and days served block */}
+                <div className="schedule-wrapper">
+                  {/* Meals served */}
+                  <div className="cell meals">
+                    {/* Count meals */}
+                    <div className="summary">
+                      {t('locations.mealsCount', { count: activeMeals.length })}
+                    </div>
+                    {/* List meals and time */}
+                    {activeMeals.map(meal => {
+                      return (
+                        <Fragment key={meal}>
+                          <div className="meal">{t('locations.' + meal)}</div>
+                          <div className="time">
+                            {/* 
+                        // @ts-ignore */}
+                            {formatTime(location[meal + 'Start'])} - {location[meal + 'End']}
+                          </div>
+                        </Fragment>
+                      );
+                    })}
+                  </div>
+                  {/* Weekdays served */}
+                  <div className="cell days">
+                    {/* Count weekdays*/}
+                    <div className="summary">
+                      {t('locations.weekdaysCount', { count: activeWeekdays.length })}
+                    </div>
+                    {/* List weekdays */}
+                    {activeWeekdays.map(weekday => {
+                      return (
+                        <div key={weekday} className="day">
+                          {weekday}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* End date */}
+                <div className="start-end-date">
+                  {t('locations.mealsEnd')}{' '}
+                  <span className="date">
+                    {DateTime.fromJSDate(location.endDate)
+                      .setLocale(i18n.language)
+                      .toFormat('MMM d')}
+                  </span>
+                </div>
+                <div className="wavy-line-divider" />
+              </Fragment>
+            )}
 
             {/* Text notification not completed at this time... */}
             {/* <div className="text-notifications">
