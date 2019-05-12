@@ -23,12 +23,12 @@ __If you'd like to run a local version of the app, follow these instructions bel
 
 
 ## Deployment
-__There are two environments, staging and production.__
+__There are two environments, proof and production.__
 > __Please note before deploying:__  You'll need to have [Firebase CLI](https://firebase.google.com/docs/cli) installed.  The account you sign into Firebase CLI with will also need permission for this Firebase project.  Please reach out with any access requests.
 
-To deploy the staging site, run:
+To deploy the proof site, run:
 ```BASH
-npm run deploy-staging
+npm run deploy-proof
 ```
 
 To deploy the production site, run:

@@ -42,9 +42,10 @@ import { useTranslation } from 'react-i18next';
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const sheetId = process.env.REACT_APP_GOOGLE_SHEET_ID || '';
 const sheetName =
-  process.env.NODE_ENV === 'production'
+  process.env.NODE_ENV === 'production' && process.env.REACT_APP_ENV === 'production'
     ? process.env.REACT_APP_GOOGLE_SHEET_NAME || '' // Should point to the 'Locations_dev' sheet
     : process.env.REACT_APP_GOOGLE_SHEET_NAME_DEV || ''; // Should point to the 'Locations_dev' sheet
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Generate an API with access to the 'Google Sheets API' within the Google Cloud Console                   //
 // and, for security, ensure application restrictions are set to HTTP referrers and necessary URLS are set  //
