@@ -1,44 +1,58 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center">
+  <img width="192" height="142" src='./src/img/food-for-thought-logo.png?raw=true' alt="Food for Thought OK">
+</p>
 
-## Available Scripts
+<h2 align="center"><b>
+Helping families locate summer meal sites faster than ever before at <a href="https://meals4kidsok.org">Meals4KidsOk.org</a></b>
+</h2>
 
-In the project directory, you can run:
+The [Summer Food Service Program](https://www.fns.usda.gov/sfsp/summer-food-service-program) is a federally-funded, state-administered program ensuring Children have Access to Nutritious Meals and Snacks When School is not in Session.  In partnership with [Hunger Free Oklahoma](https://hungerfreeok.org/), Code for Tulsa has assembled this responsive web app allowing families to find meal sites quickly and efficiently, either at home or on the go!
 
-### `npm start`
+---
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Getting started
+__If you'd like to run a local version of the app, follow these instructions below.__
+> __Please note before cloning:__  You'll need special access to the firebase project to get things working properly—even locally.  Please reach out if you're looking to investigate or contribute to this project.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+* Make sure you have either placed the _`env.local`_ file from Code for Tulsa's 1Pass account into your root directory, OR edit the environment variables in _`App.tsx`_ to link to appropriate API keys and resources.
+* Clone the repo, and in the root directory run `yarn install` to download all project depencies. (_You may need to get [Yarn](https://yarnpkg.com/en/) if you haven't already..._)
+* Run `yarn start` to spin up a locally running version of the site.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Deployment
+__There are two environments, staging and production.__
+> __Please note before deploying:__  You'll need to have [Firebase CLI](https://firebase.google.com/docs/cli) installed.  The account you sign into Firebase CLI with will also need permission for this Firebase project.  Please reach out with any access questions.
 
-### `npm run build`
+To deploy the staging site, run:
+```BASH
+npm run deploy-staging
+```
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+To deploy the production site, run:
+```BASH
+npm run deploy-production
+```
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Back-end Tech
+__This project was built with [Firebase](https://firebase.google.com/) tools and some [Google APIs](https://developers.google.com/apis-explorer/).  Specifically:__
+* __[Firebase Hosting](https://firebase.google.com/products/hosting)__: For static, single-page web app deployment
+* __[Google Sheets API](https://developers.google.com/sheets/api/)__: The "database" is pulled from a client managed Google Sheet document.  A view only copy of this spreadsheet [available here](https://docs.google.com/spreadsheets/d/1eZNA8Qsxc9xZQu4NQBBo2FHqB5rDiIBj4R15AeDZiw4/edit?usp=sharing).
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Front-end Tech
+__This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and primarily relies on the following technologies:__
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* __[React](https://reactjs.org/)__: A JavaScript library for building user interfaces
+* __[React Router](https://reacttraining.com/react-router/)__: Declarative routing for React
+* __[Leaflet](https://leafletjs.com/)__: an open-source JavaScript library
+for mobile-friendly interactive maps
+* __[React-Leaflet](https://react-leaflet.js.org/)__: ⚛️React components for 🍃Leaflet maps
+* __[react-i18next](https://react.i18next.com/)__: Internationalization for react done right. Using the [i18next](https://www.i18next.com/) i18n ecosystem.
+* __[Luxon](https://moment.github.io/luxon/)__: A powerful, modern, and friendly wrapper for Javascript dates and times.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
+## Learn More about React
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
