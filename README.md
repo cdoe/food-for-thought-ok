@@ -1,18 +1,21 @@
 <p align="center">
-  <img width="192" height="142" src='./src/img/food-for-thought-logo.png?raw=true' alt="Food for Thought OK">
+  <img width="192" height="142" src='./src/img/food-for-thought-logo.png?raw=true' alt="Food for Thought OK" />
 </p>
 
-<h2 align="center"><b>
-Helping families locate summer meal sites faster than ever before at <a href="https://meals4kidsok.org">Meals4KidsOk.org</a></b>
-</h2>
+<h3 align="center">
+  <b>Helping families locate summer meal sites faster than ever before at <a href="https://meals4kidsok.org">Meals4KidsOk.org</a></b>
+</h3>
 
-The [Summer Food Service Program](https://www.fns.usda.gov/sfsp/summer-food-service-program) is a federally-funded, state-administered program ensuring Children have Access to Nutritious Meals and Snacks When School is not in Session.  In partnership with [Hunger Free Oklahoma](https://hungerfreeok.org/), Code for Tulsa has assembled this responsive web app allowing families to find meal sites quickly and efficiently, either at home or on the go!
+In partnership with [Hunger Free Oklahoma](https://hungerfreeok.org/), Code for Tulsa has assembled this responsive web app allowing families to find summer meal sites quickly and efficiently, either at home or on the go!
 
+The [Summer Food Service Program](https://www.fns.usda.gov/sfsp/summer-food-service-program) is a federally-funded, state-administered program ensuring Children have Access to Nutritious Meals and Snacks When School is not in Session.
+
+---
 ---
 
 ## Getting started
-__If you'd like to run a local version of the app, follow these instructions below.__
-> __Please note before cloning:__  You'll need special access to the firebase project to get things working properly—even locally.  Please reach out if you're looking to investigate or contribute to this project.
+__If you'd like to run a local version of the app, follow these instructions below:__
+> __Please note before cloning:__  You'll need special access to the firebase project to get things working properly—even locally.  Please reach out if you're looking to contribute to this project or investigate further.
 
 * Make sure you have either placed the _`env.local`_ file from Code for Tulsa's 1Pass account into your root directory, OR edit the environment variables in _`App.tsx`_ to link to appropriate API keys and resources.
 * Clone the repo, and in the root directory run `yarn install` to download all project depencies. (_You may need to get [Yarn](https://yarnpkg.com/en/) if you haven't already..._)
@@ -21,7 +24,7 @@ __If you'd like to run a local version of the app, follow these instructions bel
 
 ## Deployment
 __There are two environments, staging and production.__
-> __Please note before deploying:__  You'll need to have [Firebase CLI](https://firebase.google.com/docs/cli) installed.  The account you sign into Firebase CLI with will also need permission for this Firebase project.  Please reach out with any access questions.
+> __Please note before deploying:__  You'll need to have [Firebase CLI](https://firebase.google.com/docs/cli) installed.  The account you sign into Firebase CLI with will also need permission for this Firebase project.  Please reach out with any access requests.
 
 To deploy the staging site, run:
 ```BASH
@@ -37,7 +40,7 @@ npm run deploy-production
 ## Back-end Tech
 __This project was built with [Firebase](https://firebase.google.com/) tools and some [Google APIs](https://developers.google.com/apis-explorer/).  Specifically:__
 * __[Firebase Hosting](https://firebase.google.com/products/hosting)__: For static, single-page web app deployment
-* __[Google Sheets API](https://developers.google.com/sheets/api/)__: The "database" is pulled from a client managed Google Sheet document.  A view only copy of this spreadsheet [available here](https://docs.google.com/spreadsheets/d/1eZNA8Qsxc9xZQu4NQBBo2FHqB5rDiIBj4R15AeDZiw4/edit?usp=sharing).
+* __[Google Sheets API](https://developers.google.com/sheets/api/)__: The "database" is pulled from a client managed Google Sheet document.  A view only copy of this spreadsheet [available here](https://docs.google.com/spreadsheets/d/1eZNA8Qsxc9xZQu4NQBBo2FHqB5rDiIBj4R15AeDZiw4/edit?usp=sharing)
 
 
 ## Front-end Tech
