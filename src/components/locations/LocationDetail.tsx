@@ -2,6 +2,7 @@
 import React, { FunctionComponent, HtmlHTMLAttributes, Fragment, useState, memo } from 'react';
 import Location from '../../types/location';
 import classnames from 'classnames';
+import { Helmet } from 'react-helmet';
 import { useTranslation, Trans } from 'react-i18next';
 import { compact } from 'lodash';
 // import NumberFormat from 'react-number-format';
@@ -60,12 +61,18 @@ const LocationDetail: FunctionComponent<
       ])
     : [];
 
-  const locationUrl = location ? 'meals4kids.org/locations/' + location.id : '';
+  const locationUrl = location ? 'https://meals4kids.org/locations/' + location.id : '';
 
   return (
     <div className="LocationDetail" {...rest}>
       {location && (
         <Fragment>
+          {/* Add new title/metadata to head for this location */}
+          {!!location && (
+            <Helmet>
+              <title>Food for Thought Oklahoma - {location.name}</title>
+            </Helmet>
+          )}
           {/* Above the fold on mobile */}
           {/* Location Name */}
           <div className="name">{location.name}</div>
@@ -207,13 +214,22 @@ const LocationDetail: FunctionComponent<
                     Share this location on <strong>Facebook</strong>
                   </Trans>
                 </a>
-                <a href="sms:?&body=No-cost meals for kids ALL SUMMER!">
+                <a href={'sms:?&body=' + t('locations.shareBody') + ' ' + locationUrl}>
                   <Icon icon="message" />{' '}
                   <Trans i18nKey="locations.shareSms">
                     Share this location by <strong>text message</strong>
                   </Trans>
                 </a>
-                <a href="mailto:?subject=No-cost meals for kids ALL SUMMER!&body=Blah">
+                <a
+                  href={
+                    'mailto:?subject=' +
+                    t('locations.shareSubject') +
+                    '!&body=' +
+                    t('locations.shareBody') +
+                    ' ' +
+                    locationUrl
+                  }
+                >
                   <Icon icon="email" />{' '}
                   <Trans i18nKey="locations.shareEmail">
                     Share this location by <strong>e-mail</strong>
