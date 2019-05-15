@@ -13,7 +13,7 @@
     "landing": {
       "headline": "Comidas gratuitas para niños...",
       "headlineBold": "¡TODO EL VERANO!",
-      "supportingCopy": "Mientras que la escuela está fuera durante el verano, más de 100 organizaciones patrocinadoras, que atienden a cientos de sitios en todo el estado, proporcionan comidas sin costo para niños de 18 años o menos. Muchos sitios sirven desayuno y almuerzo o almuerzo y una merienda.",
+      "supportingCopy": "Durante el receso escolar de verano, más de 100 organizaciones patrocinadoras, que atienden a cientos de sitios en todo el estado, proporcionan comida sin costo para niños de 18 años o menos. Muchos sitios sirven desayuno y almuerzo o almuerzo y una botana.",
       "findLocation": "Ubicaciones cercanas a mi",
       "couldNotFind": "No pudimos obtener su ubicación. Ingrese su dirección a continuación para ver qué hay cerca."
     },
@@ -33,13 +33,13 @@
       "filterResultsCount_plural": "Se encontraron {{count}} resultados",
 
       "filterLocations": "Filtrar ubicaciones",
-      "sortNearby": "Ordenar por cerca",
-      "sortName": "Ordenar por nombre",
+      "sortNearby": "Ordena por distancia",
+      "sortName": "Ordena por nombre",
 
       "distanceCount": "{{count}} milla de distancia",
       "distanceCount_plural": "{{count}} millas de distancia",
 
-      "back": "Espalda",
+      "back": "Regreso",
       "showMap": "Mostrar mapa",
       "showList": "Mostrar lista",
       "showLess": "Muestra menos",
@@ -56,9 +56,9 @@
         "closed": "Cerrado"
       },
 
-      "mealsBegin": "Las comidas comienzan",
-      "mealsEnd": "Fin de las comidas",
-      "mealsEnded": "Comidas terminadas",
+      "mealsBegin": "Sirviendo a las",
+      "mealsEnd": "Sirviendo hasta",
+      "mealsEnded": "Servicio ha terminado",
       "mealsCount": "comida {{count}}",
       "mealsCount_plural": "{{count}} comidas",
 
@@ -67,13 +67,13 @@
 
       "until": "hasta",
       "startingAt": "a partir de",
-      "nextMeal": "Siguiente comida",
+      "nextMeal": "Siguiente servicio",
       "tomorrow": "mañana",
       "at": "a",
 
       "breakfast": "Desayuno",
       "lunch": "Almuerzo",
-      "snack": "Bocadillo",
+      "snack": "Botana",
       "dinner": "Cena"
     },
     "faq": {
