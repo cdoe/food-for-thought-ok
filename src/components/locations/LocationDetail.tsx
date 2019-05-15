@@ -2,7 +2,7 @@
 import React, { FunctionComponent, HtmlHTMLAttributes, Fragment, useState, memo } from 'react';
 import Location from '../../types/location';
 import classnames from 'classnames';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
 import { compact } from 'lodash';
 // import NumberFormat from 'react-number-format';
 // Styles
@@ -11,6 +11,7 @@ import Icon from '../Icon';
 import LocationStatus from './LocationStatus';
 import { DateTime } from 'luxon';
 import { timeStringToDateTime } from '../../lib/dateTimeHelpers';
+import { metersToRoundedMiles } from '../../lib/distanceHelpers';
 
 // Component
 const LocationDetail: FunctionComponent<
@@ -58,6 +59,8 @@ const LocationDetail: FunctionComponent<
         location.sunday && formatWeekday(7)
       ])
     : [];
+
+  const locationUrl = location ? 'meals4kids.org/locations/' + location.id : '';
 
   return (
     <div className="LocationDetail" {...rest}>
@@ -162,17 +165,21 @@ const LocationDetail: FunctionComponent<
             <div className="location">
               <div className="address">{location.address}</div>
               <div className="city">{location.city}, OK</div>
-              <div className="distance">2 miles away</div>
+              {location.distance && (
+                <div className="distance">
+                  {t('locations.distanceCount', { count: metersToRoundedMiles(location.distance) })}
+                </div>
+              )}
               <a
                 href={
                   'https://www.google.com/maps/dir/?api=1&destination=' +
                   encodeURIComponent(`${location.name}, ${location.address}, ${location.city}, OK`)
                 }
                 className="directions-link"
-                rel="noopener noreferrer"
                 target="_blank"
+                rel="noopener noreferrer"
               >
-                <Icon icon="directions" /> Get directions
+                <Icon icon="directions" /> {t('locations.getDirections')}
               </a>
             </div>
 
@@ -192,22 +199,28 @@ const LocationDetail: FunctionComponent<
             )}
 
             {/* Social */}
-            <div className="sharing">
-              <a
-                href={
-                  'https://www.facebook.com/sharer/sharer.php?u=meals4kids.org/locations/' +
-                  location.id
-                }
-              >
-                <Icon icon="thumb_up" /> Share this location on <strong>Facebook</strong>
-              </a>
-              <a href="sms:?&body=No-cost meals for kids ALL SUMMER!">
-                <Icon icon="message" /> Share this location by <strong>text message</strong>
-              </a>
-              <a href="mailto:?subject=No-cost meals for kids ALL SUMMER!&body=Blah">
-                <Icon icon="email" /> Share this location by <strong>e-mail</strong>
-              </a>
-            </div>
+            {!!locationUrl.trim() && (
+              <div className="sharing">
+                <a href={'https://www.facebook.com/sharer/sharer.php?u=' + locationUrl}>
+                  <Icon icon="thumb_up" />{' '}
+                  <Trans i18nKey="locations.shareFacebook">
+                    Share this location on <strong>Facebook</strong>
+                  </Trans>
+                </a>
+                <a href="sms:?&body=No-cost meals for kids ALL SUMMER!">
+                  <Icon icon="message" />{' '}
+                  <Trans i18nKey="locations.shareSms">
+                    Share this location by <strong>text message</strong>
+                  </Trans>
+                </a>
+                <a href="mailto:?subject=No-cost meals for kids ALL SUMMER!&body=Blah">
+                  <Icon icon="email" />{' '}
+                  <Trans i18nKey="locations.shareEmail">
+                    Share this location by <strong>e-mail</strong>
+                  </Trans>
+                </a>
+              </div>
+            )}
           </div>
         </Fragment>
       )}

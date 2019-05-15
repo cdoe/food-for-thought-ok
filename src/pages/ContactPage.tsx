@@ -7,6 +7,7 @@ import './ContactPage.scss';
 import MobileHeader from '../layout/MobileHeader';
 import PageBody from '../layout/PageBody';
 import PageFooter from '../layout/PageFooter';
+import Icon from '../components/Icon';
 
 // Component
 const ContactPage: FunctionComponent = () => {
@@ -19,44 +20,53 @@ const ContactPage: FunctionComponent = () => {
       </MobileHeader>
       <PageBody>
         <div className="ContactPage">
-          <h1>DESIGN IS WORK IN PROGRESS</h1>
-          {/* Hunger Free OK */}
-          <h2>Contact Us</h2>
-          Hunger Free Oklahoma 918-340-9098 info@hungerfreeok.org
-          <br />
-          <br />
-          <h3>Contact us for questions about:</h3>
-          <ul>
-            <li>Using the map or locating a site near you</li>
-            <li>Ordering outreach materials</li>
-            <li>Connecting to existing programs</li>
-            <li>Reporting broken links or inaccurate information on the map</li>
-            <li>Getting involved next summer as a sponsor or site</li>
-            <li>Ordering outreach materials</li>
-          </ul>
-          <br />
-          <br />
-          <hr />
-          <br />
-          <br />
-          {/* OSDE */}
-          <h2>Oklahoma State Department of Education</h2>
-          <br />
-          Child Nutrition Programs
-          <br />
-          Dee Houston
-          <br />
-          405-522-4943
-          <br />
-          Dee.houston@sde.ok.gov
-          <h3>Contact us for questions about:</h3>
-          <ul>
-            <li>Reporting inaccurate information</li>
-            <li>Reporting an issue with a site or sponsor</li>
-            <li>Getting involved next summer as a sponsor or site</li>
-          </ul>
-          <br />
-          <strong>If you need immediate assistance, please call 211.</strong>
+          <div className="contact-flex-wrapper">
+            <div className="contact-block">
+              {/* Hunger Free OK */}
+              <div className="contact-tag">{t('contact.contact')}</div>
+              <h2 className="name">Hunger Free Oklahoma</h2>
+              <div className="questions-about-tag">{t('contact.forQuestionsAbout')}</div>
+              <ul>
+                <li>{t('contact.contactHungerFree_01')}</li>
+                <li>{t('contact.contactHungerFree_02')}</li>
+                <li>{t('contact.contactHungerFree_03')}</li>
+                <li>{t('contact.contactHungerFree_04')}</li>
+                <li>{t('contact.contactHungerFree_05')}</li>
+                <li>{t('contact.contactHungerFree_06')}</li>
+              </ul>
+              <div className="wavy-line-divider" />
+              <a className="phone-link" href="tel:918-340-9098">
+                <Icon icon="phone" /> 918-340-9098
+              </a>
+              <a className="email-link" href="mailto:info@hungerfreeok.org">
+                <Icon icon="email" /> info@hungerfreeok.org
+              </a>
+            </div>
+            {/* OSDE */}
+            <div className="contact-block">
+              <div className="contact-tag">{t('contact.contact')}</div>
+              <h2 className="name">Oklahoma State Department of Education</h2>
+              <div className="questions-about-tag">{t('contact.forQuestionsAbout')}</div>
+              <ul>
+                <li>{t('contact.contactOsde_01')}</li>
+                <li>{t('contact.contactOsde_02')}</li>
+                <li>{t('contact.contactOsde_03')}</li>
+              </ul>
+              <div className="wavy-line-divider" />
+              <h3 className="contact-name">
+                Dee Houston
+                <br />
+                Child Nutrition Programs
+              </h3>
+              <a className="phone-link" href="tel:405-522-4943">
+                <Icon icon="phone" /> 405-522-4943
+              </a>
+              <a className="email-link" href="mailto:Dee.houston@sde.ok.gov">
+                <Icon icon="email" /> Dee.houston@sde.ok.gov
+              </a>
+            </div>
+          </div>
+          <div className="immediate-assistance">{t('contact.immediateAssistance')}</div>
         </div>
       </PageBody>
       <PageFooter />

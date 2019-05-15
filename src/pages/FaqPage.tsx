@@ -18,6 +18,8 @@ const questionAnswerBlock: FunctionComponent<{ question: ReactNode; answer: Reac
   answer
 }) => {
   const [expanded, setExpanded] = useState(false);
+  const { t } = useTranslation();
+
   return (
     <Fragment>
       <button
@@ -39,12 +41,6 @@ const questionAnswerBlock: FunctionComponent<{ question: ReactNode; answer: Reac
 // Component
 const FaqPage: FunctionComponent = () => {
   const { t } = useTranslation();
-
-  // const [answer1expanded, setAnswer1expanded] = useState(false);
-  // const [answer2expanded, setAnswer2expanded] = useState(false);
-  // const [answer3expanded, setAnswer3expanded] = useState(false);
-  // const [answer4expanded, setAnswer4expanded] = useState(false);
-  // const [answer5expanded, setAnswer5expanded] = useState(false);
 
   return (
     <Fragment>
@@ -90,47 +86,49 @@ const FaqPage: FunctionComponent = () => {
             )
           })}
 
+          {/* 5. */}
+          {/* Where can I find more information about the Summer Food Service Program (SFSP)? */}
+          {questionAnswerBlock({
+            question: t('faq.whereCanIFind'),
+            answer: (
+              <a
+                href="https://www.fns.usda.gov/sfsp/summer-food-service-program"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t('faq.SFSPLinkText')}
+              </a>
+            )
+          })}
+
           {/* About website */}
-          <div className="secondary-header">About the partners:</div>
-          <div className="about-website">
-            This map was created in partnership with Hunger Free Oklahoma, the Oklahoma State
-            Department of Education, and Code for Tulsa to help families locate summer meal sites
-            faster than ever before.
-          </div>
+          <div className="secondary-header">{t('faq.aboutPartners')}</div>
+          <div className="about-website">{t('faq.aboutWebsite')}</div>
 
           {/* About partners */}
           <div className="partners-flex-wrapper">
             {/* HFOK */}
             <div className="partner-block">
-              <img alt="Hunger Free Oklahoma - Logo" src={HungerFreeOk} />
-              <div className="partner-description">
-                Hunger Free Oklahoma works to bring a unified, statewide voice to the issues and
-                solutions surrounding hunger, with a goal to ensure all Oklahomans have access to
-                affordable, nutritious food. We are leveraging the power of collaboration to solve
-                hunger in Oklahoma by improving systems, policies, and practices.
-              </div>
+              <a href="https://hungerfreeok.org/" target="_blank" rel="noopener noreferrer">
+                <img alt="Hunger Free Oklahoma - Logo" src={HungerFreeOk} />
+              </a>
+              <div className="partner-description">{t('faq.hungerFreeOkDescrip')}</div>
             </div>
 
             {/* OSDE */}
             <div className="partner-block">
-              <img alt="Oklahoma State Department of Education logo - Logo" src={OSDE} />
-              <div className="partner-description">
-                The Oklahoma State Department of Education is charged with determining the policies
-                and directing the administration and supervision of the public school system of
-                Oklahoma. This includes administering the summer meals program, school breakfast and
-                lunch programs, and afterschool meal programs.
-              </div>
+              <a href="https://sde.ok.gov/" target="_blank" rel="noopener noreferrer">
+                <img alt="Oklahoma State Department of Education logo - Logo" src={OSDE} />
+              </a>
+              <div className="partner-description">{t('faq.osdeDescrip')}</div>
             </div>
 
             {/* CFT */}
             <div className="partner-block">
-              <img alt="Code for Tulsa - Logo" src={CodeForTulsa} />
-              <div className="partner-description">
-                Code for Tulsa is among about 70 Code for America “brigades” nationwide that help
-                code and data specialist bring their technology skills to the process of connecting
-                people to their local governments. The Tulsa brigade was one of the earliest to
-                organize as the Code for America ideas expanded starting in 2009.
-              </div>
+              <a href="https://codefortulsa.org/" target="_blank" rel="noopener noreferrer">
+                <img alt="Code for Tulsa - Logo" src={CodeForTulsa} />
+              </a>
+              <div className="partner-description">{t('faq.codeForTulsaDescrip')}</div>
             </div>
           </div>
         </div>

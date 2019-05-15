@@ -7,7 +7,7 @@
       "selectLanguage": "Select language:"
     },
     "footer": {
-      "nondiscriminationStatement": "Nondiscrimination Statement",
+      "nondiscriminationStatement": "This institution is an equal opportunity provider",
       "nondiscriminationLink": "/nondiscrimination"
     },
     "landing": {
@@ -19,6 +19,35 @@
     },
     "locations": {
       "enterAddressPrompt": "Enter your address or city",
+
+      "allLocations": "All locations",
+      "openNow": "Open now",
+
+      "showingLocationCount": "Showing {{count}} location",
+      "showingLocationCount_plural": "Showing all {{count}} locations",
+
+      "openNowCount": "{{count}} location open now",
+      "openNowCount_plural": "{{count}} locations open now",
+
+      "filterResultsCount": "Found {{count}} result",
+      "filterResultsCount_plural": "Found {{count}} results",
+
+      "filterLocations": "Filter locations",
+      "sortNearby": "Sort by nearby",
+      "sortName": "Sort by name",
+
+      "distanceCount": "{{count}} mile away",
+      "distanceCount_plural": "{{count}} miles away",
+
+      "back": "Back",
+      "showMap": "Show map",
+      "showList": "Show list",
+      "showLess": "Show less",
+      "showMore": "Show more",
+      "getDirections": "Get directions",
+      "shareFacebook": "Share this location on <1>Facebook</1>",
+      "shareSms": "Share this location by <1>text message</1>",
+      "shareEmail": "Share this location by <1>e-mail</1>",
 
       "status": {
         "open-soon": "Open soon",
@@ -58,10 +87,31 @@
       "noMealsTaken": "No, meals must be consumed on-site as outlined in state program guidelines.",
       "howDoIFindSite": "How do I find a site near me?",
       "findSiteStep_01": "Allow the map to obtain your location to find the sites closest to you.",
-      "findSiteStep_02": "Select “Find a location near me” or enter your address or zip code in the search bar if location services are not enable on your device. The nearest sites should appear on the map.",
+      "findSiteStep_02": "Select \"Find a location near me\" or enter your address or zip code in the search bar if location services are not enable on your device. The nearest sites should appear on the map.",
       "findSiteStep_03": "Select any site on the map by clicking the icon. The column on the left-hand side of the page will display information such as meals served, times, days, and location.",
-      "findSiteStep_04": "Click “Get Directions” to get Google Map directions to the site.",
-      "findSiteStep_05": "To view the full directory of available sites, indicate “All locations” in the left hand column. For mobile users, select “Show list” at the bottom of the screen."
+      "findSiteStep_04": "Click \"Get Directions\" to get Google Map directions to the site.",
+      "findSiteStep_05": "To view the full directory of available sites, indicate “All locations” in the left hand column. For mobile users, select “Show list” at the bottom of the screen.",
+      "whereCanIFind": "Where can I find more information about the Summer Food Service Program (SFSP)?",
+      "SFSPLinkText": "United States Department of Agriculture (USDA): Summer Food Service Program (SFSP)",
+      "aboutPartners": "About the partners:",
+      "aboutWebsite": "This map was created in partnership with Hunger Free Oklahoma, the Oklahoma State Department of Education, and Code for Tulsa to help families locate summer meal sites faster than ever before.",
+      "hungerFreeOkDescrip": "Hunger Free Oklahoma works to bring a unified, statewide voice to the issues and solutions surrounding hunger, with a goal to ensure all Oklahomans have access to affordable, nutritious food. We are leveraging the power of collaboration to solve hunger in Oklahoma by improving systems, policies, and practices.",
+      "osdeDescrip": "The Oklahoma State Department of Education is charged with determining the policies and directing the administration and supervision of the public school system of Oklahoma. This includes administering the summer meals program, school breakfast and lunch programs, and afterschool meal programs.",
+      "codeForTulsaDescrip": "Code for Tulsa is among about 70 Code for America “brigades” nationwide that help code and data specialist bring their technology skills to the process of connecting people to their local governments. The Tulsa brigade was one of the earliest to organize as the Code for America ideas expanded starting in 2009."
+    },
+    "contact": {
+      "contact": "Contact",
+      "forQuestionsAbout": "for questions about:",
+      "contactHungerFree_01": "Using the map or locating a site near you",
+      "contactHungerFree_02": "Ordering outreach materials",
+      "contactHungerFree_03": "Connecting to existing programs",
+      "contactHungerFree_04": "Reporting broken links or inaccurate information on the map",
+      "contactHungerFree_05": "Getting involved next summer as a sponsor or site",
+      "contactHungerFree_06": "Ordering outreach materials",
+      "contactOsde_01": "Reporting inaccurate information",
+      "contactOsde_02": "Reporting an issue with a site or sponsor",
+      "contactOsde_03": "Getting involved next summer as a sponsor or site",
+      "immediateAssistance": "If you need immediate assistance, please call 211."
     }
   }
 }

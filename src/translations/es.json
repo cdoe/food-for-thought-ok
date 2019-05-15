@@ -7,18 +7,111 @@
       "selectLanguage": "Seleccione el idioma:"
     },
     "footer": {
-      "nondiscriminationStatement": "Nondiscrimination Statement",
+      "nondiscriminationStatement": "Esta institución es un proveedor de igualdad de oportunidades.",
       "nondiscriminationLink": "/nodiscriminacion"
     },
     "landing": {
-      "headline": "Comidas sin costo para niños...",
-      "headlineBold": "TODO EL VERANO!",
+      "headline": "Comidas gratuitas para niños...",
+      "headlineBold": "¡TODO EL VERANO!",
       "supportingCopy": "Mientras que la escuela está fuera durante el verano, más de 100 organizaciones patrocinadoras, que atienden a cientos de sitios en todo el estado, proporcionan comidas sin costo para niños de 18 años o menos. Muchos sitios sirven desayuno y almuerzo o almuerzo y una merienda.",
       "findLocation": "Ubicaciones cercanas a mi",
       "couldNotFind": "No pudimos obtener su ubicación. Ingrese su dirección a continuación para ver qué hay cerca."
     },
     "locations": {
-      "enterAddressPrompt": "Ingrese su dirección o ciudad"
+      "enterAddressPrompt": "Ingrese su dirección o ciudad",
+
+      "allLocations": "todas las localizaciones",
+      "openNow": "Abierto ahora",
+
+      "showingLocationCount": "Mostrando la ubicación de {{count}}",
+      "showingLocationCount_plural": "Mostrando todas las {{count}} ubicaciones",
+
+      "openNowCount": "ubicación {{count}} abierta ahora",
+      "openNowCount_plural": "{{count}} ubicaciones abiertas ahora",
+
+      "filterResultsCount": "Se encontró {{count}} resultado",
+      "filterResultsCount_plural": "Se encontraron {{count}} resultados",
+
+      "filterLocations": "Filtrar ubicaciones",
+      "sortNearby": "Ordenar por cerca",
+      "sortName": "Ordenar por nombre",
+
+      "distanceCount": "{{count}} milla de distancia",
+      "distanceCount_plural": "{{count}} millas de distancia",
+
+      "back": "Espalda",
+      "showMap": "Mostrar mapa",
+      "showList": "Mostrar lista",
+      "showLess": "Muestra menos",
+      "showMore": "Mostrar más",
+      "getDirections": "Obtener las direcciones",
+      "shareFacebook": "Comparte esta ubicación en <1>Facebook</1>",
+      "shareSms": "Comparte esta ubicación por <1>mensaje de texto</1>",
+      "shareEmail": "Comparte esta ubicación por <1>correo electrónico</1>",
+
+      "status": {
+        "open-soon": "Abre pronto",
+        "open": "Abierto",
+        "closed-soon": "Cerrando pronto",
+        "closed": "Cerrado"
+      },
+
+      "mealsBegin": "Las comidas comienzan",
+      "mealsEnd": "Fin de las comidas",
+      "mealsEnded": "Comidas terminadas",
+      "mealsCount": "comida {{count}}",
+      "mealsCount_plural": "{{count}} comidas",
+
+      "weekdaysCount": "{{count}} día a la semana",
+      "weekdaysCount_plural": "{{count}} días a la semana",
+
+      "until": "hasta",
+      "startingAt": "a partir de",
+      "nextMeal": "Siguiente comida",
+      "tomorrow": "mañana",
+      "at": "a",
+
+      "breakfast": "Desayuno",
+      "lunch": "Almuerzo",
+      "snack": "Bocadillo",
+      "dinner": "Cena"
+    },
+    "faq": {
+      "whatIsSfsp": "¿Qué es el Programa de Servicio de Alimentos de Verano (SFSP)?",
+      "SfspDescrip": "El Programa de Servicio de Alimentos de Verano (SFSP) ofrece comidas sin costo para niños y adolescentes de 18 años o menos durante los meses de verano cuando la escuela no está en sesión. Administrado por el Departamento de Educación del Estado de Oklahoma (OSDE), más de 100 organizaciones patrocinadoras operan cientos de sitios que sirven comidas gratuitas en todo el estado cada año. Muchos sitios sirven una combinación de desayuno y almuerzo o almuerzo y una merienda. Además, muchos sitios también ofrecen educación o programación recreativa.",
+      "doINeedId": "¿Debo proporcionar alguna identificación o documentación para recibir una comida?",
+      "noIdRequired": "No se requiere identificación y documentación. Cualquier niño o adolescente puede recibir una comida.",
+      "whoIsEligible": "¿Quién es elegible para recibir comidas?",
+      "childrenAndTeensEligible": "Los niños y adolescentes de 18 años o menos pueden recibir comidas y refrigerios sin costo a través del SFSP. Las comidas y refrigerios también están disponibles para personas con discapacidades, mayores de 18 años, que participan en programas escolares que atienden a personas con discapacidades.",
+      "canMealsBeTaken": "¿Se pueden llevar las comidas a casa?",
+      "noMealsTaken": "No, las comidas deben consumirse en el lugar como se describe en las pautas del programa estatal.",
+      "howDoIFindSite": "¿Cómo encuentro un sitio cerca de mí?",
+      "findSiteStep_01": "Permita que el mapa obtenga su ubicación para encontrar los sitios más cercanos a usted.",
+      "findSiteStep_02": "Seleccione \"Buscar una ubicación cerca de mí\" o ingrese su dirección o código postal en la barra de búsqueda si los servicios de ubicación no están habilitados en su dispositivo. Los sitios más cercanos deben aparecer en el mapa.",
+      "findSiteStep_03": "Seleccione cualquier sitio en el mapa haciendo clic en el icono. La columna en el lado izquierdo de la página mostrará información como las comidas servidas, los horarios, los días y la ubicación.",
+      "findSiteStep_04": "Haga clic en \"Obtener indicaciones\" para obtener las indicaciones de Google Map al sitio.",
+      "findSiteStep_05": "Para ver el directorio completo de los sitios disponibles, indique \"Todas las ubicaciones\" en la columna de la izquierda. Para usuarios móviles, seleccione \"Mostrar lista\" en la parte inferior de la pantalla.",
+      "whereCanIFind": "¿Dónde puedo encontrar más información sobre el Programa de Servicio de Alimentos de Verano (SFSP)?",
+      "SFSPLinkText": "Departamento de Agricultura de los Estados Unidos (USDA): Programa de Servicio de Alimentos de Verano (SFSP)",
+      "aboutPartners": "Acerca de los socios:",
+      "aboutWebsite": "Este mapa fue creado en colaboración con Hunger Free Oklahoma, el Departamento de Educación del Estado de Oklahoma y el Código de Tulsa para ayudar a las familias a ubicar los sitios de comidas de verano más rápido que nunca.",
+      "hungerFreeOkDescrip": "Hunger Free Oklahoma trabaja para brindar una voz estatal unificada a los problemas y soluciones relacionados con el hambre, con el objetivo de garantizar que todos los habitantes de Oklahoma tengan acceso a alimentos nutritivos y asequibles. Estamos aprovechando el poder de la colaboración para resolver el hambre en Oklahoma mejorando los sistemas, las políticas y las prácticas.",
+      "osdeDescrip": "El Departamento de Educación del Estado de Oklahoma se encarga de determinar las políticas y de dirigir la administración y supervisión del sistema de escuelas públicas de Oklahoma. Esto incluye administrar el programa de comidas de verano, los programas de desayuno y almuerzo escolar y los programas de comidas después de la escuela.",
+      "codeForTulsaDescrip": "Code for Tulsa se encuentra entre las aproximadamente 70 brigadas de Code for America en todo el país que ayudan al especialista en código y datos a llevar sus habilidades tecnológicas al proceso de conectar a las personas con sus gobiernos locales. La brigada de Tulsa fue una de las primeras en organizarse, ya que las ideas de Code for America se expandieron a partir de 2009."
+    },
+    "contact": {
+      "contact": "Contacto",
+      "forQuestionsAbout": "para preguntas sobre:",
+      "contactHungerFree_01": "Usando el mapa o localizando un sitio cerca de usted",
+      "contactHungerFree_02": "Ordenar materiales de divulgación",
+      "contactHungerFree_03": "Conectando a programas existentes",
+      "contactHungerFree_04": "Reportar enlaces rotos o información incorrecta en el mapa",
+      "contactHungerFree_05": "Participar el próximo verano como patrocinador o sitio.",
+      "contactHungerFree_06": "Ordenar materiales de divulgación",
+      "contactOsde_01": "Reportar información inexacta",
+      "contactOsde_02": "Informar un problema con un sitio o patrocinador",
+      "contactOsde_03": "Participar el próximo verano como patrocinador o sitio.",
+      "immediateAssistance": "Si necesita asistencia inmediata, llame al 211."
     }
   }
 }

@@ -1,6 +1,91 @@
+@import '../styles/variables.scss';
+
 .ContactPage {
   width: 100%;
   max-width: 768px;
   margin: 0 auto;
   padding: 48px 24px;
+
+  .contact-flex-wrapper {
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+
+    @media screen and (min-width: $break-md) {
+      flex-direction: row;
+    }
+
+    .contact-block {
+      flex: 1;
+      padding: 24px;
+      margin: 0 6px 12px;
+
+      border-radius: 6px;
+      background-color: white;
+      box-shadow: 2px 3px 5px rgba(91, 103, 112, 0.1);
+
+      .contact-tag {
+        margin: 0 0 4px;
+        color: $grey500;
+      }
+      .name {
+        margin: 0 0 4px;
+        color: $primary500;
+      }
+      .questions-about-tag {
+        margin: 0 0 32px;
+        font-size: 18px;
+        color: $grey500;
+      }
+      ul {
+        list-style: none;
+        padding: 0 0 0 16px;
+        margin-bottom: 48px;
+        li {
+          margin-bottom: 12px;
+          font-size: 18px;
+          font-weight: bold;
+          &::before {
+            content: '\25E6'; /* Add content: \2022 is the CSS Code/unicode for a bullet */
+            color: $secondary600; /* Change the color */
+            font-weight: bold; /* If you want it to be bold */
+            display: inline-block; /* Needed to add space between the bullet and the text */
+            width: 1em; /* Also needed for space (tweak if needed) */
+            margin-left: -1em; /* Also needed for space (tweak if needed) */
+          }
+        }
+      }
+
+      .wavy-line-divider {
+        width: calc(100% + 48px);
+        height: 16px;
+        margin: 0 0 32px -24px;
+        background-image: url('/img/tiled-wavy-line.png');
+        background-size: auto 16px;
+        background-repeat: repeat-x;
+      }
+
+      .contact-name {
+        font-size: 16px;
+      }
+      .phone-link,
+      .email-link {
+        display: flex;
+        align-items: center;
+        padding: 4px 0;
+        i {
+          margin-right: 4px;
+          color: $secondary600;
+        }
+      }
+    }
+  }
+
+  .immediate-assistance {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: $primary500;
+    padding: 12px;
+  }
 }

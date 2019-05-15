@@ -1,10 +1,11 @@
 // Core
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import useLocalState from '../hooks/useLocalState';
 import { sortBy } from 'lodash';
 import Location from '../types/location';
 import { DateTime } from 'luxon';
 import { statusFromTimeStrings, timeStringToDateTime } from './dateTimeHelpers';
+import useInterval from '../hooks/useInterval';
 
 function fetchLocationsFromGSheets({
   sheetId,
@@ -31,7 +32,11 @@ function fetchLocationsFromGSheets({
     '/?key=' +
     apiKey;
 
-  const fetchData = async () => {
+  const [refetchTries, setRefetchTries] = useState(0);
+  const maxRetries = 10;
+  const retryFreq = 5; // in minutes
+
+  async function fetchData() {
     try {
       // Begin benchmark for fetch time
       const fetchT0 = performance.now();
@@ -187,7 +192,7 @@ function fetchLocationsFromGSheets({
       console.error('Error fetching and formatting Google Sheets data...', error);
       return [];
     }
-  };
+  }
 
   // Fetch Data on load
   useEffect(() => {
@@ -195,6 +200,22 @@ function fetchLocationsFromGSheets({
       setLocations(result);
     });
   }, []);
+
+  // Fetch Data on load and every 5 mins to keep location info and statuses fresh
+  // but limit it so someone doesn't go overboard
+  useInterval(
+    () => {
+      if (refetchTries < maxRetries) {
+        fetchData().then(result => {
+          setLocations(result);
+          setRefetchTries(retries => retries + 1);
+        });
+      } else {
+        console.warn('reached max fetch tries. Refresh to load newest data.');
+      }
+    },
+    retryFreq * 60 * 1000 // 5 mins
+  );
 
   return locations || [];
 }

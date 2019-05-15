@@ -115,6 +115,9 @@ const App: FunctionComponent = () => {
           return location;
         })
       );
+    } else {
+      // May not have current latLong, so update with newest raw data anyways
+      setMeasuredLocations(rawLocations);
     }
   }, [rawLocations, currentUser.latLng]);
 

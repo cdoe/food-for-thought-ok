@@ -46,7 +46,6 @@ const OpenNowFilter: FunctionComponent<{
   setOpenNowFilter: Dispatch<SetStateAction<boolean>>;
 }> = ({ openNowFilter, setOpenNowFilter }) => {
   const { t } = useTranslation();
-  // const [openNowFilter, setOpenNowFilter] = useState(false);
 
   return (
     <div className="open-now-filter">
@@ -57,7 +56,7 @@ const OpenNowFilter: FunctionComponent<{
           setOpenNowFilter(false);
         }}
       >
-        All locations
+        {t('locations.allLocations')}
       </button>
       <button
         className={openNowFilter ? 'active' : ''}
@@ -66,7 +65,7 @@ const OpenNowFilter: FunctionComponent<{
           setOpenNowFilter(true);
         }}
       >
-        Open now
+        {t('locations.openNow')}
       </button>
     </div>
   );
@@ -278,13 +277,17 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
             }
           }
         }
-        setNearbyBounds(nearbyBounds);
+        setMapBounds(nearbyBounds);
+        setNearbyBounds(nearbyBounds); // For throttled value
       }
     }
   }, [compareDistance, currentUser.latLng]);
   // Set bounds to nearby with throttled value to avoid race conditions of sorting & setNearbyBounds
+  // (but not if oklahoma bounds)
   useEffect(() => {
-    !locationId && setMapBounds(nearbyBounds);
+    if (!locationId && !nearbyBounds.equals(oklahomaBounds)) {
+      setMapBounds(nearbyBounds);
+    }
   }, [throttledNearbyBounds]);
 
   return (
@@ -332,7 +335,11 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
                     loader={<div className="list-message">Loading...</div>}
                     endMessage={
                       <div className="list-message">
-                        Showing all {displayLocations.length} locations
+                        {!isFiltering && openNowFilter
+                          ? t('locations.openNowCount', { count: displayLocations.length })
+                          : t('locations.showingLocationCount', { count: displayLocations.length })}
+                        {isFiltering &&
+                          t('locations.filterResultsCount', { count: displayLocations.length })}
                       </div>
                     }
                     initialScrollY={54} // Initiall scroll past filter/sort
@@ -343,7 +350,7 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
                       <div className="filter-wrapper">
                         <Icon icon="search" className="search-icon" />
                         <Input
-                          placeholder="Filter locations"
+                          placeholder={t('locations.filterLocations')}
                           value={filterValue}
                           onChange={e => {
                             setFilterValue(e.target.value);
@@ -373,8 +380,8 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
                               }));
                             }}
                           >
-                            <option value="nearby">Sort by nearby</option>
-                            <option value="name">Sort by name</option>
+                            <option value="nearby">{t('locations.sortNearby')}</option>
+                            <option value="name">{t('locations.sortName')}</option>
                           </select>
                           <Icon icon="arrow_drop_down" className="dropdown-icon" />
                         </div>
@@ -494,7 +501,9 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
                       <LocationStatus location={location} small />
                       {location.distance && (
                         <div className="distance">
-                          {metersToRoundedMiles(location.distance)} miles away
+                          {t('locations.distanceCount', {
+                            count: metersToRoundedMiles(location.distance)
+                          })}
                         </div>
                       )}
                     </Tooltip>
@@ -513,7 +522,7 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
             {/* Back arrow (but don't show on mobile expanded) */}
             {!mobileDetailsExpanded && (
               <Link to="/locations/" className="back-link">
-                <Icon icon="arrow_back_ios" /> Back
+                <Icon icon="arrow_back_ios" /> {t('locations.back')}
               </Link>
             )}
             <LocationDetail
@@ -533,9 +542,9 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
             }}
           >
             {mobileListIsOpen ? (
-              <IconText icon="map" text="Show map" />
+              <IconText icon="map" text={t('locations.showMap')} />
             ) : (
-              <IconText icon="list" text="Show list" />
+              <IconText icon="list" text={t('locations.showList')} />
             )}
           </div>
         )}
@@ -550,9 +559,9 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
             }}
           >
             {mobileDetailsExpanded ? (
-              <IconText icon="expand_more" text="Show less" />
+              <IconText icon="expand_more" text={t('locations.showLess')} />
             ) : (
-              <IconText icon="expand_less" text="Show more" />
+              <IconText icon="expand_less" text={t('locations.showMore')} />
             )}
           </div>
         )}
