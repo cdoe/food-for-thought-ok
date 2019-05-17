@@ -7,34 +7,22 @@ import React, {
   SetStateAction,
   useEffect
 } from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import Leaflet from 'leaflet';
+import { BrowserRouter as Router } from 'react-router-dom';
+import useSessionState from './hooks/useSessionState';
 import fetchLocationsFromGSheets from './lib/fetchLocationsFromGSheets';
+import AppRoutes from './AppRoutes';
+import Leaflet from 'leaflet';
 // Global Contexts
 import CurrentUser, { defaultCurrentUser } from './types/currentUser';
-export const CurrentUserCtx = createContext<[CurrentUser, Dispatch<SetStateAction<CurrentUser>>]>([
-  defaultCurrentUser,
-  () => {}
-]);
+export const CurrentUserCtx = createContext<
+  [CurrentUser, Dispatch<SetStateAction<CurrentUser>>]
+>([defaultCurrentUser, () => {}]);
 export const MobileNavCtx = createContext<[boolean, any]>([false, () => {}]);
 import Location from './types/location';
 export const LocationsCtx = createContext<Location[]>([]);
 // Styles
 import './styles/normalize.css';
 import './styles/base.scss';
-// Pages
-import LandingPage from './pages/LandingPage';
-import LocationsPage from './pages/LocationsPage';
-import FaqPage from './pages/FaqPage';
-import ContactPage from './pages/ContactPage';
-import ListPage from './pages/ListPage';
-import NondiscriminationPage, { NondiscriminationPageSpanish } from './pages/NondiscriminationPage';
-// Layout Components
-import PageWrapper from './layout/PageWrapper';
-import PrimaryNav from './layout/PrimaryNav';
-import MobileNav from './layout/MobileNav';
-import useSessionState from './hooks/useSessionState';
-import { useTranslation } from 'react-i18next';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Make sure the Google Sheet's sharing settings are set to 'Anyone with the link can view' then update .env.local variables. //
@@ -42,7 +30,8 @@ import { useTranslation } from 'react-i18next';
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const sheetId = process.env.REACT_APP_GOOGLE_SHEET_ID || '';
 const sheetName =
-  process.env.NODE_ENV === 'production' && process.env.REACT_APP_ENV === 'production'
+  process.env.NODE_ENV === 'production' &&
+  process.env.REACT_APP_ENV === 'production'
     ? process.env.REACT_APP_GOOGLE_SHEET_NAME || '' // Should point to the 'Locations_dev' sheet
     : process.env.REACT_APP_GOOGLE_SHEET_NAME_DEV || ''; // Should point to the 'Locations_dev' sheet
 
@@ -56,7 +45,10 @@ const apiKey = process.env.REACT_APP_GOOGLE_API_KEY || ''; // Restricted to meal
 // Render very top-level App component
 const App: FunctionComponent = () => {
   // Global currentUser state
-  const [currentUser, setCurrentUser] = useSessionState(defaultCurrentUser, 'current-user');
+  const [currentUser, setCurrentUser] = useSessionState(
+    defaultCurrentUser,
+    'current-user'
+  );
 
   // Detect if browser has geolocation
   useEffect(() => {
@@ -124,35 +116,12 @@ const App: FunctionComponent = () => {
   // Global menu state
   const [mobileNavIsOpen, setMobileNavIsOpen] = useState(false);
 
-  const { t } = useTranslation();
-
   return (
     <CurrentUserCtx.Provider value={[currentUser, setCurrentUser]}>
       <LocationsCtx.Provider value={measuredLocations}>
         <MobileNavCtx.Provider value={[mobileNavIsOpen, setMobileNavIsOpen]}>
           <Router>
-            <Switch>
-              <PageWrapper>
-                <PrimaryNav />
-                <MobileNav />
-                <Switch>
-                  <Route path="/" exact component={LandingPage} />
-                  <Route path="/locations/:locationId?" component={LocationsPage} />
-                  <Route path="/faq" component={FaqPage} />
-                  <Route path="/contact" component={ContactPage} />
-                  <Route path="/list" component={ListPage} />
-                  {t('footer.nondiscriminationLink') === '/nodiscriminacion' && (
-                    <Redirect from="/nondiscrimination" to="/nodiscriminacion" />
-                  )}
-                  <Route path="/nondiscrimination" component={NondiscriminationPage} />
-                  {t('footer.nondiscriminationLink') === '/nondiscrimination' && (
-                    <Redirect from="/nodiscriminacion" to="/nondiscrimination" />
-                  )}
-                  <Route path="/nodiscriminacion" component={NondiscriminationPageSpanish} />
-                  <Redirect path="/" to="/" />
-                </Switch>
-              </PageWrapper>
-            </Switch>
+            <AppRoutes />
           </Router>
         </MobileNavCtx.Provider>
       </LocationsCtx.Provider>

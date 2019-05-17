@@ -7,7 +7,7 @@ import { RouteComponentProps } from 'react-router-dom';
 // Initialize
 ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_TRACKING_CODE || '');
 
-export const withTracker = <P extends RouteComponentProps>(
+const withGaTracker = <P extends RouteComponentProps>(
   WrappedComponent: React.ComponentType<P>,
   options: FieldsObject = {}
 ) => {
@@ -24,3 +24,5 @@ export const withTracker = <P extends RouteComponentProps>(
     return <WrappedComponent {...props} />;
   };
 };
+
+export default withGaTracker;

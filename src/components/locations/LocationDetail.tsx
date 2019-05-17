@@ -1,10 +1,16 @@
 // Core
-import React, { FunctionComponent, HtmlHTMLAttributes, Fragment, useState, memo } from 'react';
+import React, {
+  FunctionComponent,
+  HtmlHTMLAttributes,
+  Fragment,
+  memo
+} from 'react';
 import Location from '../../types/location';
 import classnames from 'classnames';
 import { Helmet } from 'react-helmet';
 import { useTranslation, Trans } from 'react-i18next';
 import { compact } from 'lodash';
+import ReactGA from 'react-ga';
 // import NumberFormat from 'react-number-format';
 // Styles
 import './LocationDetail.scss';
@@ -16,7 +22,9 @@ import { metersToRoundedMiles } from '../../lib/distanceHelpers';
 
 // Component
 const LocationDetail: FunctionComponent<
-  { location?: Location; mobileExpanded?: boolean } & HtmlHTMLAttributes<HTMLDivElement>
+  { location?: Location; mobileExpanded?: boolean } & HtmlHTMLAttributes<
+    HTMLDivElement
+  >
 > = ({ location, mobileExpanded = false, ...rest }) => {
   const { t, i18n } = useTranslation();
 
@@ -61,7 +69,9 @@ const LocationDetail: FunctionComponent<
       ])
     : [];
 
-  const locationUrl = location ? 'https://meals4kids.org/locations/' + location.id : '';
+  const locationUrl = location
+    ? 'https://meals4kids.org/locations/' + location.id
+    : '';
 
   return (
     <div className="LocationDetail" {...rest}>
@@ -80,7 +90,11 @@ const LocationDetail: FunctionComponent<
           <LocationStatus location={location} lineWrapped large />
 
           {/* Below the fold on mobile */}
-          <div className={classnames('mobile-expander', { expanded: mobileExpanded })}>
+          <div
+            className={classnames('mobile-expander', {
+              expanded: mobileExpanded
+            })}
+          >
             {/* Mealtimes, Weekdays, and End Date (if not past end-date) */}
             {location.status !== 'after-end' && (
               <Fragment>
@@ -92,7 +106,9 @@ const LocationDetail: FunctionComponent<
                   <div className="cell meals">
                     {/* Count meals */}
                     <div className="summary">
-                      {t('locations.mealsCount', { count: activeMeals.length })}
+                      {t('locations.mealsCount', {
+                        count: activeMeals.length
+                      })}
                     </div>
                     {/* List meals and time */}
                     {activeMeals.map(meal => {
@@ -101,8 +117,11 @@ const LocationDetail: FunctionComponent<
                           <div className="meal">{t('locations.' + meal)}</div>
                           <div className="time">
                             {/* 
-                        // @ts-ignore */}
-                            {formatTime(location[meal + 'Start'])} - {location[meal + 'End']}
+                            // @ts-ignore */}
+                            {formatTime(location[meal + 'Start'])} -{' '}
+                            {/* 
+                            // @ts-ignore */}
+                            {location[meal + 'End']}
                           </div>
                         </Fragment>
                       );
@@ -112,7 +131,9 @@ const LocationDetail: FunctionComponent<
                   <div className="cell days">
                     {/* Count weekdays*/}
                     <div className="summary">
-                      {t('locations.weekdaysCount', { count: activeWeekdays.length })}
+                      {t('locations.weekdaysCount', {
+                        count: activeWeekdays.length
+                      })}
                     </div>
                     {/* List weekdays */}
                     {activeWeekdays.map(weekday => {
@@ -174,13 +195,19 @@ const LocationDetail: FunctionComponent<
               <div className="city">{location.city}, OK</div>
               {location.distance && (
                 <div className="distance">
-                  {t('locations.distanceCount', { count: metersToRoundedMiles(location.distance) })}
+                  {t('locations.distanceCount', {
+                    count: metersToRoundedMiles(location.distance)
+                  })}
                 </div>
               )}
               <a
                 href={
                   'https://www.google.com/maps/dir/?api=1&destination=' +
-                  encodeURIComponent(`${location.name}, ${location.address}, ${location.city}, OK`)
+                  encodeURIComponent(
+                    `${location.name}, ${location.address}, ${
+                      location.city
+                    }, OK`
+                  )
                 }
                 className="directions-link"
                 target="_blank"
@@ -196,7 +223,9 @@ const LocationDetail: FunctionComponent<
                 <a
                   className="phone-link"
                   href={
-                    'tel:' + location.phone + (location.phoneExt ? ',' + location.phoneExt : '')
+                    'tel:' +
+                    location.phone +
+                    (location.phoneExt ? ',' + location.phoneExt : '')
                   }
                 >
                   <Icon icon="phone" /> {location.phone}
@@ -208,13 +237,34 @@ const LocationDetail: FunctionComponent<
             {/* Social */}
             {!!locationUrl.trim() && (
               <div className="sharing">
-                <a href={'https://www.facebook.com/sharer/sharer.php?u=' + locationUrl}>
+                <a
+                  href={
+                    'https://www.facebook.com/sharer/sharer.php?u=' +
+                    locationUrl
+                  }
+                  onClick={() => {
+                    ReactGA.event({
+                      category: 'Social',
+                      action: 'Shared location on Facebook'
+                    });
+                  }}
+                >
                   <Icon icon="thumb_up" />{' '}
                   <Trans i18nKey="locations.shareFacebook">
                     Share this location on <strong>Facebook</strong>
                   </Trans>
                 </a>
-                <a href={'sms:?&body=' + t('locations.shareBody') + ' ' + locationUrl}>
+                <a
+                  href={
+                    'sms:?&body=' + t('locations.shareBody') + ' ' + locationUrl
+                  }
+                  onClick={() => {
+                    ReactGA.event({
+                      category: 'Social',
+                      action: 'Shared location by SMS'
+                    });
+                  }}
+                >
                   <Icon icon="message" />{' '}
                   <Trans i18nKey="locations.shareSms">
                     Share this location by <strong>text message</strong>
@@ -229,6 +279,12 @@ const LocationDetail: FunctionComponent<
                     ' ' +
                     locationUrl
                   }
+                  onClick={() => {
+                    ReactGA.event({
+                      category: 'Social',
+                      action: 'Shared location by email'
+                    });
+                  }}
                 >
                   <Icon icon="email" />{' '}
                   <Trans i18nKey="locations.shareEmail">
