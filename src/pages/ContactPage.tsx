@@ -35,6 +35,7 @@ const ContactPage: FunctionComponent = () => {
                 <li>{t('contact.contactHungerFree_06')}</li>
               </ul>
               <div className="wavy-line-divider" />
+              <h3 className="contact-name">{t('contact.callOrText')}</h3>
               <a className="phone-link" href="tel:918-340-9098">
                 <Icon icon="phone" /> 918-340-9098
               </a>

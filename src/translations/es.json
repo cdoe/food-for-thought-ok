@@ -23,7 +23,7 @@
       "allLocations": "todas las localizaciones",
       "openNow": "Abierto ahora",
 
-      "moreSoon": "¡Más sitios de comida de verano próximamente!",
+      "moreSoon": "¡tendremos más sitios listados pronto!",
 
       "showingLocationCount": "Mostrando la ubicación de {{count}}",
       "showingLocationCount_plural": "Mostrando todas las {{count}} ubicaciones",
@@ -112,6 +112,7 @@
       "contactHungerFree_04": "Reportar enlaces rotos o información incorrecta en el mapa",
       "contactHungerFree_05": "Participar el próximo verano como patrocinador o sitio.",
       "contactHungerFree_06": "Ordenar materiales de divulgación",
+      "callOrText": "Llame o mande un text",
       "contactOsde_01": "Reportar información inexacta",
       "contactOsde_02": "Informar un problema con un sitio o patrocinador",
       "contactOsde_03": "Participar el próximo verano como patrocinador o sitio.",
