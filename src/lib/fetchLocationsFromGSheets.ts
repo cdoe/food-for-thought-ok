@@ -124,6 +124,8 @@ function fetchLocationsFromGSheets({
                 rowObject.currentMeal = meal;
                 rowObject.currentMealUntil =
                   mealStatus === 'open-soon' ? rowObject[meal + 'Start'] : rowObject[meal + 'End'];
+                // Exit 'some' loop if has status
+                return !!mealStatus;
               } else {
                 // Figure out if this meal is next
                 const startString = rowObject[meal + 'Start'];
@@ -140,37 +142,38 @@ function fetchLocationsFromGSheets({
                   }
                 }
               }
-              // Exit 'some' loop if true
-              return !!mealStatus;
+              return false;
             });
           }
           // No status found, so we're closed!
           if (!rowObject.status) {
             rowObject.status = 'closed';
-            // Loop through the following days to find next meal,
-            // then save and exit
-            for (let addDays = 1; addDays <= 7; addDays++) {
-              let nextMealDate = now.plus({ day: addDays }).endOf('day');
-              if (openDays[nextMealDate.weekday]) {
-                // Found next day, now loop through meals to find next time
-                meals.forEach(meal => {
-                  const startString = rowObject[meal + 'Start'];
-                  if (startString) {
-                    const startTime = timeStringToDateTime(startString).set({
-                      day: nextMealDate.day
-                    });
-                    // Is soonest upcoming
-                    if (startTime < nextMealDate) {
-                      // Modify time of next meal date
-                      nextMealDate = nextMealDate.set({
-                        hour: startTime.hour,
-                        minute: startTime.minute
+            // If next meal hasn't already been identified, loop through the
+            // following days to find next meal, then save and exit
+            if (!rowObject.nextMealDate) {
+              for (let addDays = 1; addDays <= 7; addDays++) {
+                let nextMealDate = now.plus({ day: addDays }).endOf('day');
+                if (openDays[nextMealDate.weekday]) {
+                  // Found next day, now loop through meals to find next time
+                  meals.forEach(meal => {
+                    const startString = rowObject[meal + 'Start'];
+                    if (startString) {
+                      const startTime = timeStringToDateTime(startString).set({
+                        day: nextMealDate.day
                       });
-                      rowObject.nextMealDate = nextMealDate.toJSDate();
+                      // Is soonest upcoming
+                      if (startTime < nextMealDate) {
+                        // Modify time of next meal date
+                        nextMealDate = nextMealDate.set({
+                          hour: startTime.hour,
+                          minute: startTime.minute
+                        });
+                        rowObject.nextMealDate = nextMealDate.toJSDate();
+                      }
                     }
-                  }
-                });
-                break;
+                  });
+                  break;
+                }
               }
             }
           }
