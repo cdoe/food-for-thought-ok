@@ -70,7 +70,7 @@ const LocationDetail: FunctionComponent<
     : [];
 
   const locationUrl = location
-    ? 'https://meals4kids.org/locations/' + location.id
+    ? 'https://meals4kidsok.org/locations/' + location.id
     : '';
 
   return (
