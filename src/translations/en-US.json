@@ -78,7 +78,10 @@
       "breakfast": "Breakfast",
       "lunch": "Lunch",
       "snack": "Snack",
-      "dinner": "Dinner"
+      "dinner": "Dinner",
+
+      "reportProblem": "Report a problem with this location",
+      "addOwnNotes": "ADD YOUR OWN NOTES HERE"
     },
     "faq": {
       "whatIsSfsp": "What is the Summer Food Service Program (SFSP)?",

@@ -1,10 +1,5 @@
 // Core
-import React, {
-  FunctionComponent,
-  HtmlHTMLAttributes,
-  Fragment,
-  memo
-} from 'react';
+import React, { FunctionComponent, HtmlHTMLAttributes, Fragment, memo } from 'react';
 import Location from '../../types/location';
 import classnames from 'classnames';
 import { Helmet } from 'react-helmet';
@@ -22,9 +17,7 @@ import { metersToRoundedMiles } from '../../lib/distanceHelpers';
 
 // Component
 const LocationDetail: FunctionComponent<
-  { location?: Location; mobileExpanded?: boolean } & HtmlHTMLAttributes<
-    HTMLDivElement
-  >
+  { location?: Location; mobileExpanded?: boolean } & HtmlHTMLAttributes<HTMLDivElement>
 > = ({ location, mobileExpanded = false, ...rest }) => {
   const { t, i18n } = useTranslation();
 
@@ -69,9 +62,7 @@ const LocationDetail: FunctionComponent<
       ])
     : [];
 
-  const locationUrl = location
-    ? 'https://meals4kidsok.org/locations/' + location.id
-    : '';
+  const locationUrl = location ? 'https://meals4kidsok.org/locations/' + location.id : '';
 
   return (
     <div className="LocationDetail" {...rest}>
@@ -203,11 +194,7 @@ const LocationDetail: FunctionComponent<
               <a
                 href={
                   'https://www.google.com/maps/dir/?api=1&destination=' +
-                  encodeURIComponent(
-                    `${location.name}, ${location.address}, ${
-                      location.city
-                    }, OK`
-                  )
+                  encodeURIComponent(`${location.name}, ${location.address}, ${location.city}, OK`)
                 }
                 className="directions-link"
                 target="_blank"
@@ -223,9 +210,7 @@ const LocationDetail: FunctionComponent<
                 <a
                   className="phone-link"
                   href={
-                    'tel:' +
-                    location.phone +
-                    (location.phoneExt ? ',' + location.phoneExt : '')
+                    'tel:' + location.phone + (location.phoneExt ? ',' + location.phoneExt : '')
                   }
                 >
                   <Icon icon="phone" /> {location.phone}
@@ -237,11 +222,9 @@ const LocationDetail: FunctionComponent<
             {/* Social */}
             {!!locationUrl.trim() && (
               <div className="sharing">
+                {/* Facebook */}
                 <a
-                  href={
-                    'https://www.facebook.com/sharer/sharer.php?u=' +
-                    locationUrl
-                  }
+                  href={'https://www.facebook.com/sharer/sharer.php?u=' + locationUrl}
                   onClick={() => {
                     ReactGA.event({
                       category: 'Social',
@@ -254,10 +237,9 @@ const LocationDetail: FunctionComponent<
                     Share this location on <strong>Facebook</strong>
                   </Trans>
                 </a>
+                {/* Text message */}
                 <a
-                  href={
-                    'sms:?&body=' + t('locations.shareBody') + ' ' + locationUrl
-                  }
+                  href={'sms:?&body=' + t('locations.shareBody') + ' ' + locationUrl}
                   onClick={() => {
                     ReactGA.event({
                       category: 'Social',
@@ -270,6 +252,7 @@ const LocationDetail: FunctionComponent<
                     Share this location by <strong>text message</strong>
                   </Trans>
                 </a>
+                {/* Email */}
                 <a
                   href={
                     'mailto:?subject=' +
@@ -293,6 +276,36 @@ const LocationDetail: FunctionComponent<
                 </a>
               </div>
             )}
+
+            {/* Report a problem with this location */}
+            <div className="report-problem">
+              <a
+                href={
+                  'mailto:HungerFreeOK@gmail.com?subject=Meals4KidsOK.org%20-%20Location%20Error%20Report!&body=' +
+                  "I'd like to report a problem with the " +
+                  '%3Cb%3E%3Ca%20href=%22' + // Encoded - <b><a href="
+                  locationUrl +
+                  '%22%3E' + // ">
+                  location.name +
+                  '%3C/a%3E%3C/b%3E' + // </a></b>
+                  ' location on meals4kidsok.org%0D%0A%0D%0A' +
+                  '%0D%0A' + // Line return
+                  '%3Ci%3E' + // <i>
+                  t('locations.addOwnNotes') +
+                  '%3C/i%3E' //</i>
+                }
+                onClick={() => {
+                  ReactGA.event({
+                    category: 'Action',
+                    action: 'Report a location'
+                  });
+                }}
+              >
+                <Icon icon="report_problem" />
+                {t('locations.reportProblem')}
+                {/* </Trans> */}
+              </a>
+            </div>
           </div>
         </Fragment>
       )}

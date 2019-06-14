@@ -78,7 +78,10 @@
       "breakfast": "Desayuno",
       "lunch": "Almuerzo",
       "snack": "Botana",
-      "dinner": "Cena"
+      "dinner": "Cena",
+
+      "reportProblem": "Reportar un problema con esta ubicación",
+      "addOwnNotes": "AÑADIR SUS PROPIAS NOTAS AQUÍ"
     },
     "faq": {
       "whatIsSfsp": "¿Qué es el Programa de Servicio de Alimentos de Verano (SFSP)?",
