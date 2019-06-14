@@ -22,6 +22,11 @@ import withGaTracker from './lib/withGaTracker';
 const AppRoutes: FunctionComponent = props => {
   const { t, i18n } = useTranslation();
 
+  // Convert to spanish traffic if visiting spanish url
+  !!window.location.host.includes('comidaparaninosok.org') &&
+    !i18n.language.includes('es') &&
+    window.location.replace('https://meals4kidsok.org/es');
+
   return (
     <Switch>
       {/* Set https://[domain]/es to spanish  */}
@@ -29,7 +34,7 @@ const AppRoutes: FunctionComponent = props => {
         path="/es"
         exact
         render={() => {
-          i18n.language !== 'es' && i18n.changeLanguage('es');
+          !i18n.language.includes('es') && i18n.changeLanguage('es');
           return <Redirect to="/" />;
         }}
       />
