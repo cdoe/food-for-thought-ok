@@ -13,6 +13,36 @@ The [Summer Food Service Program](https://www.fns.usda.gov/sfsp/summer-food-serv
 ---
 ---
 
+* [Back-end Tech](#back-end-tech)
+* [Front-end Tech](#front-end-tech)
+* [Getting Started](#getting-started)
+* [Deployment](#deployment)
+
+---
+---
+
+## Back-end Tech
+__This project was built with [Firebase](https://firebase.google.com/) tools and some [Google APIs](https://developers.google.com/apis-explorer/).  Specifically:__
+* __[Firebase Hosting](https://firebase.google.com/products/hosting)__: For static, single-page web app deployment
+* __[Google Sheets API](https://developers.google.com/sheets/api/)__: The "database" is pulled from a client managed Google Sheet document.  A view only copy of this spreadsheet [available here](https://docs.google.com/spreadsheets/d/1eZNA8Qsxc9xZQu4NQBBo2FHqB5rDiIBj4R15AeDZiw4/edit?usp=sharing)
+
+
+## Front-end Tech
+__This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and primarily relies on the following technologies:__
+
+* __[React](https://reactjs.org/)__: A JavaScript library for building user interfaces
+* __[React Router](https://reacttraining.com/react-router/)__: Declarative routing for React
+* __[Leaflet](https://leafletjs.com/)__: an open-source JavaScript library
+for mobile-friendly interactive maps
+* __[React-Leaflet](https://react-leaflet.js.org/)__: ⚛️React components for 🍃Leaflet maps
+* __[react-i18next](https://react.i18next.com/)__: Internationalization for react done right. Using the [i18next](https://www.i18next.com/) i18n ecosystem.
+* __[Luxon](https://moment.github.io/luxon/)__: A powerful, modern, and friendly wrapper for Javascript dates and times.
+
+### Learn More about React
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
 ## Getting started
 __If you'd like to run a local version of the app, follow these instructions below:__
 > __Please note before cloning:__  You'll need special access to the firebase project to get things working properly—even locally.  Please reach out if you're looking to contribute to this project or investigate further.
@@ -45,27 +75,3 @@ To deploy the production site, run:
 ```BASH
 npm run deploy-production
 ```
-
-
-## Back-end Tech
-__This project was built with [Firebase](https://firebase.google.com/) tools and some [Google APIs](https://developers.google.com/apis-explorer/).  Specifically:__
-* __[Firebase Hosting](https://firebase.google.com/products/hosting)__: For static, single-page web app deployment
-* __[Google Sheets API](https://developers.google.com/sheets/api/)__: The "database" is pulled from a client managed Google Sheet document.  A view only copy of this spreadsheet [available here](https://docs.google.com/spreadsheets/d/1eZNA8Qsxc9xZQu4NQBBo2FHqB5rDiIBj4R15AeDZiw4/edit?usp=sharing)
-
-
-## Front-end Tech
-__This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and primarily relies on the following technologies:__
-
-* __[React](https://reactjs.org/)__: A JavaScript library for building user interfaces
-* __[React Router](https://reacttraining.com/react-router/)__: Declarative routing for React
-* __[Leaflet](https://leafletjs.com/)__: an open-source JavaScript library
-for mobile-friendly interactive maps
-* __[React-Leaflet](https://react-leaflet.js.org/)__: ⚛️React components for 🍃Leaflet maps
-* __[react-i18next](https://react.i18next.com/)__: Internationalization for react done right. Using the [i18next](https://www.i18next.com/) i18n ecosystem.
-* __[Luxon](https://moment.github.io/luxon/)__: A powerful, modern, and friendly wrapper for Javascript dates and times.
-
-
-## Learn More about React
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
