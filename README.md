@@ -17,10 +17,20 @@ The [Summer Food Service Program](https://www.fns.usda.gov/sfsp/summer-food-serv
 __If you'd like to run a local version of the app, follow these instructions below:__
 > __Please note before cloning:__  You'll need special access to the firebase project to get things working properly—even locally.  Please reach out if you're looking to contribute to this project or investigate further.
 
-* Make sure you have either placed the _`env.local`_ file from Code for Tulsa's 1Pass account into your root directory, OR edit the environment variables in _`App.tsx`_ to link to appropriate API keys and resources.
+
 * Clone the repo, and in the root directory run `yarn install` to download all project depencies. (_You may need to get [Yarn](https://yarnpkg.com/en/) if you haven't already..._)
 * Run `yarn start` to spin up a locally running version of the site.
+* Make sure you have either placed the _`.env`_ file from Code for Tulsa's 1Pass account into your root directory, OR edit the environment variables in _`App.tsx`_ to link to appropriate API keys and resources.
 
+> Your _`.env`_ file should look a little something like:
+>```
+>REACT_APP_GOOGLE_SHEET_ID=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+>REACT_APP_GOOGLE_SHEET_NAME_DEV=Locations_dev
+>REACT_APP_GOOGLE_SHEET_NAME=Locations
+>
+>REACT_APP_GOOGLE_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+>REACT_APP_GOOGLE_ANALYTICS_TRACKING_CODE=UA-xxxxxxxxx-x
+>```
 
 ## Deployment
 __There are two environments, proof and production.__

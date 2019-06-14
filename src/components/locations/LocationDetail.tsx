@@ -292,7 +292,7 @@ const LocationDetail: FunctionComponent<
                   '%0D%0A' + // Line return
                   '%3Ci%3E' + // <i>
                   t('locations.addOwnNotes') +
-                  '%3C/i%3E' //</i>
+                  ':%3C/i%3E' // :</i>
                 }
                 onClick={() => {
                   ReactGA.event({
@@ -303,7 +303,6 @@ const LocationDetail: FunctionComponent<
               >
                 <Icon icon="report_problem" />
                 {t('locations.reportProblem')}
-                {/* </Trans> */}
               </a>
             </div>
           </div>
