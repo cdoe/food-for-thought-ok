@@ -323,24 +323,20 @@ const LocationsPage: FunctionComponent<
           !!locationId ? (
             undefined
           ) : (
-            <OpenNowFilter
-              openNowFilter={openNowFilter}
-              setOpenNowFilter={setOpenNowFilter}
-            />
+            <OpenNowFilter openNowFilter={openNowFilter} setOpenNowFilter={setOpenNowFilter} />
           )
         }
       >
-        <SearchAutocomplete
-          history={history}
-          redirectOnSuccess={!!locationId}
-        />
+        <SearchAutocomplete history={history} redirectOnSuccess={!!locationId} />
       </MobileHeader>
 
       {/* Rest of the locations page */}
       <div className="LocationsPage">
-        {/* More locations coming soon notice */}
-        <div className="more-soon">{t('locations.moreSoon')}</div>
-        
+        {/* More locations coming soon - notice */}
+        {/* <div className="notice">{t('locations.moreSoon')}</div> */}
+        {/* Some sites may close on July 4th - notice  */}
+        <div className="notice">{t('locations.julyFourthClosings')}</div>
+
         {/* Flex wrapper including embedded map and locations side bar */}
         <div className="list-and-map-wrapper">
           {/* Locations list side bar (formatted a little different on mobile) */}
@@ -426,17 +422,10 @@ const LocationsPage: FunctionComponent<
                               }));
                             }}
                           >
-                            <option value="nearby">
-                              {t('locations.sortNearby')}
-                            </option>
-                            <option value="name">
-                              {t('locations.sortName')}
-                            </option>
+                            <option value="nearby">{t('locations.sortNearby')}</option>
+                            <option value="name">{t('locations.sortName')}</option>
                           </select>
-                          <Icon
-                            icon="arrow_drop_down"
-                            className="dropdown-icon"
-                          />
+                          <Icon icon="arrow_drop_down" className="dropdown-icon" />
                         </div>
                       )}
                     </div>
@@ -514,8 +503,7 @@ const LocationsPage: FunctionComponent<
             {displayLocations.map(location => {
               if (location.lat && location.lng) {
                 const latLng = Leaflet.latLng([location.lat, location.lng]);
-                return locationId === location.id ||
-                  hoverLocationId === location.id ? (
+                return locationId === location.id || hoverLocationId === location.id ? (
                   // Selected... or hovered list item... marker (pin)
                   <Marker
                     key={location.id}
@@ -533,18 +521,14 @@ const LocationsPage: FunctionComponent<
                     center={latLng}
                     radius={locationId ? 6 : 8}
                     color={
-                      ['open-soon', 'open', 'closed-soon'].includes(
-                        location.status || ''
-                      )
+                      ['open-soon', 'open', 'closed-soon'].includes(location.status || '')
                         ? '#c10f78'
                         : '#780353'
                     }
                     weight={locationId ? 5 : 1}
                     opacity={locationId || hoverLocationId ? 0.0001 : 1}
                     fillColor={
-                      ['open-soon', 'open', 'closed-soon'].includes(
-                        location.status || ''
-                      )
+                      ['open-soon', 'open', 'closed-soon'].includes(location.status || '')
                         ? '#da1884'
                         : '#9d0867'
                     }
