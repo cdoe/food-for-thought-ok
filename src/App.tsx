@@ -9,20 +9,21 @@ import React, {
 } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import useSessionState from './hooks/useSessionState';
-import fetchLocationsFromGSheets from './lib/fetchLocationsFromGSheets';
+import useFetchedLocationsFromGSheets from './lib/fetchLocationsFromGSheets';
 import AppRoutes from './AppRoutes';
 import Leaflet from 'leaflet';
-// Global Contexts
-import CurrentUser, { defaultCurrentUser } from './types/currentUser';
-export const CurrentUserCtx = createContext<
-  [CurrentUser, Dispatch<SetStateAction<CurrentUser>>]
->([defaultCurrentUser, () => {}]);
-export const MobileNavCtx = createContext<[boolean, any]>([false, () => {}]);
-import Location from './types/location';
-export const LocationsCtx = createContext<Location[]>([]);
 // Styles
 import './styles/normalize.css';
 import './styles/base.scss';
+// Global Contexts
+import CurrentUser, { defaultCurrentUser } from './types/currentUser';
+import Location from './types/location';
+export const CurrentUserCtx = createContext<[CurrentUser, Dispatch<SetStateAction<CurrentUser>>]>([
+  defaultCurrentUser,
+  () => {}
+]);
+export const MobileNavCtx = createContext<[boolean, any]>([false, () => {}]);
+export const LocationsCtx = createContext<Location[]>([]);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Make sure the Google Sheet's sharing settings are set to 'Anyone with the link can view' then update .env.local variables. //
@@ -30,8 +31,7 @@ import './styles/base.scss';
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const sheetId = process.env.REACT_APP_GOOGLE_SHEET_ID || '';
 const sheetName =
-  process.env.NODE_ENV === 'production' &&
-  process.env.REACT_APP_ENV === 'production'
+  process.env.NODE_ENV === 'production' && process.env.REACT_APP_ENV === 'production'
     ? process.env.REACT_APP_GOOGLE_SHEET_NAME || '' // Should point to the 'Locations_dev' sheet
     : process.env.REACT_APP_GOOGLE_SHEET_NAME_DEV || ''; // Should point to the 'Locations_dev' sheet
 
@@ -45,10 +45,7 @@ const apiKey = process.env.REACT_APP_GOOGLE_API_KEY || ''; // Restricted to meal
 // Render very top-level App component
 const App: FunctionComponent = () => {
   // Global currentUser state
-  const [currentUser, setCurrentUser] = useSessionState(
-    defaultCurrentUser,
-    'current-user'
-  );
+  const [currentUser, setCurrentUser] = useSessionState(defaultCurrentUser, 'current-user');
 
   // Detect if browser has geolocation
   useEffect(() => {
@@ -58,7 +55,7 @@ const App: FunctionComponent = () => {
         hasGeoAccess: false
       }));
     }
-  }, []);
+  }, [setCurrentUser]);
 
   // If doesn't have previous location, get location from IP address and center to that location
   // https://freegeoip.app/ (may have arbitrary limit for free use)
@@ -81,11 +78,11 @@ const App: FunctionComponent = () => {
           }
         });
     }
-  }, []);
+  }, [currentUser.latLng, setCurrentUser]);
 
   // Locations
   // Fetched from Google Sheets, data transformed/formatted, and alphabetized
-  const rawLocations = fetchLocationsFromGSheets({
+  const rawLocations = useFetchedLocationsFromGSheets({
     sheetId,
     sheetName,
     apiKey

@@ -1,5 +1,5 @@
 // Core
-import React, { FunctionComponent, useContext, useState, useRef, RefObject, version } from 'react';
+import React, { FunctionComponent, useContext, useState, useRef } from 'react';
 import { CurrentUserCtx } from '../../App';
 import { useTranslation } from 'react-i18next';
 import { History } from 'history';
@@ -9,6 +9,8 @@ import './SearchAutocomplete.scss';
 import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
 import Input from '../Input';
 import Loader from '../Loader';
+
+declare var google: any;
 
 // Component
 const SearchAutocomplete: FunctionComponent<{

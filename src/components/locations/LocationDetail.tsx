@@ -4,7 +4,7 @@ import Location from '../../types/location';
 import classnames from 'classnames';
 import { Helmet } from 'react-helmet';
 import { useTranslation, Trans } from 'react-i18next';
-import { compact } from 'lodash';
+import compact from 'lodash/compact';
 import ReactGA from 'react-ga';
 // import NumberFormat from 'react-number-format';
 // Styles

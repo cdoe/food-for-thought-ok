@@ -12,17 +12,11 @@ import React, {
 import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
-import { sortBy } from 'lodash';
+import sortBy from 'lodash/sortBy';
 import { useTranslation } from 'react-i18next';
 // Mapping
 import Leaflet from 'leaflet';
-import {
-  Map as LeafletMap,
-  TileLayer,
-  CircleMarker,
-  Marker,
-  Tooltip
-} from 'react-leaflet';
+import { Map as LeafletMap, TileLayer, CircleMarker, Marker, Tooltip } from 'react-leaflet';
 import { metersToRoundedMiles } from '../lib/distanceHelpers';
 import Location from '../types/location';
 // Data
@@ -115,9 +109,10 @@ const currentLocationLeafletIcon: Leaflet.IconOptions = {
 };
 
 // Component
-const LocationsPage: FunctionComponent<
-  RouteComponentProps<{ locationId?: string }>
-> = ({ history, match }) => {
+const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string }>> = ({
+  history,
+  match
+}) => {
   const { t } = useTranslation();
 
   // currentUser (available app-wide context)
@@ -136,9 +131,7 @@ const LocationsPage: FunctionComponent<
   const isFiltering = !!filterValue.trim();
   // List for alphabetical OR
   const [sortedLocations, setSortedLocations] = useState<Location[]>(locations);
-  const [displayLocations, setDisplayLocations] = useState<Location[]>(
-    locations
-  );
+  const [displayLocations, setDisplayLocations] = useState<Location[]>(locations);
   // Get locationId from URL (if exists)
   const locationId = match.params.locationId;
   // Stateful count to use in virtual scroller
@@ -157,26 +150,19 @@ const LocationsPage: FunctionComponent<
   const retina = typeof window !== 'undefined' && window.devicePixelRatio >= 2;
   // Determine if device is touch capable
   // so we can disable some hover effects preventing double tap on mobile
-  const isTouchDevice =
-    'ontouchstart' in document.documentElement ? true : false;
+  const isTouchDevice = 'ontouchstart' in document.documentElement ? true : false;
   // Store references to the leaflet map
   const leafletRef = useRef<LeafletMap>({} as LeafletMap);
 
   // Establish map params
   ///////////////////////
-  const [mapZoom, setMapZoom] = useState(
-    currentUser.latLng ? 12 : defaultMapZoom
-  );
+  const [mapZoom, setMapZoom] = useState(currentUser.latLng ? 12 : defaultMapZoom);
   const [mapCenter, setMapCenter] = useState<Leaflet.LatLng>(
     currentUser.latLng ? Leaflet.latLng(currentUser.latLng) : oklahomaCenter
   );
-  const [mapBounds, setMapBounds] = useState<Leaflet.LatLngBounds>(
-    oklahomaBounds
-  );
+  const [mapBounds, setMapBounds] = useState<Leaflet.LatLngBounds>(oklahomaBounds);
   // Store a set of bounds as a baseline for locations near them
-  const [nearbyBounds, setNearbyBounds] = useState<Leaflet.LatLngBounds>(
-    oklahomaBounds
-  );
+  const [nearbyBounds, setNearbyBounds] = useState<Leaflet.LatLngBounds>(oklahomaBounds);
   const throttledNearbyBounds = useThrottle(nearbyBounds, 300);
   // Store a set of bounds that a user can return to after backing out of location details
   const [historyBounds, setHistoryBounds] = useState<Leaflet.LatLngBounds>();
@@ -209,14 +195,9 @@ const LocationsPage: FunctionComponent<
     if (!!throttledFilterValue.trim()) {
       // Filter subset of those that match name or city of typed in filter
       filteredLocations = filteredLocations.filter(location => {
-        const nameMatch = location.name
-          .toLowerCase()
-          .includes(throttledFilterValue.toLowerCase());
+        const nameMatch = location.name.toLowerCase().includes(throttledFilterValue.toLowerCase());
         const cityMatch =
-          location.city &&
-          location.city
-            .toLowerCase()
-            .includes(throttledFilterValue.toLowerCase());
+          location.city && location.city.toLowerCase().includes(throttledFilterValue.toLowerCase());
         return nameMatch || cityMatch;
       });
     }
@@ -245,9 +226,7 @@ const LocationsPage: FunctionComponent<
         const latLng = Leaflet.latLng([location.lat, location.lng]);
         // if user's location is set, set bounds to include both
         if (!!currentUser.latLng) {
-          setMapBounds(
-            Leaflet.latLngBounds([currentUser.latLng, latLng]).pad(0.5)
-          );
+          setMapBounds(Leaflet.latLngBounds([currentUser.latLng, latLng]).pad(0.5));
         } else {
           // if user's location isn't set, go ahead and just center around selected location
           setMapCenter(latLng);
@@ -272,7 +251,7 @@ const LocationsPage: FunctionComponent<
     // so next time opened is defaulted to not expanded.
     // This mainly happens when pressing the back arrow in detail view on mobile.
     !locationId && setMobileDetailsExpanded(false);
-  }, [locationId]);
+  }, [currentUser.latLng, historyBounds, initialLoad, locationId, locations, nearbyBounds]);
 
   // Anytime locations or userLocation changes set nearbyNounds
   // to closest 15 locations within 15 miles, 5 locations minimum
@@ -285,10 +264,7 @@ const LocationsPage: FunctionComponent<
           distanceSortedLocations[0].lat,
           distanceSortedLocations[0].lng
         ]);
-        const nearbyBounds = Leaflet.latLngBounds(
-          currentUser.latLng,
-          nearestLatLng
-        );
+        const nearbyBounds = Leaflet.latLngBounds(currentUser.latLng, nearestLatLng);
         for (let i = 1; i < 15; i++) {
           if (distanceSortedLocations[i]) {
             const lat = distanceSortedLocations[i].lat;
@@ -305,14 +281,14 @@ const LocationsPage: FunctionComponent<
         setNearbyBounds(nearbyBounds); // For throttled value
       }
     }
-  }, [compareDistance, currentUser.latLng]);
+  }, [compareDistance, currentUser.latLng, isLoading, locations]);
   // Set bounds to nearby with throttled value to avoid race conditions of sorting & setNearbyBounds
   // (but not if oklahoma bounds)
   useEffect(() => {
     if (!locationId && !nearbyBounds.equals(oklahomaBounds)) {
       setMapBounds(nearbyBounds);
     }
-  }, [throttledNearbyBounds]);
+  }, [locationId, nearbyBounds, throttledNearbyBounds]);
 
   return (
     <Fragment>
@@ -323,24 +299,18 @@ const LocationsPage: FunctionComponent<
           !!locationId ? (
             undefined
           ) : (
-            <OpenNowFilter
-              openNowFilter={openNowFilter}
-              setOpenNowFilter={setOpenNowFilter}
-            />
+            <OpenNowFilter openNowFilter={openNowFilter} setOpenNowFilter={setOpenNowFilter} />
           )
         }
       >
-        <SearchAutocomplete
-          history={history}
-          redirectOnSuccess={!!locationId}
-        />
+        <SearchAutocomplete history={history} redirectOnSuccess={!!locationId} />
       </MobileHeader>
 
       {/* Rest of the locations page */}
       <div className="LocationsPage">
         {/* More locations coming soon notice */}
         <div className="more-soon">{t('locations.moreSoon')}</div>
-        
+
         {/* Flex wrapper including embedded map and locations side bar */}
         <div className="list-and-map-wrapper">
           {/* Locations list side bar (formatted a little different on mobile) */}
@@ -353,10 +323,7 @@ const LocationsPage: FunctionComponent<
               {/* Nearby search NOT for mobile */}
               <div className="desktop-search">
                 <SearchAutocomplete history={history} />
-                <OpenNowFilter
-                  openNowFilter={openNowFilter}
-                  setOpenNowFilter={setOpenNowFilter}
-                />
+                <OpenNowFilter openNowFilter={openNowFilter} setOpenNowFilter={setOpenNowFilter} />
               </div>
 
               {/* Loader (But not when filtering) */}
@@ -426,17 +393,10 @@ const LocationsPage: FunctionComponent<
                               }));
                             }}
                           >
-                            <option value="nearby">
-                              {t('locations.sortNearby')}
-                            </option>
-                            <option value="name">
-                              {t('locations.sortName')}
-                            </option>
+                            <option value="nearby">{t('locations.sortNearby')}</option>
+                            <option value="name">{t('locations.sortName')}</option>
                           </select>
-                          <Icon
-                            icon="arrow_drop_down"
-                            className="dropdown-icon"
-                          />
+                          <Icon icon="arrow_drop_down" className="dropdown-icon" />
                         </div>
                       )}
                     </div>
@@ -514,8 +474,7 @@ const LocationsPage: FunctionComponent<
             {displayLocations.map(location => {
               if (location.lat && location.lng) {
                 const latLng = Leaflet.latLng([location.lat, location.lng]);
-                return locationId === location.id ||
-                  hoverLocationId === location.id ? (
+                return locationId === location.id || hoverLocationId === location.id ? (
                   // Selected... or hovered list item... marker (pin)
                   <Marker
                     key={location.id}
@@ -533,18 +492,14 @@ const LocationsPage: FunctionComponent<
                     center={latLng}
                     radius={locationId ? 6 : 8}
                     color={
-                      ['open-soon', 'open', 'closed-soon'].includes(
-                        location.status || ''
-                      )
+                      ['open-soon', 'open', 'closed-soon'].includes(location.status || '')
                         ? '#c10f78'
                         : '#780353'
                     }
                     weight={locationId ? 5 : 1}
                     opacity={locationId || hoverLocationId ? 0.0001 : 1}
                     fillColor={
-                      ['open-soon', 'open', 'closed-soon'].includes(
-                        location.status || ''
-                      )
+                      ['open-soon', 'open', 'closed-soon'].includes(location.status || '')
                         ? '#da1884'
                         : '#9d0867'
                     }
@@ -568,6 +523,7 @@ const LocationsPage: FunctionComponent<
                   </CircleMarker>
                 );
               }
+              return null;
             })}
           </LeafletMap>
           {/* Location detail panel */}
@@ -629,10 +585,7 @@ const LocationsPage: FunctionComponent<
 };
 
 // Used in mobile toggler above
-const IconText: FunctionComponent<{ icon: string; text: string }> = ({
-  icon,
-  text
-}) => (
+const IconText: FunctionComponent<{ icon: string; text: string }> = ({ icon, text }) => (
   <Fragment>
     <Icon icon={icon} /> {text}
   </Fragment>

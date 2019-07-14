@@ -14,7 +14,10 @@ const NondiscriminationPage: FunctionComponent = () => {
       <MobileHeader />
       <PageBody>
         <div className="NondiscriminationPage">
-          <iframe src="https://docs.google.com/document/d/e/2PACX-1vSdja9e2NYtlTno9WREoypZP8FT6ub4h1gagrFfpPi7YcL1Gf44oz88-G02hxl__irDwv7c8Tgy1Je1/pub?embedded=true" />
+          <iframe
+            title="Nondiscrimination page"
+            src="https://docs.google.com/document/d/e/2PACX-1vSdja9e2NYtlTno9WREoypZP8FT6ub4h1gagrFfpPi7YcL1Gf44oz88-G02hxl__irDwv7c8Tgy1Je1/pub?embedded=true"
+          />
         </div>
       </PageBody>
       <PageFooter />
@@ -30,7 +33,10 @@ export const NondiscriminationPageSpanish: FunctionComponent = () => {
       <MobileHeader />
       <PageBody>
         <div className="NondiscriminationPage">
-          <iframe src="https://docs.google.com/document/d/e/2PACX-1vQSuQmi5bOE3Te1X7nNNtjxza2o510wpHWa9cjS3N9CgJw1rFOOvjpLDIi-pChab0CvTf5ZGm6fh4NW/pub?embedded=true" />
+          <iframe
+            title="Nondiscrimination page"
+            src="https://docs.google.com/document/d/e/2PACX-1vQSuQmi5bOE3Te1X7nNNtjxza2o510wpHWa9cjS3N9CgJw1rFOOvjpLDIi-pChab0CvTf5ZGm6fh4NW/pub?embedded=true"
+          />
         </div>
       </PageBody>
       <PageFooter />

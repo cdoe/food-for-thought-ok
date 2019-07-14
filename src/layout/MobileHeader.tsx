@@ -6,19 +6,14 @@ import './MobileHeader.scss';
 // Components
 import Icon from '../components/Icon';
 
-const OpenNowFilter: FunctionComponent = () => {
-  // const [openNowFilter, setOpenNowFilter] = useState(false);
-
-  return <div className="open-now-filter">okay</div>;
-};
-
 // Component
 const MobileHeader: FunctionComponent<{ hideMenuButton?: boolean; bottom?: ReactElement<any> }> = ({
   hideMenuButton = false,
   bottom,
   children
 }) => {
-  const [mobileNavIsOpen, setMobileNavIsOpen] = useContext(MobileNavCtx);
+  const mobileNavContext = useContext(MobileNavCtx);
+  const setMobileNavIsOpen = mobileNavContext[1];
 
   return (
     <div className="MobileHeader">

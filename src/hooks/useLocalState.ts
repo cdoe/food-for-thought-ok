@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 
 const dateTimeReviver = function(key: string, value: string) {
-  var a;
   // If key has "date" anywhere in the name
   // try to convert to a javascript date
   if (typeof key === 'string' && key.search(/date/i) > 0) {
@@ -32,7 +31,7 @@ function useLocalState<S>(defaultState: S, id: string) {
     if (localState !== null) {
       localStorage.setItem(id, JSON.stringify(localState));
     }
-  }, [localState]);
+  }, [id, localState]);
 
   return [localState, setLocalState];
 }

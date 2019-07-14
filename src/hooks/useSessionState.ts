@@ -20,7 +20,7 @@ function useSessionState<S>(defaultState: S, id: string): [S, Dispatch<SetStateA
     if (sessionState !== null) {
       sessionStorage.setItem(id, JSON.stringify(sessionState));
     }
-  }, [sessionState]);
+  }, [id, sessionState]);
 
   return [sessionState, setSessionState];
 }

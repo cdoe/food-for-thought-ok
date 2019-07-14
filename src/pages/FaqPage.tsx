@@ -13,12 +13,11 @@ import HungerFreeOk from '../img/hunger-free-ok.png';
 import OSDE from '../img/osde.png';
 import CodeForTulsa from '../img/code-for-tulsa.png';
 
-const questionAnswerBlock: FunctionComponent<{ question: ReactNode; answer: ReactNode }> = ({
+const QuestionAnswerBlock: FunctionComponent<{ question: ReactNode; answer: ReactNode }> = ({
   question,
   answer
 }) => {
   const [expanded, setExpanded] = useState(false);
-  const { t } = useTranslation();
 
   return (
     <Fragment>
@@ -51,31 +50,28 @@ const FaqPage: FunctionComponent = () => {
         <div className="FaqPage">
           {/* 1. */}
           {/* What is the Summer Food Service Program (SFSP)? */}
-          {questionAnswerBlock({ question: t('faq.whatIsSfsp'), answer: t('faq.SfspDescrip') })}
+          <QuestionAnswerBlock question={t('faq.whatIsSfsp')} answer={t('faq.SfspDescrip')} />
 
           {/* 2. */}
           {/* Do I need to provide any identification or paperwork to receive a meal? */}
-          {questionAnswerBlock({ question: t('faq.doINeedId'), answer: t('faq.noIdRequired') })}
+          <QuestionAnswerBlock question={t('faq.doINeedId')} answer={t('faq.noIdRequired')} />
 
           {/* 3. */}
           {/* Who is eligible to receive meals? */}
-          {questionAnswerBlock({
-            question: t('faq.whoIsEligible'),
-            answer: t('faq.childrenAndTeensEligible')
-          })}
+          <QuestionAnswerBlock
+            question={t('faq.whoIsEligible')}
+            answer={t('faq.childrenAndTeensEligible')}
+          />
 
           {/* 4. */}
           {/* Can meals be taken home? */}
-          {questionAnswerBlock({
-            question: t('faq.canMealsBeTaken'),
-            answer: t('faq.noMealsTaken')
-          })}
+          <QuestionAnswerBlock question={t('faq.canMealsBeTaken')} answer={t('faq.noMealsTaken')} />
 
           {/* 5. */}
           {/* How do I find a site near me? */}
-          {questionAnswerBlock({
-            question: t('faq.howDoIFindSite'),
-            answer: (
+          <QuestionAnswerBlock
+            question={t('faq.howDoIFindSite')}
+            answer={
               <ul>
                 <li>{t('faq.findSiteStep_01')}</li>
                 <li>{t('faq.findSiteStep_02')}</li>
@@ -83,14 +79,14 @@ const FaqPage: FunctionComponent = () => {
                 <li>{t('faq.findSiteStep_04')}</li>
                 <li>{t('faq.findSiteStep_05')}</li>
               </ul>
-            )
-          })}
+            }
+          />
 
           {/* 5. */}
           {/* Where can I find more information about the Summer Food Service Program (SFSP)? */}
-          {questionAnswerBlock({
-            question: t('faq.whereCanIFind'),
-            answer: (
+          <QuestionAnswerBlock
+            question={t('faq.whereCanIFind')}
+            answer={
               <a
                 href="https://www.fns.usda.gov/sfsp/summer-food-service-program"
                 target="_blank"
@@ -98,8 +94,8 @@ const FaqPage: FunctionComponent = () => {
               >
                 {t('faq.SFSPLinkText')}
               </a>
-            )
-          })}
+            }
+          />
 
           {/* About website */}
           <div className="secondary-header">{t('faq.aboutPartners')}</div>
