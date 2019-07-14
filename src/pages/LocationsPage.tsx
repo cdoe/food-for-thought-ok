@@ -311,7 +311,7 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
         {/* More locations coming soon - notice */}
         {/* <div className="notice">{t('locations.moreSoon')}</div> */}
         {/* Some sites may close on July 4th - notice  */}
-        <div className="notice">{t('locations.julyFourthClosings')}</div>
+        {/* <div className="notice">{t('locations.julyFourthClosings')}</div> */}
 
         {/* Flex wrapper including embedded map and locations side bar */}
         <div className="list-and-map-wrapper">
