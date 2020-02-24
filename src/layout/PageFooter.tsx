@@ -12,7 +12,9 @@ const PageFooter: FunctionComponent = () => {
   return (
     <div className="PageFooter">
       <span className="credits">©2019 Hunger Free Oklahoma</span>
-      <Link to={t('footer.nondiscriminationLink')}>{t('footer.nondiscriminationStatement')}</Link>
+      <Link to={t('footer.nondiscriminationLink') as string}>
+        {t('footer.nondiscriminationStatement')}
+      </Link>
     </div>
   );
 };
