@@ -8,29 +8,11 @@
     />
 
     <!-- Favicon Stuff -->
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="%PUBLIC_URL%/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="%PUBLIC_URL%/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="%PUBLIC_URL%/favicon-16x16.png"
-    />
+    <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16x16.png" />
     <link rel="manifest" href="%PUBLIC_URL%/site.webmanifest" />
-    <link
-      rel="mask-icon"
-      href="%PUBLIC_URL%/safari-pinned-tab.svg"
-      color="#da1684"
-    />
+    <link rel="mask-icon" href="%PUBLIC_URL%/safari-pinned-tab.svg" color="#da1684" />
     <meta name="msapplication-TileColor" content="#da1684" />
     <meta name="theme-color" content="#ffffff" />
     <!--
@@ -44,21 +26,21 @@
     -->
 
     <title>
-      Food for Thought Oklahoma - No-cost meals for kids all summer!
+      Food for Thought Oklahoma - Find a meal site near you
     </title>
 
     <!-- OpenGraph Meta primary for Facebook and LinkedIn -->
     <meta property="og:site_name" content="Food for Thought OK" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://meals4kidsok.org" />
-    <meta property="og:title" content="No-cost meals for kids... ALL SUMMER!" />
+    <meta property="og:title" content="Find a meal site near you" />
     <meta
       property="og:description"
-      content="While school is out for the summer, over 100 sponsoring organizations, serving hundreds of sites across the state, provide no-cost meals to kids 18 and younger. Many sites serve both breakfast and lunch or lunch and a snack."
+      content="Find a meal site near you during school closures due to COVID-19. Hunger Free Oklahoma is updating information on meal sites as it becomes available."
     />
     <meta
       property="og:image"
-      content="https://meals4kidsok.org/img/meals-for-kids-ok-open-graph.png"
+      content="https://meals4kidsok.org/img/meals-for-kids-ok-open-graph-covid.png"
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="627" />
@@ -66,10 +48,7 @@
     <!-- Museo Sans Rounded Font from Typekit -->
     <link rel="stylesheet" href="https://use.typekit.net/nzx2rrj.css" />
     <!-- Google icons -->
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
 
     <!-- Leaflet Styles -->
     <link
@@ -110,14 +89,11 @@
           ('https:' == document.location.protocol ? 'https://' : 'http://') +
           'pixel-a.basis.net/dmp/asyncPixelSync';
         var iframe = d.createElement('iframe');
-        (iframe.frameElement || iframe).style.cssText =
-          'width: 0; height: 0; border: 0;';
+        (iframe.frameElement || iframe).style.cssText = 'width: 0; height: 0; border: 0;';
         iframe.src = 'javascript:false';
         d.body.appendChild(iframe);
         var doc = iframe.contentWindow.document;
-        doc
-          .open()
-          .write('<body onload="window.location.href=\'' + syncUrl + '\'">');
+        doc.open().write('<body onload="window.location.href=\'' + syncUrl + '\'">');
         doc.close();
       })(document);
     </script>
