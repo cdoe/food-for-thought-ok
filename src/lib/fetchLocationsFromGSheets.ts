@@ -44,12 +44,13 @@ async function fetchData(jsonUrl: string) {
       });
 
       // If row doesn't include name, lat/lng, or start/end dates, toss it out
+      // For covid, we're ignorning end dates
       if (
         !rowObject.name ||
         !rowObject.lat ||
         !rowObject.lng ||
-        !rowObject.startDate ||
-        !rowObject.endDate
+        !rowObject.startDate
+        // !rowObject.endDate
       )
         return;
 
@@ -62,13 +63,14 @@ async function fetchData(jsonUrl: string) {
       // Get status
       const now = DateTime.local();
       const startDate = DateTime.fromJSDate(rowObject.startDate);
-      const endDate = DateTime.fromJSDate(rowObject.endDate).endOf('day');
+      // const endDate = DateTime.fromJSDate(rowObject.endDate).endOf('day');
       if (now < startDate) {
         // Before open
         rowObject.status = 'before-start';
-      } else if (now > endDate) {
-        // After close
-        rowObject.status = 'after-end';
+        // Disabled end date for covid
+        // } else if (now > endDate) {
+        //   // After close
+        //   rowObject.status = 'after-end';
       } else {
         // Check if serving meals this day of the week
         // 1 = Monday, 2 = Tuesday, 3 = Wednesday, etc

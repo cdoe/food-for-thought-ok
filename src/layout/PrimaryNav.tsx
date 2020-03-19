@@ -26,9 +26,10 @@ const PrimaryNav: FunctionComponent = () => {
           {t('nav.locations')}
         </NavLink>
         {/* FAQ */}
-        <NavLink className="nav-link" to="/faq">
+        {/* Disabled during covid */}
+        {/* <NavLink className="nav-link" to="/faq">
           {t('nav.faq')}
-        </NavLink>
+        </NavLink> */}
         {/* Contact */}
         <NavLink className="nav-link" to="/contact">
           {t('nav.contact')}

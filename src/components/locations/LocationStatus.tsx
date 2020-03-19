@@ -96,8 +96,8 @@ const LocationStatus: FunctionComponent<{
         </div>
       )}
 
-      {/* Ended Date */}
-      {status === 'after-end' && (
+      {/* Ended Date (possibly null during covid) */}
+      {status === 'after-end' && !!location.endDate && (
         <div className="meals-begin-end">
           {t('locations.mealsEnded')}{' '}
           {DateTime.fromJSDate(location.endDate)

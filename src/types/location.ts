@@ -10,7 +10,7 @@ export default interface Location {
   phone: string | null;
   phoneExt: string | null;
   startDate: Date;
-  endDate: Date;
+  endDate: Date | null;
   breakfastStart: string | null;
   breakfastEnd: string | null;
   lunchStart: string | null;
@@ -34,4 +34,5 @@ export default interface Location {
   servesSnack: boolean;
   servesDinner: boolean;
   status: 'before-start' | 'after-end' | 'open' | 'open-soon' | 'closed-soon' | 'closed';
+  notes: string;
 }

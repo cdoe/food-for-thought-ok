@@ -308,6 +308,8 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
 
       {/* Rest of the locations page */}
       <div className="LocationsPage">
+        {/* Covid-19 - notice */}
+        <div className="notice">{t('locations.covidResponse')}</div>
         {/* More locations coming soon - notice */}
         {/* <div className="notice">{t('locations.moreSoon')}</div> */}
         {/* Some sites may close on July 4th - notice  */}

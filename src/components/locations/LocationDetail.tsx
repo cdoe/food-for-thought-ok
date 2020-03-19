@@ -16,9 +16,10 @@ import { timeStringToDateTime } from '../../lib/dateTimeHelpers';
 import { metersToRoundedMiles } from '../../lib/distanceHelpers';
 
 // Component
-const LocationDetail: FunctionComponent<
-  { location?: Location; mobileExpanded?: boolean } & HtmlHTMLAttributes<HTMLDivElement>
-> = ({ location, mobileExpanded = false, ...rest }) => {
+const LocationDetail: FunctionComponent<{
+  location?: Location;
+  mobileExpanded?: boolean;
+} & HtmlHTMLAttributes<HTMLDivElement>> = ({ location, mobileExpanded = false, ...rest }) => {
   const { t, i18n } = useTranslation();
 
   // Text notifications not yet wired up
@@ -137,15 +138,17 @@ const LocationDetail: FunctionComponent<
                   </div>
                 </div>
 
-                {/* End date */}
-                <div className="start-end-date">
-                  {t('locations.mealsEnd')}{' '}
-                  <span className="date">
-                    {DateTime.fromJSDate(location.endDate)
-                      .setLocale(i18n.language)
-                      .toFormat('MMM d')}
-                  </span>
-                </div>
+                {/* End date (possibly null during covid) */}
+                {!!location.endDate && (
+                  <div className="start-end-date">
+                    {t('locations.mealsEnd')}{' '}
+                    <span className="date">
+                      {DateTime.fromJSDate(location.endDate)
+                        .setLocale(i18n.language)
+                        .toFormat('MMM d')}
+                    </span>
+                  </div>
+                )}
                 <div className="wavy-line-divider" />
               </Fragment>
             )}
@@ -204,8 +207,10 @@ const LocationDetail: FunctionComponent<
               </a>
             </div>
 
+            {!!location.notes && <div className="notes">{location.notes}</div>}
+
             {/* Phone */}
-            {location.phone && (
+            {!!location.phone && (
               <div className="contact-phone">
                 <a
                   className="phone-link"

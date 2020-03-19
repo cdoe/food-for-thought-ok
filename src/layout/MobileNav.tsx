@@ -61,8 +61,8 @@ const MobileNav: FunctionComponent = () => {
             <Icon icon="map" />
             {t('nav.locations')}
           </NavLink>
-          {/* FAQ */}
-          <NavLink
+          {/* FAQ (disabled during covid) */}
+          {/* <NavLink
             className="nav-link"
             to="/faq"
             onClick={() => {
@@ -71,7 +71,7 @@ const MobileNav: FunctionComponent = () => {
           >
             <Icon icon="help" />
             {t('nav.faq')}
-          </NavLink>
+          </NavLink> */}
           {/* Contact */}
           <NavLink
             className="nav-link"
