@@ -48,12 +48,13 @@
       "showList": "Show list",
       "showLess": "Show less",
       "showMore": "Show more",
+      "website": "Website",
       "getDirections": "Get directions",
       "shareFacebook": "Share this location on <1>Facebook</1>",
       "shareSms": "Share this location by <1>text message</1>",
       "shareEmail": "Share this location by <1>e-mail</1>",
-      "shareSubject": "No-cost meals for kids ALL SUMMER!",
-      "shareBody": "Check out this link for no cost meals for kids all summer!",
+      "shareSubject": "Find a meal site near you during school closures due to COVID-19.",
+      "shareBody": "COVID-19 Response: Emergency Meal Sites for Kids.",
 
       "status": {
         "open-soon": "Open soon",

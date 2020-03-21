@@ -10,6 +10,16 @@
     color: $primary500;
   }
 
+  .website {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 8px;
+    i {
+      font-size: 20px;
+      margin-right: 4px;
+    }
+  }
+
   .mobile-expander {
     display: none;
     &.expanded {

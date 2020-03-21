@@ -48,12 +48,13 @@
       "showList": "Mostrar lista",
       "showLess": "Muestra menos",
       "showMore": "Mostrar más",
+      "website": "Sitio web",
       "getDirections": "Obtener las direcciones",
       "shareFacebook": "Comparte esta ubicación en <1>Facebook</1>",
       "shareSms": "Comparte esta ubicación por <1>mensaje de texto</1>",
       "shareEmail": "Comparte esta ubicación por <1>correo electrónico</1>",
-      "shareSubject": "Comidas gratuitas para niños ¡TODO EL VERANO!",
-      "shareBody": "¡Echa un vistazo a este enlace para comidas sin costo para niños durante todo el verano!",
+      "shareSubject": "Encuentre un sitio de recogida de comida cerca de usted durante el cierre de las escuelas como resultado del virus COVID-19.",
+      "shareBody": "COVID-19 Respuesta de la Comunidad: servicios de alimentos de emergencia para niños.",
 
       "status": {
         "open-soon": "Abre pronto",

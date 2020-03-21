@@ -7,6 +7,8 @@ export default interface Location {
   address: string | null;
   city: string | null;
   zip: string | null;
+  website: string;
+  notes: string;
   phone: string | null;
   phoneExt: string | null;
   startDate: Date;
@@ -34,5 +36,4 @@ export default interface Location {
   servesSnack: boolean;
   servesDinner: boolean;
   status: 'before-start' | 'after-end' | 'open' | 'open-soon' | 'closed-soon' | 'closed';
-  notes: string;
 }

@@ -78,6 +78,25 @@ const LocationDetail: FunctionComponent<{
           {/* Above the fold on mobile */}
           {/* Location Name */}
           <div className="name">{location.name}</div>
+          {location.website && (
+            <a
+              href={
+                location.website.includes('http') ? location.website : `https://${location.website}`
+              }
+              className="website"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => {
+                ReactGA.event({
+                  category: 'Navigation',
+                  action: 'Clicked location website link'
+                });
+              }}
+            >
+              <Icon icon="open_in_new" />
+              {t('locations.website')}
+            </a>
+          )}
           {/* Status */}
           <LocationStatus location={location} lineWrapped large />
 
@@ -236,6 +255,8 @@ const LocationDetail: FunctionComponent<{
                       action: 'Shared location on Facebook'
                     });
                   }}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <Icon icon="thumb_up" />{' '}
                   <Trans i18nKey="locations.shareFacebook">
@@ -244,7 +265,9 @@ const LocationDetail: FunctionComponent<{
                 </a>
                 {/* Text message */}
                 <a
-                  href={'sms:?&body=' + t('locations.shareBody') + ' ' + locationUrl}
+                  href={`sms:?&body=${t('locations.shareBody')}%0D%0A${
+                    location.name
+                  } - ${locationUrl}`}
                   onClick={() => {
                     ReactGA.event({
                       category: 'Social',
@@ -259,14 +282,17 @@ const LocationDetail: FunctionComponent<{
                 </a>
                 {/* Email */}
                 <a
-                  href={
-                    'mailto:?subject=' +
-                    t('locations.shareSubject') +
-                    '!&body=' +
-                    t('locations.shareBody') +
-                    ' ' +
-                    locationUrl
-                  }
+                  href={`mailto:?subject=${t('locations.shareSubject')}&body=${t(
+                    'locations.shareBody'
+                  )}%0D%0A${location.name} - ${locationUrl}`}
+                  // href={
+                  //   'mailto:?subject=' +
+                  //   t('locations.shareSubject') +
+                  //   '!&body=' +
+                  //   t('locations.shareBody') +
+                  //   ' ' +
+                  //   locationUrl
+                  // }
                   onClick={() => {
                     ReactGA.event({
                       category: 'Social',
@@ -286,7 +312,7 @@ const LocationDetail: FunctionComponent<{
             <div className="report-problem">
               <a
                 href={
-                  'mailto:HungerFreeOK@gmail.com?subject=Meals4KidsOK.org%20-%20Location%20Error%20Report!&body=' +
+                  'mailto:HungerFreeOK@gmail.com?subject=Meals4KidsOK.org%20-%20Location%20Error%20Report&body=' +
                   "I'd like to report a problem with the " +
                   '%3Cb%3E%3Ca%20href=%22' + // Encoded - <b><a href="
                   locationUrl +
