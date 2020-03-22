@@ -11,7 +11,7 @@
       "nondiscriminationLink": "/nondiscrimination"
     },
     "landing": {
-      "headline": "Find a meal site near you during school closures due to COVID-19.",
+      "headline": "Find a meal site near you during school closures due to COVID-19 for kids ages 1-18.",
       "subheadline": "Select \"Locations near me\" or enter your address or zip code in the search bar.",
       "supportingCopy": "Hunger Free Oklahoma is updating information on meal sites as it becomes available.<br/><br/>For additional resources for food access <1>click here</1>",
       "findLocation": "Locations near me",
@@ -23,7 +23,7 @@
       "allLocations": "All locations",
       "openNow": "Open now",
 
-      "covidResponse": "COVID-19 Response: Emergency Meal Sites for Kids",
+      "covidResponse": "COVID-19 Response: Emergency Meal Sites for Kids age 1-18",
       "moreSoon": "More summer meal sites coming soon!",
       "julyFourthClosings": "Reminder: Individual meal sites may be closed on July 4th. Please check with your site.",
 
@@ -54,7 +54,7 @@
       "shareSms": "Share this location by <1>text message</1>",
       "shareEmail": "Share this location by <1>e-mail</1>",
       "shareSubject": "Find a meal site near you during school closures due to COVID-19.",
-      "shareBody": "COVID-19 Response: Emergency Meal Sites for Kids.",
+      "shareBody": "COVID-19 Response: Emergency Meal Sites for Kids age 1-18.",
 
       "status": {
         "open-soon": "Open soon",
