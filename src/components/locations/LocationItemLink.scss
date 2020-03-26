@@ -28,8 +28,14 @@
   }
 
   .location {
-    margin-bottom: 12px;
+    margin-bottom: 8px;
     color: $grey500;
+  }
+
+  .notes {
+    color: $primary800;
+    font-weight: bold;
+    margin-bottom: 16px;
   }
 
   .meals {

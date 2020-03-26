@@ -14,6 +14,7 @@ import LocationStatus from './LocationStatus';
 import { DateTime } from 'luxon';
 import { timeStringToDateTime } from '../../lib/dateTimeHelpers';
 import { metersToRoundedMiles } from '../../lib/distanceHelpers';
+import ClampLines from 'react-clamp-lines';
 
 // Component
 const LocationDetail: FunctionComponent<{
@@ -99,6 +100,23 @@ const LocationDetail: FunctionComponent<{
           )}
           {/* Status */}
           <LocationStatus location={location} lineWrapped large />
+
+          {/* Location notes (added during covid) */}
+          {/* Mobile version */}
+          {!!location.notes && (
+            <ClampLines
+              key={mobileExpanded ? 0 : 1}
+              text={location.notes}
+              id="mobile-clamped-notes"
+              lines={mobileExpanded ? 8 : 2}
+              buttons={mobileExpanded}
+              moreText="Read more"
+              lessText=""
+              className="notes mobile"
+            />
+          )}
+          {/* Non-mobile version */}
+          {!!location.notes && <div className="notes desktop">{location.notes}</div>}
 
           {/* Below the fold on mobile */}
           <div
@@ -225,8 +243,6 @@ const LocationDetail: FunctionComponent<{
                 <Icon icon="directions" /> {t('locations.getDirections')}
               </a>
             </div>
-
-            {!!location.notes && <div className="notes">{location.notes}</div>}
 
             {/* Phone */}
             {!!location.phone && (
