@@ -7,7 +7,7 @@ import React, {
   useContext,
   useRef,
   Dispatch,
-  SetStateAction
+  SetStateAction,
 } from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -99,19 +99,19 @@ const PinLeafletIcon: Leaflet.IconOptions = {
   iconAnchor: [12.5, 36],
   shadowUrl: pinShadow,
   shadowSize: [41, 41],
-  shadowAnchor: [12, 40]
+  shadowAnchor: [12, 40],
 };
 const currentLocationLeafletIcon: Leaflet.IconOptions = {
   iconUrl: currentLocationIcon,
   iconRetinaUrl: retinaCurrentLocationIcon,
   iconSize: [25, 25],
-  iconAnchor: [12.5, 12.5]
+  iconAnchor: [12.5, 12.5],
 };
 
 // Component
 const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string }>> = ({
   history,
-  match
+  match,
 }) => {
   const { t } = useTranslation();
 
@@ -262,7 +262,7 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
       if (distanceSortedLocations[0].lat && distanceSortedLocations[0].lng) {
         const nearestLatLng = Leaflet.latLng([
           distanceSortedLocations[0].lat,
-          distanceSortedLocations[0].lng
+          distanceSortedLocations[0].lng,
         ]);
         const nearbyBounds = Leaflet.latLngBounds(currentUser.latLng, nearestLatLng);
         for (let i = 1; i < 15; i++) {
@@ -296,9 +296,7 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
       {/* and the OpenNowFilter only shows on mobile when location detail view isn't active */}
       <MobileHeader
         bottom={
-          !!locationId ? (
-            undefined
-          ) : (
+          !!locationId ? undefined : (
             <OpenNowFilter openNowFilter={openNowFilter} setOpenNowFilter={setOpenNowFilter} />
           )
         }
@@ -314,13 +312,15 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
         {/* <div className="notice">{t('locations.moreSoon')}</div> */}
         {/* Some sites may close on July 4th - notice  */}
         {/* <div className="notice">{t('locations.julyFourthClosings')}</div> */}
+        {/* Some sites may close on Good Friday - notice  */}
+        {/* <div className="notice">{t('locations.goodFridayClosings')}</div> */}
 
         {/* Flex wrapper including embedded map and locations side bar */}
         <div className="list-and-map-wrapper">
           {/* Locations list side bar (formatted a little different on mobile) */}
           <div
             className={classnames('locations-list', {
-              open: mobileListIsOpen && !locationId
+              open: mobileListIsOpen && !locationId,
             })}
           >
             <div className="list-flex-wrapper">
@@ -348,14 +348,14 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
                       <div className="list-message">
                         {!isFiltering && openNowFilter
                           ? t('locations.openNowCount', {
-                              count: displayLocations.length
+                              count: displayLocations.length,
                             })
                           : t('locations.showingLocationCount', {
-                              count: displayLocations.length
+                              count: displayLocations.length,
                             })}
                         {isFiltering &&
                           t('locations.filterResultsCount', {
-                            count: displayLocations.length
+                            count: displayLocations.length,
                           })}
                       </div>
                     }
@@ -393,7 +393,7 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
                             onChange={e => {
                               setCurrentUser(currentUser => ({
                                 ...currentUser,
-                                sortType: e.target.value as 'nearby' | 'name'
+                                sortType: e.target.value as 'nearby' | 'name',
                               }));
                             }}
                           >
@@ -519,7 +519,7 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
                       {location.distance && (
                         <div className="distance">
                           {t('locations.distanceCount', {
-                            count: metersToRoundedMiles(location.distance)
+                            count: metersToRoundedMiles(location.distance),
                           })}
                         </div>
                       )}
@@ -534,7 +534,7 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
           <div
             className={classnames('location-detail-panel', {
               open: !!locationId,
-              expanded: mobileDetailsExpanded
+              expanded: mobileDetailsExpanded,
             })}
           >
             {/* Back arrow (but don't show on mobile expanded) */}

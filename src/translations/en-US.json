@@ -26,6 +26,7 @@
       "covidResponse": "COVID-19 Response: Emergency Meal Sites for Kids age 1-18",
       "moreSoon": "More summer meal sites coming soon!",
       "julyFourthClosings": "Reminder: Individual meal sites may be closed on July 4th. Please check with your site.",
+      "goodFridayClosings": "Due to Good Friday, meal site hours may vary. Please check with your nearest meal site.",
 
       "showingLocationCount": "Showing {{count}} location",
       "showingLocationCount_plural": "Showing all {{count}} locations",

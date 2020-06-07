@@ -26,6 +26,7 @@
       "covidResponse": "COVID-19 Respuesta de la Comunidad: servicios de alimentos de emergencia para niños 1-18 de edad.",
       "moreSoon": "¡tendremos más sitios listados pronto!",
       "julyFourthClosings": "Recordatorio: los sitios de comidas tal vez pueden estar cerrados el 4 de julio. Por favor, contacte el sitio directamente.",
+      "goodFridayClosings": "Debido al Viernes Santo, el horario de comidas puede variar. Por favor, consulte con su sitio de comidas más cercano.",
 
       "showingLocationCount": "Mostrando la ubicación de {{count}}",
       "showingLocationCount_plural": "Mostrando todas las {{count}} ubicaciones",
