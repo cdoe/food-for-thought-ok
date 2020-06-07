@@ -5,7 +5,7 @@ import React, {
   createContext,
   Dispatch,
   SetStateAction,
-  useEffect
+  useEffect,
 } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import useSessionState from './hooks/useSessionState';
@@ -20,7 +20,7 @@ import CurrentUser, { defaultCurrentUser } from './types/currentUser';
 import Location from './types/location';
 export const CurrentUserCtx = createContext<[CurrentUser, Dispatch<SetStateAction<CurrentUser>>]>([
   defaultCurrentUser,
-  () => {}
+  () => {},
 ]);
 export const MobileNavCtx = createContext<[boolean, any]>([false, () => {}]);
 export const LocationsCtx = createContext<Location[]>([]);
@@ -52,7 +52,7 @@ const App: FunctionComponent = () => {
     if (!('geolocation' in navigator)) {
       setCurrentUser(currentUser => ({
         ...currentUser,
-        hasGeoAccess: false
+        hasGeoAccess: false,
       }));
     }
   }, [setCurrentUser]);
@@ -62,21 +62,20 @@ const App: FunctionComponent = () => {
   // We could possibly look into a paid solution like https://ipinfo.io/ or https://ipstack.com
   useEffect(() => {
     if (!currentUser.latLng) {
-      fetch('https://freegeoip.app/json/')
-        .then(resp => {
-          return resp.json();
-        })
-        .then(data => {
-          // If in oklahoma, center to general area
-          if (data.region_code === 'OK' && data.latitude && data.longitude) {
-            setCurrentUser(currentUser => ({
-              ...currentUser,
-              latLng: [data.latitude, data.longitude],
-              geoQuery: `${data.city}, ${data.region_code} ${data.zip_code}`,
-              geoName: `${data.city}, ${data.region_code} ${data.zip_code}`
-            }));
-          }
-        });
+      // aync functions must be wrapped inside `useEffect`
+      (async () => {
+        const response = await fetch('https://freegeoip.app/json/');
+        const data = await response.json();
+        // If in oklahoma, center to general area
+        if (data.region_code === 'OK' && data.latitude && data.longitude) {
+          setCurrentUser(currentUser => ({
+            ...currentUser,
+            latLng: [data.latitude, data.longitude],
+            geoQuery: `${data.city}, ${data.region_code} ${data.zip_code}`,
+            geoName: `${data.city}, ${data.region_code} ${data.zip_code}`,
+          }));
+        }
+      })();
     }
   }, [currentUser.latLng, setCurrentUser]);
 
@@ -85,7 +84,7 @@ const App: FunctionComponent = () => {
   const rawLocations = useFetchedLocationsFromGSheets({
     sheetId,
     sheetName,
-    apiKey
+    apiKey,
   });
   // Locations with calculated distance parameter added based on user's location
   const [measuredLocations, setMeasuredLocations] = useState(rawLocations);

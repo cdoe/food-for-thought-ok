@@ -28,9 +28,7 @@ const LocationStatus: FunctionComponent<{
 
   const formatTime = (timeString: string | null) => {
     if (timeString) {
-      return timeStringToDateTime(timeString)
-        .setLocale(i18n.language)
-        .toFormat('t');
+      return timeStringToDateTime(timeString).setLocale(i18n.language).toFormat('t');
     }
     return '';
   };
@@ -90,19 +88,15 @@ const LocationStatus: FunctionComponent<{
       {status === 'before-start' && (
         <div className="meals-begin-end">
           {t('locations.mealsBegin')}{' '}
-          {DateTime.fromJSDate(location.startDate)
-            .setLocale(i18n.language)
-            .toFormat('MMM d')}
+          {DateTime.fromJSDate(location.startDate).setLocale(i18n.language).toFormat('MMM d')}
         </div>
       )}
 
-      {/* Ended Date (possibly null during covid) */}
+      {/* Ended Date (possibly null since covid) */}
       {status === 'after-end' && !!location.endDate && (
         <div className="meals-begin-end">
           {t('locations.mealsEnded')}{' '}
-          {DateTime.fromJSDate(location.endDate)
-            .setLocale(i18n.language)
-            .toFormat('MMM d')}
+          {DateTime.fromJSDate(location.endDate).setLocale(i18n.language).toFormat('MMM d')}
         </div>
       )}
     </div>

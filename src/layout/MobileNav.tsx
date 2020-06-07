@@ -8,7 +8,7 @@ import './MobileNav.scss';
 // Components
 import Icon from '../components/Icon';
 // Images
-import logo from '../img/food-for-thought-logo-words.png';
+import logo from '../img/food-for-thought-logo.png';
 import LanguageSelector from './LanguageSelector';
 
 // Component
@@ -51,35 +51,17 @@ const MobileNav: FunctionComponent = () => {
         {/* List of links (close menu on click) */}
         <div className="nav-links">
           {/* Map */}
-          <NavLink
-            className="nav-link"
-            to="/locations"
-            onClick={() => {
-              setIsOpen(false);
-            }}
-          >
+          <NavLink className="nav-link" to="/locations" onClick={() => setIsOpen(false)}>
             <Icon icon="map" />
             {t('nav.locations')}
           </NavLink>
-          {/* FAQ (disabled during covid) */}
-          {/* <NavLink
-            className="nav-link"
-            to="/faq"
-            onClick={() => {
-              setIsOpen(false);
-            }}
-          >
+          {/* FAQ */}
+          <NavLink className="nav-link" to="/faq" onClick={() => setIsOpen(false)}>
             <Icon icon="help" />
             {t('nav.faq')}
-          </NavLink> */}
+          </NavLink>
           {/* Contact */}
-          <NavLink
-            className="nav-link"
-            to="/contact"
-            onClick={() => {
-              setIsOpen(false);
-            }}
-          >
+          <NavLink className="nav-link" to="/contact" onClick={() => setIsOpen(false)}>
             <Icon icon="call" />
             {t('nav.contact')}
           </NavLink>

@@ -17,10 +17,12 @@ import { metersToRoundedMiles } from '../../lib/distanceHelpers';
 import ClampLines from 'react-clamp-lines';
 
 // Component
-const LocationDetail: FunctionComponent<{
-  location?: Location;
-  mobileExpanded?: boolean;
-} & HtmlHTMLAttributes<HTMLDivElement>> = ({ location, mobileExpanded = false, ...rest }) => {
+const LocationDetail: FunctionComponent<
+  {
+    location?: Location;
+    mobileExpanded?: boolean;
+  } & HtmlHTMLAttributes<HTMLDivElement>
+> = ({ location, mobileExpanded = false, ...rest }) => {
   const { t, i18n } = useTranslation();
 
   // Text notifications not yet wired up
@@ -33,23 +35,19 @@ const LocationDetail: FunctionComponent<{
         location.servesBreakfast && 'breakfast',
         location.servesLunch && 'lunch',
         location.servesSnack && 'snack',
-        location.servesDinner && 'dinner'
+        location.servesDinner && 'dinner',
       ])
     : [];
 
   const formatTime = (timeString: string | null) => {
     if (timeString) {
-      return timeStringToDateTime(timeString)
-        .setLocale(i18n.language)
-        .toFormat('t');
+      return timeStringToDateTime(timeString).setLocale(i18n.language).toFormat('t');
     }
     return '';
   };
 
   const formatWeekday = (weekday: number) => {
-    return DateTime.fromObject({ weekday })
-      .setLocale(i18n.language)
-      .toFormat('EEEE');
+    return DateTime.fromObject({ weekday }).setLocale(i18n.language).toFormat('EEEE');
   };
 
   const activeWeekdays = location
@@ -60,7 +58,7 @@ const LocationDetail: FunctionComponent<{
         location.thursday && formatWeekday(4),
         location.friday && formatWeekday(5),
         location.saturday && formatWeekday(6),
-        location.sunday && formatWeekday(7)
+        location.sunday && formatWeekday(7),
       ])
     : [];
 
@@ -90,7 +88,7 @@ const LocationDetail: FunctionComponent<{
               onClick={() => {
                 ReactGA.event({
                   category: 'Navigation',
-                  action: 'Clicked location website link'
+                  action: 'Clicked location website link',
                 });
               }}
             >
@@ -121,7 +119,7 @@ const LocationDetail: FunctionComponent<{
           {/* Below the fold on mobile */}
           <div
             className={classnames('mobile-expander', {
-              expanded: mobileExpanded
+              expanded: mobileExpanded,
             })}
           >
             {/* Mealtimes, Weekdays, and End Date (if not past end-date) */}
@@ -136,7 +134,7 @@ const LocationDetail: FunctionComponent<{
                     {/* Count meals */}
                     <div className="summary">
                       {t('locations.mealsCount', {
-                        count: activeMeals.length
+                        count: activeMeals.length,
                       })}
                     </div>
                     {/* List meals and time */}
@@ -161,7 +159,7 @@ const LocationDetail: FunctionComponent<{
                     {/* Count weekdays*/}
                     <div className="summary">
                       {t('locations.weekdaysCount', {
-                        count: activeWeekdays.length
+                        count: activeWeekdays.length,
                       })}
                     </div>
                     {/* List weekdays */}
@@ -175,7 +173,7 @@ const LocationDetail: FunctionComponent<{
                   </div>
                 </div>
 
-                {/* End date (possibly null during covid) */}
+                {/* End date (possibly null since covid) */}
                 {!!location.endDate && (
                   <div className="start-end-date">
                     {t('locations.mealsEnd')}{' '}
@@ -227,7 +225,7 @@ const LocationDetail: FunctionComponent<{
               {location.distance && (
                 <div className="distance">
                   {t('locations.distanceCount', {
-                    count: metersToRoundedMiles(location.distance)
+                    count: metersToRoundedMiles(location.distance),
                   })}
                 </div>
               )}
@@ -268,7 +266,7 @@ const LocationDetail: FunctionComponent<{
                   onClick={() => {
                     ReactGA.event({
                       category: 'Social',
-                      action: 'Shared location on Facebook'
+                      action: 'Shared location on Facebook',
                     });
                   }}
                   target="_blank"
@@ -287,7 +285,7 @@ const LocationDetail: FunctionComponent<{
                   onClick={() => {
                     ReactGA.event({
                       category: 'Social',
-                      action: 'Shared location by SMS'
+                      action: 'Shared location by SMS',
                     });
                   }}
                 >
@@ -301,18 +299,10 @@ const LocationDetail: FunctionComponent<{
                   href={`mailto:?subject=${t('locations.shareSubject')}&body=${t(
                     'locations.shareBody'
                   )}%0D%0A${location.name} - ${locationUrl}`}
-                  // href={
-                  //   'mailto:?subject=' +
-                  //   t('locations.shareSubject') +
-                  //   '!&body=' +
-                  //   t('locations.shareBody') +
-                  //   ' ' +
-                  //   locationUrl
-                  // }
                   onClick={() => {
                     ReactGA.event({
                       category: 'Social',
-                      action: 'Shared location by email'
+                      action: 'Shared location by email',
                     });
                   }}
                 >
@@ -344,7 +334,7 @@ const LocationDetail: FunctionComponent<{
                 onClick={() => {
                   ReactGA.event({
                     category: 'Action',
-                    action: 'Report a location'
+                    action: 'Report a location',
                   });
                 }}
               >

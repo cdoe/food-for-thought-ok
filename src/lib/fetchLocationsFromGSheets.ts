@@ -44,7 +44,7 @@ async function fetchData(jsonUrl: string) {
       });
 
       // If row doesn't include name, lat/lng, or start/end dates, toss it out
-      // For covid, we're ignorning end dates
+      // Since covid, we're ignorning end dates
       if (
         !rowObject.name ||
         !rowObject.lat ||
@@ -67,7 +67,7 @@ async function fetchData(jsonUrl: string) {
       if (now < startDate) {
         // Before open
         rowObject.status = 'before-start';
-        // Disabled end date for covid
+        // Disabled end date since covid
         // } else if (now > endDate) {
         //   // After close
         //   rowObject.status = 'after-end';
@@ -132,14 +132,14 @@ async function fetchData(jsonUrl: string) {
                   const startString = rowObject[meal + 'Start'];
                   if (startString) {
                     const startTime = timeStringToDateTime(startString).set({
-                      day: nextMealDate.day
+                      day: nextMealDate.day,
                     });
                     // Is soonest upcoming
                     if (startTime < nextMealDate) {
                       // Modify time of next meal date
                       nextMealDate = nextMealDate.set({
                         hour: startTime.hour,
-                        minute: startTime.minute
+                        minute: startTime.minute,
                       });
                       rowObject.nextMealDate = nextMealDate.toJSDate();
                     }
@@ -172,7 +172,7 @@ async function fetchData(jsonUrl: string) {
 function useFetchedLocationsFromGSheets({
   sheetId,
   sheetName,
-  apiKey
+  apiKey,
 }: {
   sheetId: string;
   sheetName: string;

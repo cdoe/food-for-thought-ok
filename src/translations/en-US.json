@@ -11,9 +11,9 @@
       "nondiscriminationLink": "/nondiscrimination"
     },
     "landing": {
-      "headline": "Find a meal site near you during school closures due to COVID-19 for kids ages 1-18.",
-      "subheadline": "Select \"Locations near me\" or enter your address or zip code in the search bar.",
-      "supportingCopy": "Hunger Free Oklahoma is updating information on meal sites as it becomes available.<br/><br/>For additional resources for food access <1>click here</1>",
+      "headline": "No-cost meals for kids...",
+      "headlineBold": "ALL SUMMER!",
+      "supportingCopy": "While school is out for the summer, over 100 sponsoring organizations, serving hundreds of sites across the state, provide no-cost meals to kids 18 and younger. Many sites serve both breakfast and lunch or lunch and a snack.",
       "findLocation": "Locations near me",
       "couldNotFind": "We could not get your location. Enter your address below to see what's nearby."
     },
@@ -54,8 +54,8 @@
       "shareFacebook": "Share this location on <1>Facebook</1>",
       "shareSms": "Share this location by <1>text message</1>",
       "shareEmail": "Share this location by <1>e-mail</1>",
-      "shareSubject": "Find a meal site near you during school closures due to COVID-19.",
-      "shareBody": "COVID-19 Response: Emergency Meal Sites for Kids age 1-18.",
+      "shareSubject": "No-cost meals for kids ALL SUMMER!",
+      "shareBody": "Check out this link for no cost meals for kids all summer!",
 
       "status": {
         "open-soon": "Open soon",

@@ -7,8 +7,7 @@ import './styles/base.scss';
 // Pages
 import LandingPage from './pages/LandingPage';
 import LocationsPage from './pages/LocationsPage';
-// FAQ disabled during covid
-// import FaqPage from './pages/FaqPage';
+import FaqPage from './pages/FaqPage';
 import ContactPage from './pages/ContactPage';
 import NondiscriminationPage, { NondiscriminationPageSpanish } from './pages/NondiscriminationPage';
 // Layout Components
@@ -19,7 +18,7 @@ import { useTranslation } from 'react-i18next';
 import withGaTracker from './lib/withGaTracker';
 
 // Render very top-level App component
-const AppRoutes: FunctionComponent = props => {
+const AppRoutes: FunctionComponent = () => {
   const { t, i18n } = useTranslation();
 
   // Convert to spanish traffic if visiting spanish url
@@ -44,8 +43,7 @@ const AppRoutes: FunctionComponent = props => {
         <Switch>
           <Route path="/" exact component={withGaTracker(LandingPage)} />
           <Route path="/locations/:locationId?" component={withGaTracker(LocationsPage)} />
-          {/* FAQ disabled during covid */}
-          {/* <Route path="/faq" component={withGaTracker(FaqPage)} /> */}
+          <Route path="/faq" component={withGaTracker(FaqPage)} />
           <Route path="/contact" component={withGaTracker(ContactPage)} />
           {t('footer.nondiscriminationLink') === '/nodiscriminacion' && (
             <Redirect from="/nondiscrimination" to="/nodiscriminacion" />

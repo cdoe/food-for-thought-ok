@@ -11,9 +11,9 @@
       "nondiscriminationLink": "/nodiscriminacion"
     },
     "landing": {
-      "headline": "Encuentre un sitio de recogida de comida para niños 1-18 de edad, cerca de usted durante el cierre de las escuelas como resultado del virus COVID-19.",
-      "subheadline": "Seleccione \"Ubicaciones cercanas a mí\" o ingrese su dirección o código postal en la barra de búsqueda.",
-      "supportingCopy": "Hunger Free Oklahoma está actualizando la información sobre los sitios de recogida de comida lo mas pronto que está disponible.<br/><br/>Para obtener recursos adicionales para comida, <1>haga clic aquí</1>",
+      "headline": "Comidas gratuitas para niños...",
+      "headlineBold": "¡TODO EL VERANO!",
+      "supportingCopy": "Durante el receso escolar de verano, más de 100 organizaciones patrocinadoras, que atienden a cientos de sitios en todo el estado, proporcionan comida sin costo para niños de 18 años o menos. Muchos sitios sirven desayuno y almuerzo o almuerzo y una botana.",
       "findLocation": "Ubicaciones cercanas a mi",
       "couldNotFind": "No pudimos obtener su ubicación. Ingrese su dirección a continuación para ver qué hay cerca."
     },
@@ -54,8 +54,8 @@
       "shareFacebook": "Comparte esta ubicación en <1>Facebook</1>",
       "shareSms": "Comparte esta ubicación por <1>mensaje de texto</1>",
       "shareEmail": "Comparte esta ubicación por <1>correo electrónico</1>",
-      "shareSubject": "Encuentre un sitio de recogida de comida cerca de usted durante el cierre de las escuelas como resultado del virus COVID-19.",
-      "shareBody": "COVID-19 Respuesta de la Comunidad: servicios de alimentos de emergencia para niños.",
+      "shareSubject": "Comidas gratuitas para niños ¡TODO EL VERANO!",
+      "shareBody": "¡Echa un vistazo a este enlace para comidas sin costo para niños durante todo el verano!",
 
       "status": {
         "open-soon": "Abre pronto",

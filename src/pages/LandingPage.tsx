@@ -1,7 +1,7 @@
 // Core
 import React, { FunctionComponent, Fragment, useContext, useState } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { useTranslation, Trans } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { CurrentUserCtx } from '../App';
 // Styles
 import './LandingPage.scss';
@@ -24,12 +24,12 @@ const LandingPage: FunctionComponent<RouteComponentProps> = ({ history }) => {
   // When user clicks to get location
   const handleGetGeo = () => {
     navigator.geolocation.getCurrentPosition(
-      function(position) {
+      function (position) {
         // Found! Set user's location in latLng
         setCurrentUser(currentUser => ({
           ...currentUser,
           hasGeoAccess: true,
-          latLng: [position.coords.latitude, position.coords.longitude]
+          latLng: [position.coords.latitude, position.coords.longitude],
         }));
         // Go to locations page
         history.push('/locations');
@@ -40,13 +40,13 @@ const LandingPage: FunctionComponent<RouteComponentProps> = ({ history }) => {
         // Geolocation error
         setCurrentUser(currentUser => ({
           ...currentUser,
-          hasGeoAccess: false
+          hasGeoAccess: false,
         }));
         console.error('Error getting location: ', err.message);
       },
       {
         enableHighAccuracy: true,
-        timeout: 6500
+        timeout: 6500,
       }
     );
   };
@@ -60,7 +60,9 @@ const LandingPage: FunctionComponent<RouteComponentProps> = ({ history }) => {
         <div className="LandingPage">
           <div className="jumbotron">
             <div className="fader" />
-            <h1>{t('landing.headline')}</h1>
+            <h1>
+              {t('landing.headline')} <span>{t('landing.headlineBold')}</span>
+            </h1>
             {/* Find locations button */}
             {currentUser.hasGeoAccess !== false && (
               <button
@@ -88,24 +90,10 @@ const LandingPage: FunctionComponent<RouteComponentProps> = ({ history }) => {
                 <SearchAutocomplete history={history} autofocus={autofocus} redirectOnSuccess />
               </div>
             )}
-            <h1>
-              <span>{t('landing.subheadline')}</span>
-            </h1>
           </div>
           <div className="wavebg" />
           <div className="inverted-copy">
-            <p>
-              <Trans i18nKey="landing.supportingCopy">
-                Find a meal site near you during school closures due to COVID-19...
-                <a
-                  href="https://hungerfreeok.org/covid19/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  click here
-                </a>
-              </Trans>
-            </p>
+            <p>{t('landing.supportingCopy')}</p>
           </div>
           <PageFooter />
         </div>
