@@ -10,6 +10,35 @@
     color: $primary500;
   }
 
+  .website {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 8px;
+    i {
+      font-size: 20px;
+      margin-right: 4px;
+    }
+  }
+
+  .notes {
+    margin-bottom: 24px;
+    font-size: 18px;
+    font-weight: bold;
+    color: $primary800;
+
+    &.mobile {
+      @media screen and (min-width: $break-md) {
+        display: none;
+      }
+    }
+    &.desktop {
+      display: none;
+      @media screen and (min-width: $break-md) {
+        display: block;
+      }
+    }
+  }
+
   .mobile-expander {
     display: none;
     &.expanded {
@@ -169,6 +198,14 @@
         color: $secondary600;
       }
     }
+  }
+
+  .clamp-lines__button {
+    color: $secondary600;
+    background: transparent;
+    padding: 12px 0;
+    border: none;
+    outline: none;
   }
 
   .contact-phone {

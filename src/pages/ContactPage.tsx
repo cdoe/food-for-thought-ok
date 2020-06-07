@@ -28,17 +28,18 @@ const ContactPage: FunctionComponent = () => {
               <div className="questions-about-tag">{t('contact.forQuestionsAbout')}</div>
               <ul>
                 <li>{t('contact.contactHungerFree_01')}</li>
-                <li>{t('contact.contactHungerFree_02')}</li>
-                <li>{t('contact.contactHungerFree_03')}</li>
+                <li>{t('contact.contactOsde_01')}</li>
+                {/* <li>{t('contact.contactHungerFree_02')}</li> */}
+                {/* <li>{t('contact.contactHungerFree_03')}</li> */}
                 <li>{t('contact.contactHungerFree_04')}</li>
-                <li>{t('contact.contactHungerFree_05')}</li>
-                <li>{t('contact.contactHungerFree_06')}</li>
+                {/* <li>{t('contact.contactHungerFree_05')}</li> */}
+                {/* <li>{t('contact.contactHungerFree_06')}</li> */}
               </ul>
               <div className="wavy-line-divider" />
-              <h3 className="contact-name">{t('contact.callOrText')}</h3>
-              <a className="phone-link" href="tel:918-340-9098">
+              {/* <h3 className="contact-name">{t('contact.callOrText')}</h3> */}
+              {/* <a className="phone-link" href="tel:918-340-9098">
                 <Icon icon="phone" /> 918-340-9098
-              </a>
+              </a> */}
               <a className="email-link" href="mailto:info@hungerfreeok.org">
                 <Icon icon="email" /> info@hungerfreeok.org
               </a>
@@ -49,9 +50,10 @@ const ContactPage: FunctionComponent = () => {
               <h2 className="name">Oklahoma State Department of Education</h2>
               <div className="questions-about-tag">{t('contact.forQuestionsAbout')}</div>
               <ul>
-                <li>{t('contact.contactOsde_01')}</li>
+                {/* This #2 changed to hunger-free side for covid */}
+                {/* <li>{t('contact.contactOsde_01')}</li> */}
                 <li>{t('contact.contactOsde_02')}</li>
-                <li>{t('contact.contactOsde_03')}</li>
+                {/* <li>{t('contact.contactOsde_03')}</li> */}
               </ul>
               <div className="wavy-line-divider" />
               <h3 className="contact-name">

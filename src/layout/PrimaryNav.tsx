@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 // Styles
 import './PrimaryNav.scss';
 // Images
-import logo from '../img/food-for-thought-logo-simple.png';
+import logo from '../img/food-for-thought-logo-words.png';
 // Components
 import LanguageSelector from './LanguageSelector';
 
@@ -26,9 +26,10 @@ const PrimaryNav: FunctionComponent = () => {
           {t('nav.locations')}
         </NavLink>
         {/* FAQ */}
-        <NavLink className="nav-link" to="/faq">
+        {/* Disabled during covid */}
+        {/* <NavLink className="nav-link" to="/faq">
           {t('nav.faq')}
-        </NavLink>
+        </NavLink> */}
         {/* Contact */}
         <NavLink className="nav-link" to="/contact">
           {t('nav.contact')}

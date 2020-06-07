@@ -7,10 +7,12 @@ export default interface Location {
   address: string | null;
   city: string | null;
   zip: string | null;
+  website: string;
+  notes: string;
   phone: string | null;
   phoneExt: string | null;
   startDate: Date;
-  endDate: Date;
+  endDate: Date | null;
   breakfastStart: string | null;
   breakfastEnd: string | null;
   lunchStart: string | null;

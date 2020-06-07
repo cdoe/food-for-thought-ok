@@ -7,9 +7,9 @@ import './styles/base.scss';
 // Pages
 import LandingPage from './pages/LandingPage';
 import LocationsPage from './pages/LocationsPage';
-import FaqPage from './pages/FaqPage';
+// FAQ disabled during covid
+// import FaqPage from './pages/FaqPage';
 import ContactPage from './pages/ContactPage';
-import ListPage from './pages/ListPage';
 import NondiscriminationPage, { NondiscriminationPageSpanish } from './pages/NondiscriminationPage';
 // Layout Components
 import PageWrapper from './layout/PageWrapper';
@@ -44,9 +44,9 @@ const AppRoutes: FunctionComponent = props => {
         <Switch>
           <Route path="/" exact component={withGaTracker(LandingPage)} />
           <Route path="/locations/:locationId?" component={withGaTracker(LocationsPage)} />
-          <Route path="/faq" component={withGaTracker(FaqPage)} />
+          {/* FAQ disabled during covid */}
+          {/* <Route path="/faq" component={withGaTracker(FaqPage)} /> */}
           <Route path="/contact" component={withGaTracker(ContactPage)} />
-          <Route path="/list" component={withGaTracker(ListPage)} />
           {t('footer.nondiscriminationLink') === '/nodiscriminacion' && (
             <Redirect from="/nondiscrimination" to="/nodiscriminacion" />
           )}

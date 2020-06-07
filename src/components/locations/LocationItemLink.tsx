@@ -10,11 +10,12 @@ import Icon from '../Icon';
 import { Link } from 'react-router-dom';
 import { DateTime } from 'luxon';
 import LocationStatus from './LocationStatus';
+import ClampLines from 'react-clamp-lines';
 
 // Component
-const LocationItemLink: FunctionComponent<
-  { location: Location } & AnchorHTMLAttributes<HTMLAnchorElement>
-> = ({ location, ...rest }) => {
+const LocationItemLink: FunctionComponent<{ location: Location } & AnchorHTMLAttributes<
+  HTMLAnchorElement
+>> = ({ location, ...rest }) => {
   const { t, i18n } = useTranslation();
 
   return (
@@ -31,6 +32,17 @@ const LocationItemLink: FunctionComponent<
         {location.address} · {location.city}
         {location.distance && ` · ${metersToRoundedMiles(location.distance)}mi`}
       </div>
+
+      {/* Loction notes (added during covid) */}
+      {!!location.notes && (
+        <ClampLines
+          text={location.notes}
+          id="clamped-notes"
+          lines={2}
+          buttons={false}
+          className="notes"
+        />
+      )}
 
       {/* Location status label and next/current meal */}
       <LocationStatus location={location} />
