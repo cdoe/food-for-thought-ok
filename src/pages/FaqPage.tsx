@@ -15,7 +15,7 @@ import CodeForTulsa from '../img/code-for-tulsa.png';
 
 const QuestionAnswerBlock: FunctionComponent<{ question: ReactNode; answer: ReactNode }> = ({
   question,
-  answer
+  answer,
 }) => {
   const [expanded, setExpanded] = useState(false);
 
@@ -65,7 +65,12 @@ const FaqPage: FunctionComponent = () => {
 
           {/* 4. */}
           {/* Can meals be taken home? */}
-          <QuestionAnswerBlock question={t('faq.canMealsBeTaken')} answer={t('faq.noMealsTaken')} />
+          {/* Temporary addendum for Covid-19 ( waiver allows meals to be taken home ) */}
+          <QuestionAnswerBlock
+            question={t('faq.canMealsBeTaken')}
+            answer={t('faq.takeMealsHomeWaiver')}
+          />
+          {/* <QuestionAnswerBlock question={t('faq.canMealsBeTaken')} answer={t('faq.noMealsTaken')} /> */}
 
           {/* 5. */}
           {/* How do I find a site near me? */}
