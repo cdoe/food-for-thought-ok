@@ -63,14 +63,14 @@ async function fetchData(jsonUrl: string) {
       // Get status
       const now = DateTime.local();
       const startDate = DateTime.fromJSDate(rowObject.startDate);
-      // const endDate = DateTime.fromJSDate(rowObject.endDate).endOf('day');
+      const endDate = rowObject.endDate && DateTime.fromJSDate(rowObject.endDate).endOf('day');
       if (now < startDate) {
         // Before open
         rowObject.status = 'before-start';
         // Disabled end date since covid
-        // } else if (now > endDate) {
-        //   // After close
-        //   rowObject.status = 'after-end';
+      } else if (endDate && now > endDate) {
+        // After close
+        rowObject.status = 'after-end';
       } else {
         // Check if serving meals this day of the week
         // 1 = Monday, 2 = Tuesday, 3 = Wednesday, etc

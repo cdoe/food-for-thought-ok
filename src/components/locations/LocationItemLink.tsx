@@ -13,9 +13,9 @@ import LocationStatus from './LocationStatus';
 import ClampLines from 'react-clamp-lines';
 
 // Component
-const LocationItemLink: FunctionComponent<{ location: Location } & AnchorHTMLAttributes<
-  HTMLAnchorElement
->> = ({ location, ...rest }) => {
+const LocationItemLink: FunctionComponent<
+  { location: Location } & AnchorHTMLAttributes<HTMLAnchorElement>
+> = ({ location, ...rest }) => {
   const { t, i18n } = useTranslation();
 
   return (
@@ -34,7 +34,7 @@ const LocationItemLink: FunctionComponent<{ location: Location } & AnchorHTMLAtt
       </div>
 
       {/* Loction notes (added during covid) */}
-      {!!location.notes && (
+      {!!location.notes && location.status !== 'after-end' && (
         <ClampLines
           text={location.notes}
           id="clamped-notes"
@@ -65,45 +65,31 @@ const LocationItemLink: FunctionComponent<{ location: Location } & AnchorHTMLAtt
             <Icon icon="event_available" />
             {/* Monday */}
             <span className={location.monday ? 'active' : ''}>
-              {DateTime.fromObject({ weekday: 1 })
-                .setLocale(i18n.language)
-                .toFormat('EEE')}
+              {DateTime.fromObject({ weekday: 1 }).setLocale(i18n.language).toFormat('EEE')}
             </span>
             {/* Tuesday */}
             <span className={location.tuesday ? 'active' : ''}>
-              {DateTime.fromObject({ weekday: 2 })
-                .setLocale(i18n.language)
-                .toFormat('EEE')}
+              {DateTime.fromObject({ weekday: 2 }).setLocale(i18n.language).toFormat('EEE')}
             </span>
             {/* Wednesday */}
             <span className={location.wednesday ? 'active' : ''}>
-              {DateTime.fromObject({ weekday: 3 })
-                .setLocale(i18n.language)
-                .toFormat('EEE')}
+              {DateTime.fromObject({ weekday: 3 }).setLocale(i18n.language).toFormat('EEE')}
             </span>
             {/* Thursday */}
             <span className={location.thursday ? 'active' : ''}>
-              {DateTime.fromObject({ weekday: 4 })
-                .setLocale(i18n.language)
-                .toFormat('EEE')}
+              {DateTime.fromObject({ weekday: 4 }).setLocale(i18n.language).toFormat('EEE')}
             </span>
             {/* Friday */}
             <span className={location.friday ? 'active' : ''}>
-              {DateTime.fromObject({ weekday: 5 })
-                .setLocale(i18n.language)
-                .toFormat('EEE')}
+              {DateTime.fromObject({ weekday: 5 }).setLocale(i18n.language).toFormat('EEE')}
             </span>
             {/* Saturday */}
             <span className={location.saturday ? 'active' : ''}>
-              {DateTime.fromObject({ weekday: 6 })
-                .setLocale(i18n.language)
-                .toFormat('EEE')}
+              {DateTime.fromObject({ weekday: 6 }).setLocale(i18n.language).toFormat('EEE')}
             </span>
             {/* Sunday */}
             <span className={location.sunday ? 'active' : ''}>
-              {DateTime.fromObject({ weekday: 7 })
-                .setLocale(i18n.language)
-                .toFormat('EEE')}
+              {DateTime.fromObject({ weekday: 7 }).setLocale(i18n.language).toFormat('EEE')}
             </span>
           </div>
         </Fragment>
