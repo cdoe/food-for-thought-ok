@@ -8,7 +8,7 @@ import './MobileNav.scss';
 // Components
 import Icon from '../components/Icon';
 // Images
-import logo from '../img/food-for-thought-logo.png';
+import logo from '../img/food-for-thought-logo-words.png';
 import LanguageSelector from './LanguageSelector';
 
 // Component

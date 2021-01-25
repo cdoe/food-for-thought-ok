@@ -29,9 +29,7 @@ const SearchAutocomplete: FunctionComponent<{
 
   let searchOptions: any = {
     sessionToken,
-    componentRestrictions: {
-      country: 'us',
-    },
+    componentRestrictions: { country: 'us' },
   };
   if (!!currentUser.latLng) {
     searchOptions.location = new google.maps.LatLng(...currentUser.latLng);
