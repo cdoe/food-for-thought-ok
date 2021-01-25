@@ -30,8 +30,8 @@ const SearchAutocomplete: FunctionComponent<{
   let searchOptions: any = {
     sessionToken,
     componentRestrictions: {
-      country: 'us'
-    }
+      country: 'us',
+    },
   };
   if (!!currentUser.latLng) {
     searchOptions.location = new google.maps.LatLng(...currentUser.latLng);
@@ -52,7 +52,7 @@ const SearchAutocomplete: FunctionComponent<{
       onChange={locationQuery => {
         setCurrentUser(currentUser => ({
           ...currentUser,
-          geoQuery: locationQuery
+          geoQuery: locationQuery,
         }));
       }}
       onSelect={address => {
@@ -61,7 +61,7 @@ const SearchAutocomplete: FunctionComponent<{
         setCurrentUser(currentUser => ({
           ...currentUser,
           geoQuery: address,
-          geoName: address
+          geoName: address,
         }));
         inputRef.current && inputRef.current.blur();
         setSessionToken(new google.maps.places.AutocompleteSessionToken());
@@ -75,7 +75,7 @@ const SearchAutocomplete: FunctionComponent<{
                 ...currentUser,
                 geoQuery: name,
                 geoName: name,
-                latLng: [lat, lng]
+                latLng: [lat, lng],
               }));
               setGettingLatLng(false);
               redirectOnSuccess && history.push('/locations');
@@ -104,7 +104,7 @@ const SearchAutocomplete: FunctionComponent<{
                 // Reset input field to last successful location if blurring
                 setCurrentUser(currentUser => ({
                   ...currentUser,
-                  geoQuery: currentUser.geoName
+                  geoQuery: currentUser.geoName,
                 }));
               },
               onFocus: e => {
@@ -113,7 +113,8 @@ const SearchAutocomplete: FunctionComponent<{
                 e.target.setSelectionRange(0, e.target.value.length);
                 // Trigger open on focus
                 getInputProps().onChange({ target: { value: e.target.value } });
-              }
+              },
+              style: { zIndex: 3101 },
             })}
           />
           {(loading || gettingLatLng) && <Loader />}
@@ -128,8 +129,9 @@ const SearchAutocomplete: FunctionComponent<{
                 <div
                   {...getSuggestionItemProps(suggestion, {
                     className,
-                    style
+                    style,
                   })}
+                  key={suggestion.placeId}
                 >
                   <span>{suggestion.description}</span>
                 </div>

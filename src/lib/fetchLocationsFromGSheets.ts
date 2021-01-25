@@ -67,7 +67,6 @@ async function fetchData(jsonUrl: string) {
       if (now < startDate) {
         // Before open
         rowObject.status = 'before-start';
-        // Disabled end date since covid
       } else if (endDate && now > endDate) {
         // After close
         rowObject.status = 'after-end';

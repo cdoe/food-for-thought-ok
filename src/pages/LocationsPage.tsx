@@ -346,13 +346,14 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
                     loader={<div className="list-message">Loading...</div>}
                     endMessage={
                       <div className="list-message">
-                        {!isFiltering && openNowFilter
-                          ? t('locations.openNowCount', {
-                              count: displayLocations.length,
-                            })
-                          : t('locations.showingLocationCount', {
-                              count: displayLocations.length,
-                            })}
+                        {!isFiltering &&
+                          (openNowFilter
+                            ? t('locations.openNowCount', {
+                                count: displayLocations.length,
+                              })
+                            : t('locations.showingLocationCount', {
+                                count: displayLocations.length,
+                              }))}
                         {isFiltering &&
                           t('locations.filterResultsCount', {
                             count: displayLocations.length,

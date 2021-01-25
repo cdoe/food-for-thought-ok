@@ -11,7 +11,7 @@ const PageFooter: FunctionComponent = () => {
 
   return (
     <div className="PageFooter">
-      <span className="credits">©2019 Hunger Free Oklahoma</span>
+      <span className="credits">©{new Date().getFullYear()} Hunger Free Oklahoma</span>
       <Link to={t('footer.nondiscriminationLink') as string}>
         {t('footer.nondiscriminationStatement')}
       </Link>

@@ -1,11 +1,3 @@
-## **NOTICE:** This project has been retired by HFOK. Users are now encouraged to [sign up on Smartsheet](https://app.smartsheet.com/b/form/a1aa6b77e96542acb37c15636c1d152f) to stay informed of local meal locations.
-
-</h2>
-
----
-
----
-
 <p align="center">
   <img width="192" height="142" src='./src/img/food-for-thought-logo.png?raw=true' alt="Food for Thought OK" />
 </p>
