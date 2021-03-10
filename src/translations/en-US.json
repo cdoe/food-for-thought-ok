@@ -50,6 +50,8 @@
       "showLess": "Show less",
       "showMore": "Show more",
       "website": "Website",
+      "unverified": "<strong>This site has not been verified.</strong> Please call the number listed or check with your district to make sure the days and times listed are correct.",
+      "isMobile": "<strong>This location is a mobile site.</strong> Please arrive early as meal times may not be exact.",
       "getDirections": "Get directions",
       "shareFacebook": "Share this location on <1>Facebook</1>",
       "shareSms": "Share this location by <1>text message</1>",

@@ -1,6 +1,7 @@
 export default interface Location {
   id: string;
   name: string;
+  isVerified: boolean;
   isMobile: boolean;
   lat: number;
   lng: number;

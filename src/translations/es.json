@@ -50,6 +50,8 @@
       "showLess": "Muestra menos",
       "showMore": "Mostrar más",
       "website": "Sitio web",
+      "unverified": "<strong>Este sitio no ha sido verificado.</strong> Por favor, llame al número que figura en la lista o consulte con su distrito para asegurarse de que los días y las horas enumerados sean correctos.",
+      "isMobile": "<strong>Esta ubicación es un sitio móvil.</strong> Llegue temprano, ya que es posible que los horarios de las comidas no sean exactos.",
       "getDirections": "Obtener las direcciones",
       "shareFacebook": "Comparte esta ubicación en <1>Facebook</1>",
       "shareSms": "Comparte esta ubicación por <1>mensaje de texto</1>",

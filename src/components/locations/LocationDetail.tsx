@@ -99,13 +99,28 @@ const LocationDetail: FunctionComponent<
             </a>
           )}
 
+          {/* Unverified notice */}
+          {!location.isVerified && (
+            <div className="location-notice">
+              <Icon icon="error" />
+              <div>
+                <Trans i18nKey="locations.unverified">
+                  <strong>This site has not been verified.</strong> Please call the number listed or
+                  check with your district to make sure the days and times listed are correct.
+                </Trans>
+              </div>
+            </div>
+          )}
+
           {/* Mobile notice */}
           {location.isMobile && (
-            <div className="mobile-notice">
+            <div className="location-notice">
               <Icon icon="airport_shuttle" />
               <div>
-                <strong>This location is a mobile site.</strong> Please arrive early as meal times
-                may not be exact.
+                <Trans i18nKey="locations.isMobile">
+                  <strong>This location is a mobile site.</strong> Please arrive early as meal times
+                  may not be exact.
+                </Trans>
               </div>
             </div>
           )}
@@ -331,9 +346,17 @@ const LocationDetail: FunctionComponent<
             {/* Report a problem with this location */}
             <a
               className="report-problem"
-              href={`https://docs.google.com/forms/d/e/1FAIpQLSce_5hNfpasvPoJpWgLRkGVScsw9wU3QSLhCuDtAdS_QTwmZQ/viewform?entry.1608006945=${encodeURIComponent(
-                location.name
-              )}`}
+              href={
+                // Proof form
+                process.env.REACT_APP_ENV === 'proof'
+                  ? `https://docs.google.com/forms/d/e/1FAIpQLSce_5hNfpasvPoJpWgLRkGVScsw9wU3QSLhCuDtAdS_QTwmZQ/viewform?entry.1608006945=${encodeURIComponent(
+                      location.name
+                    )}`
+                  : // Production form
+                    `https://docs.google.com/forms/d/e/1FAIpQLSezSbT0y3V1lPxhgZj6Arz3RJsQk2DhmACCBbeAPYDRPqqIdQ/viewform?entry.1608006945=${encodeURIComponent(
+                      location.name
+                    )}`
+              }
               onClick={() => {
                 ReactGA.event({
                   category: 'Action',
