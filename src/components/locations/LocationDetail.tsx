@@ -77,6 +77,8 @@ const LocationDetail: FunctionComponent<
           {/* Above the fold on mobile */}
           {/* Location Name */}
           <div className="name">{location.name}</div>
+
+          {/* Location website */}
           {location.website && (
             <a
               href={
@@ -96,6 +98,18 @@ const LocationDetail: FunctionComponent<
               {t('locations.website')}
             </a>
           )}
+
+          {/* Mobile notice */}
+          {location.isMobile && (
+            <div className="mobile-notice">
+              <Icon icon="airport_shuttle" />
+              <div>
+                <strong>This location is a mobile site.</strong> Please arrive early as meal times
+                may not be exact.
+              </div>
+            </div>
+          )}
+
           {/* Status */}
           <LocationStatus location={location} lineWrapped large />
 
@@ -315,33 +329,23 @@ const LocationDetail: FunctionComponent<
             )}
 
             {/* Report a problem with this location */}
-            <div className="report-problem">
-              <a
-                href={
-                  'mailto:HungerFreeOK@gmail.com?subject=Meals4KidsOK.org%20-%20Location%20Error%20Report&body=' +
-                  "I'd like to report a problem with the " +
-                  '%3Cb%3E%3Ca%20href=%22' + // Encoded - <b><a href="
-                  locationUrl +
-                  '%22%3E' + // ">
-                  location.name +
-                  '%3C/a%3E%3C/b%3E' + // </a></b>
-                  ' location on meals4kidsok.org%0D%0A%0D%0A' +
-                  '%0D%0A' + // Line return
-                  '%3Ci%3E' + // <i>
-                  t('locations.addOwnNotes') +
-                  ':%3C/i%3E' // :</i>
-                }
-                onClick={() => {
-                  ReactGA.event({
-                    category: 'Action',
-                    action: 'Report a location',
-                  });
-                }}
-              >
-                <Icon icon="report_problem" />
-                {t('locations.reportProblem')}
-              </a>
-            </div>
+            <a
+              className="report-problem"
+              href={`https://docs.google.com/forms/d/e/1FAIpQLSce_5hNfpasvPoJpWgLRkGVScsw9wU3QSLhCuDtAdS_QTwmZQ/viewform?entry.1608006945=${encodeURIComponent(
+                location.name
+              )}`}
+              onClick={() => {
+                ReactGA.event({
+                  category: 'Action',
+                  action: 'Report a location',
+                });
+              }}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Icon icon="report_problem" />
+              {t('locations.reportProblem')}
+            </a>
           </div>
         </Fragment>
       )}

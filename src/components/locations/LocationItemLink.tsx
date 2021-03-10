@@ -25,7 +25,19 @@ const LocationItemLink: FunctionComponent<
       {...rest}
     >
       {/* Location Name */}
-      <div className="name">{location.name}</div>
+      <div className="name">
+        {location.name}
+        {/* Mobile Location tag */}
+        {location.isMobile && (
+          <>
+            {' '}
+            <span className="mobile-tag">
+              <Icon icon="airport_shuttle" />
+              Mobile
+            </span>
+          </>
+        )}
+      </div>
 
       {/* Address, Distance */}
       <div className="location">

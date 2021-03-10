@@ -29,6 +29,7 @@ The [Summer Food Service Program](https://www.fns.usda.gov/sfsp/summer-food-serv
 
 - **[Firebase Hosting](https://firebase.google.com/products/hosting)**: For static, single-page web app deployment
 - **[Google Sheets API](https://developers.google.com/sheets/api/)**: The "database" is pulled from a client managed Google Sheet document. A view only copy of this spreadsheet [available here](https://docs.google.com/spreadsheets/d/1eZNA8Qsxc9xZQu4NQBBo2FHqB5rDiIBj4R15AeDZiw4/edit?usp=sharing)
+- **[Google Forms](https://www.google.com/forms/about/)**: Feedback on meal sites is gathered with a Google form—[available here](https://www.google.com/forms/about/https://docs.google.com/forms/d/1rGmYeMaP-PGVl2aupzs7FKBkVrq8rBmz7uHPelHrIhE/viewform?edit_requested=true)
 
 ## Front-end Tech
 
@@ -75,14 +76,14 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 > **Please note before deploying:** You'll need to have [Firebase CLI](https://firebase.google.com/docs/cli) installed. The account you sign into Firebase CLI with will also need permission for this Firebase project. Please reach out with any access requests.
 
-To deploy the proof site, run:
+To deploy the [proof site](https://proof.meals4kidsok.org/), run:
 
 ```BASH
-npm run deploy-proof
+yarn deploy-proof
 ```
 
 To deploy the production site, run:
 
 ```BASH
-npm run deploy-production
+yarn deploy-production
 ```

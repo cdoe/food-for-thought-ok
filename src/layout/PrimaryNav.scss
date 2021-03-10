@@ -70,3 +70,18 @@
     display: flex;
   }
 }
+// Misc notice
+.draft-notice {
+  padding: 6px 8px;
+  font-size: 13px;
+  line-height: 16px;
+
+  text-align: center;
+  background-color: $secondary600;
+  color: white;
+  font-weight: bold;
+
+  a {
+    color: $navHighlight;
+  }
+}
