@@ -60,7 +60,9 @@ const LandingPage: FunctionComponent<RouteComponentProps> = ({ history }) => {
         <div className="LandingPage">
           <div className="jumbotron">
             <div className="fader" />
-            <h1>{t('landing.headline')}</h1>
+            <h1>
+              {t('landing.headline')} <strong>{t('landing.headlineBold')}</strong>
+            </h1>
             {/* Find locations button */}
             {currentUser.hasGeoAccess !== false && (
               <button
@@ -96,7 +98,7 @@ const LandingPage: FunctionComponent<RouteComponentProps> = ({ history }) => {
           <div className="inverted-copy">
             <p>
               <Trans i18nKey="landing.supportingCopy">
-                Find a meal site near you during school closures due to COVID-19...
+                Hunger Free Oklahoma is updating information on meal sites as it becomes available.
                 <a
                   href="https://hungerfreeok.org/covid19/"
                   target="_blank"
