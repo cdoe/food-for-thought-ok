@@ -1,6 +1,6 @@
 // Used to implement Google Analaytics with React Router 4
 // Taken from here: https://github.com/react-ga/react-ga/wiki/React-Router-v4-withTracker
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import ReactGA, { FieldsObject } from 'react-ga';
 import { RouteComponentProps } from 'react-router-dom';
 

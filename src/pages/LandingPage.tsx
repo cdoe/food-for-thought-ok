@@ -1,5 +1,5 @@
 // Core
-import React, { FunctionComponent, Fragment, useContext, useState } from 'react';
+import { FC, Fragment, useContext, useState } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { useTranslation, Trans } from 'react-i18next';
 import { CurrentUserCtx } from '../App';
@@ -15,7 +15,7 @@ import Loader from '../components/Loader';
 import SearchAutocomplete from '../components/locations/SearchAutocomplete';
 
 // Component
-const LandingPage: FunctionComponent<RouteComponentProps> = ({ history }) => {
+const LandingPage: FC<RouteComponentProps> = ({ history }) => {
   const [currentUser, setCurrentUser] = useContext(CurrentUserCtx);
   const [isLoadingLocation, setLoadingLocation] = useState(false);
   const [autofocus, setAutofocus] = useState(false);

@@ -1,5 +1,5 @@
 // Core
-import React, { FunctionComponent, Fragment } from 'react';
+import { FC, Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 // Styles
 import './ContactPage.scss';
@@ -10,7 +10,7 @@ import PageFooter from '../layout/PageFooter';
 import Icon from '../components/Icon';
 
 // Component
-const ContactPage: FunctionComponent = () => {
+const ContactPage: FC = () => {
   const { t } = useTranslation();
 
   return (

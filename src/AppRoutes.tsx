@@ -1,5 +1,5 @@
 // Core
-import React, { FunctionComponent, memo } from 'react';
+import { FC, memo } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 // Styles
 import './styles/normalize.css';
@@ -18,7 +18,7 @@ import { useTranslation } from 'react-i18next';
 import withGaTracker from './lib/withGaTracker';
 
 // Render very top-level App component
-const AppRoutes: FunctionComponent = () => {
+const AppRoutes: FC = () => {
   const { t, i18n } = useTranslation();
 
   // Convert to spanish traffic if visiting spanish url

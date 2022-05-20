@@ -1,5 +1,5 @@
 // Core
-import React, { FunctionComponent, AnchorHTMLAttributes, memo, Fragment } from 'react';
+import { FC, AnchorHTMLAttributes, memo, Fragment } from 'react';
 import Location from '../../types/location';
 import { metersToRoundedMiles } from '../../lib/distanceHelpers';
 import { useTranslation } from 'react-i18next';
@@ -13,9 +13,10 @@ import LocationStatus from './LocationStatus';
 import ClampLines from 'react-clamp-lines';
 
 // Component
-const LocationItemLink: FunctionComponent<
-  { location: Location } & AnchorHTMLAttributes<HTMLAnchorElement>
-> = ({ location, ...rest }) => {
+interface Props extends AnchorHTMLAttributes<HTMLAnchorElement> {
+  location: Location;
+}
+const LocationItemLink: FC<Props> = ({ location, ...rest }) => {
   const { t, i18n } = useTranslation();
 
   return (

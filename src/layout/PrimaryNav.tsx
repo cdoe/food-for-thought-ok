@@ -1,5 +1,5 @@
 // Core
-import React, { FunctionComponent, memo } from 'react';
+import { FC, memo } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 // Styles
@@ -10,7 +10,7 @@ import logo from '../img/food-for-thought-logo-words.png';
 import LanguageSelector from './LanguageSelector';
 
 // Component
-const PrimaryNav: FunctionComponent = () => {
+const PrimaryNav: FC = () => {
   const { t } = useTranslation();
 
   return (

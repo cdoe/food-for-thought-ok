@@ -1,7 +1,7 @@
 // Core
-import React, { FunctionComponent } from 'react';
+import { FC } from 'react';
 // Styles
 import './Loader.scss';
 
-const Loader: FunctionComponent = () => <div className="loader" />;
+const Loader: FC = () => <div className="loader" />;
 export default Loader;

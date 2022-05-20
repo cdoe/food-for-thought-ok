@@ -1,5 +1,5 @@
 // Core
-import React, { FunctionComponent, useContext, ReactElement } from 'react';
+import { FC, useContext, ReactNode } from 'react';
 import { MobileNavCtx } from '../App';
 // Styles
 import './MobileHeader.scss';
@@ -7,11 +7,12 @@ import './MobileHeader.scss';
 import Icon from '../components/Icon';
 
 // Component
-const MobileHeader: FunctionComponent<{ hideMenuButton?: boolean; bottom?: ReactElement<any> }> = ({
-  hideMenuButton = false,
-  bottom,
-  children
-}) => {
+interface Props {
+  children?: ReactNode;
+  hideMenuButton?: boolean;
+  bottom?: ReactNode;
+}
+const MobileHeader: FC<Props> = ({ hideMenuButton = false, bottom, children }) => {
   const mobileNavContext = useContext(MobileNavCtx);
   const setMobileNavIsOpen = mobileNavContext[1];
 

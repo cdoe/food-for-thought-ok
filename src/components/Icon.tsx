@@ -1,13 +1,13 @@
 // Core
-import React, { FunctionComponent, HTMLAttributes, memo } from 'react';
+import { FC, HTMLAttributes, memo } from 'react';
 // Styles
 import './Icon.scss';
 
 // Component
-const Icon: FunctionComponent<HTMLAttributes<HTMLElement> & { icon: string }> = ({
-  icon,
-  className = ''
-}) => {
+interface Props extends HTMLAttributes<HTMLElement> {
+  icon: string;
+}
+const Icon: FC<Props> = ({ icon, className = '' }) => {
   return <i className={'material-icon material-icons-round ' + className}>{icon}</i>;
 };
 

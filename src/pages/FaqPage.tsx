@@ -1,5 +1,5 @@
 // Core
-import React, { FunctionComponent, Fragment, useState, ReactNode } from 'react';
+import { FC, Fragment, useState, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 // Styles
 import './FaqPage.scss';
@@ -13,7 +13,7 @@ import HungerFreeOk from '../img/hunger-free-ok.png';
 import OSDE from '../img/osde.png';
 import CodeForTulsa from '../img/code-for-tulsa.png';
 
-const QuestionAnswerBlock: FunctionComponent<{ question: ReactNode; answer: ReactNode }> = ({
+const QuestionAnswerBlock: FC<{ question: ReactNode; answer: ReactNode }> = ({
   question,
   answer,
 }) => {
@@ -38,7 +38,7 @@ const QuestionAnswerBlock: FunctionComponent<{ question: ReactNode; answer: Reac
 };
 
 // Component
-const FaqPage: FunctionComponent = () => {
+const FaqPage: FC = () => {
   const { t } = useTranslation();
 
   return (

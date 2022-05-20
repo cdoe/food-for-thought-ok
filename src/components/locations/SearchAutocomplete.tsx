@@ -1,5 +1,5 @@
 // Core
-import React, { FunctionComponent, useContext, useState, useRef } from 'react';
+import { FC, useContext, useState, useRef } from 'react';
 import { CurrentUserCtx } from '../../App';
 import { useTranslation } from 'react-i18next';
 import { History } from 'history';
@@ -13,11 +13,16 @@ import Loader from '../Loader';
 declare var google: any;
 
 // Component
-const SearchAutocomplete: FunctionComponent<{
+interface Props {
   history: History;
   autofocus?: boolean;
   redirectOnSuccess?: boolean;
-}> = ({ history, autofocus = false, redirectOnSuccess = false }) => {
+}
+const SearchAutocomplete: FC<Props> = ({
+  history,
+  autofocus = false,
+  redirectOnSuccess = false,
+}) => {
   const [currentUser, setCurrentUser] = useContext(CurrentUserCtx);
   const [sessionToken, setSessionToken] = useState(
     new google.maps.places.AutocompleteSessionToken()

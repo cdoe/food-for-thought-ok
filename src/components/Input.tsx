@@ -1,12 +1,13 @@
 // Core
-import React, { FunctionComponent, InputHTMLAttributes, memo, RefObject } from 'react';
+import { FC, InputHTMLAttributes, memo, RefObject } from 'react';
 // Styles
 import './Input.scss';
 
 // Component
-const Input: FunctionComponent<
-  InputHTMLAttributes<HTMLInputElement> & { forwardedRef?: RefObject<HTMLInputElement> }
-> = ({ forwardedRef, ...rest }) => {
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
+  forwardedRef?: RefObject<HTMLInputElement>;
+}
+const Input: FC<Props> = ({ forwardedRef, ...rest }) => {
   return <input className="input" ref={forwardedRef} {...rest} />;
 };
 

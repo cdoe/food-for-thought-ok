@@ -1,5 +1,5 @@
 // Core
-import React, { FunctionComponent, useContext } from 'react';
+import { FC, useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { MobileNavCtx } from '../App';
 import { useTranslation } from 'react-i18next';
@@ -12,7 +12,7 @@ import logo from '../img/food-for-thought-logo-words.png';
 import LanguageSelector from './LanguageSelector';
 
 // Component
-const MobileNav: FunctionComponent = () => {
+const MobileNav: FC = () => {
   const [isOpen, setIsOpen] = useContext(MobileNavCtx);
   const { t } = useTranslation();
 

@@ -1,12 +1,12 @@
 // Core
-import React, { FunctionComponent } from 'react';
+import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 // Styles
 import './PageFooter.scss';
 
 // Component
-const PageFooter: FunctionComponent = () => {
+const PageFooter: FC = () => {
   const { t } = useTranslation();
 
   return (

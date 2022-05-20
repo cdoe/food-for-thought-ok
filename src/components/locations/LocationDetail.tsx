@@ -1,5 +1,5 @@
 // Core
-import React, { FunctionComponent, HtmlHTMLAttributes, Fragment, memo } from 'react';
+import { FC, HtmlHTMLAttributes, Fragment, memo } from 'react';
 import Location from '../../types/location';
 import classnames from 'classnames';
 import { Helmet } from 'react-helmet';
@@ -17,12 +17,11 @@ import { metersToRoundedMiles } from '../../lib/distanceHelpers';
 import ClampLines from 'react-clamp-lines';
 
 // Component
-const LocationDetail: FunctionComponent<
-  {
-    location?: Location;
-    mobileExpanded?: boolean;
-  } & HtmlHTMLAttributes<HTMLDivElement>
-> = ({ location, mobileExpanded = false, ...rest }) => {
+interface Props extends HtmlHTMLAttributes<HTMLDivElement> {
+  location?: Location;
+  mobileExpanded?: boolean;
+}
+const LocationDetail: FC<Props> = ({ location, mobileExpanded = false, ...rest }) => {
   const { t, i18n } = useTranslation();
 
   // Text notifications not yet wired up

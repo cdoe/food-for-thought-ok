@@ -1,6 +1,6 @@
 // Core
-import React, {
-  FunctionComponent,
+import {
+  FC,
   Fragment,
   useState,
   useEffect,
@@ -41,7 +41,7 @@ import currentLocationIcon from '../img/current-location.png';
 import retinaCurrentLocationIcon from '../img/current-location@2x.png';
 import LocationStatus from '../components/locations/LocationStatus';
 
-const OpenNowFilter: FunctionComponent<{
+const OpenNowFilter: FC<{
   openNowFilter: boolean;
   setOpenNowFilter: Dispatch<SetStateAction<boolean>>;
 }> = ({ openNowFilter, setOpenNowFilter }) => {
@@ -109,10 +109,7 @@ const currentLocationLeafletIcon: Leaflet.IconOptions = {
 };
 
 // Component
-const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string }>> = ({
-  history,
-  match,
-}) => {
+const LocationsPage: FC<RouteComponentProps<{ locationId?: string }>> = ({ history, match }) => {
   const { t } = useTranslation();
 
   // currentUser (available app-wide context)
@@ -590,7 +587,7 @@ const LocationsPage: FunctionComponent<RouteComponentProps<{ locationId?: string
 };
 
 // Used in mobile toggler above
-const IconText: FunctionComponent<{ icon: string; text: string }> = ({ icon, text }) => (
+const IconText: FC<{ icon: string; text: string }> = ({ icon, text }) => (
   <Fragment>
     <Icon icon={icon} /> {text}
   </Fragment>

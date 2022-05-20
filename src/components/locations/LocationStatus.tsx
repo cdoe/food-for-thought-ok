@@ -1,5 +1,5 @@
 // Core
-import React, { FunctionComponent } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DateTime } from 'luxon';
 import { timeStringToDateTime } from '../../lib/dateTimeHelpers';
@@ -9,12 +9,13 @@ import './LocationStatus.scss';
 import classnames from 'classnames';
 
 // Component
-const LocationStatus: FunctionComponent<{
+interface Props {
   location: Location;
   small?: boolean;
   large?: boolean;
   lineWrapped?: boolean;
-}> = ({ location, small, large, lineWrapped }) => {
+}
+const LocationStatus: FC<Props> = ({ location, small, large, lineWrapped }) => {
   const { t, i18n } = useTranslation();
 
   // Status helpers

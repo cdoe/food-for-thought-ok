@@ -1,11 +1,14 @@
 // Core
-import React, { FunctionComponent } from 'react';
+import { FC, ReactNode } from 'react';
 // Styles
 import './PageBody.scss';
 
 // Component
-const PageBody: FunctionComponent = props => {
-  return <main className="PageBody">{props.children}</main>;
+interface Props {
+  children: ReactNode;
+}
+const PageBody: FC<Props> = ({ children }) => {
+  return <main className="PageBody">{children}</main>;
 };
 
 // Export

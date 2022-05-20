@@ -1,12 +1,5 @@
 // Core
-import React, {
-  FunctionComponent,
-  useState,
-  createContext,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-} from 'react';
+import { FC, useState, createContext, Dispatch, SetStateAction, useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import useSessionState from './hooks/useSessionState';
 import useFetchedLocationsFromGSheets from './lib/fetchLocationsFromGSheets';
@@ -43,7 +36,7 @@ const sheetName =
 const apiKey = process.env.REACT_APP_GOOGLE_API_KEY || ''; // Restricted to meals4kidsok.org and dev environment
 
 // Render very top-level App component
-const App: FunctionComponent = () => {
+const App: FC = () => {
   // Global currentUser state
   const [currentUser, setCurrentUser] = useSessionState(defaultCurrentUser, 'current-user');
 

@@ -1,5 +1,5 @@
 // Core
-import React, { FunctionComponent, Fragment } from 'react';
+import { FC, Fragment } from 'react';
 // Styles
 import './NondiscriminationPage.scss';
 // Layout
@@ -8,7 +8,7 @@ import PageBody from '../layout/PageBody';
 import PageFooter from '../layout/PageFooter';
 
 // Component
-const NondiscriminationPage: FunctionComponent = () => {
+const NondiscriminationPage: FC = () => {
   return (
     <Fragment>
       <MobileHeader />
@@ -27,7 +27,7 @@ const NondiscriminationPage: FunctionComponent = () => {
 export default NondiscriminationPage;
 
 // Component (spanish)
-export const NondiscriminationPageSpanish: FunctionComponent = () => {
+export const NondiscriminationPageSpanish: FC = () => {
   return (
     <Fragment>
       <MobileHeader />

@@ -1,11 +1,14 @@
 // Core
-import React, { FunctionComponent } from 'react';
+import { FC, ReactNode } from 'react';
 // Styles
 import './PageWrapper.scss';
 
 // Component
-const PageWrapper: FunctionComponent = props => {
-  return <div className="PageWrapper">{props.children}</div>;
+interface Props {
+  children: ReactNode;
+}
+const PageWrapper: FC<Props> = ({ children }) => {
+  return <div className="PageWrapper">{children}</div>;
 };
 
 // Export
