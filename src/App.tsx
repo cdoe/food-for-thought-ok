@@ -57,22 +57,21 @@ const App: FunctionComponent = () => {
     }
   }, [setCurrentUser]);
 
-  // If doesn't have previous location, get location from IP address and center to that location
-  // https://freegeoip.app/ (may have arbitrary limit for free use)
-  // We could possibly look into a paid solution like https://ipinfo.io/ or https://ipstack.com
+  // If doesn't have previous location, get location from IP address and center to that location via https://ip-api.com/
+  // We could possibly look into a paid solution like https://ipbase.com/ or https://ipinfo.io/ or https://ipstack.com
   useEffect(() => {
     if (!currentUser.latLng) {
       // aync functions must be wrapped inside `useEffect`
       (async () => {
-        const response = await fetch('https://freegeoip.app/json/');
+        const response = await fetch('http://ip-api.com/json/');
         const data = await response.json();
         // If in oklahoma, center to general area
-        if (data.region_code === 'OK' && data.latitude && data.longitude) {
+        if (data.region === 'OK' && data.lat && data.lon) {
           setCurrentUser(currentUser => ({
             ...currentUser,
-            latLng: [data.latitude, data.longitude],
-            geoQuery: `${data.city}, ${data.region_code} ${data.zip_code}`,
-            geoName: `${data.city}, ${data.region_code} ${data.zip_code}`,
+            latLng: [data.lat, data.lon],
+            geoQuery: `${data.city}, ${data.region} ${data.zip}`,
+            geoName: `${data.city}, ${data.region} ${data.zip}`,
           }));
         }
       })();
