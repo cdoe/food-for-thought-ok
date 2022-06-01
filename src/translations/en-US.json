@@ -100,6 +100,7 @@
       "canMealsBeTaken": "Can meals be taken home?",
       "noMealsTaken": "No, meals must be consumed on-site as outlined in state program guidelines.",
       "takeMealsHomeWaiver": "Due to federal waivers in place, families are now allowed to pick up the meals and take them home.",
+      "grabAndGoMeals": "Select school sites are eligible to offer grab and go meals until June 30. Please contact sites directly for more information. Starting July 1, all meals will need to be eaten on site.",
       "howDoIFindSite": "How do I find a site near me?",
       "findSiteStep_01": "Allow the map to obtain your location to find the sites closest to you.",
       "findSiteStep_02": "Select \"Find a location near me\" or enter your address or zip code in the search bar if location services are not enable on your device. The nearest sites should appear on the map.",

@@ -306,7 +306,7 @@ const LocationsPage: FC<RouteComponentProps<{ locationId?: string }>> = ({ histo
         {/* Covid-19 - notice */}
         {/* <div className="notice">{t('locations.covidResponse')}</div> */}
         {/* More locations coming soon - notice */}
-        {/* <div className="notice">{t('locations.moreSoon')}</div> */}
+        <div className="notice">{t('locations.moreSoon')}</div>
         {/* Some sites may close on July 4th - notice  */}
         {/* <div className="notice">{t('locations.julyFourthClosings')}</div> */}
         {/* Some sites may close on Good Friday - notice  */}

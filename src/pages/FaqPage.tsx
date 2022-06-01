@@ -65,12 +65,17 @@ const FaqPage: FC = () => {
 
           {/* 4. */}
           {/* Can meals be taken home? */}
+          {/* <QuestionAnswerBlock question={t('faq.canMealsBeTaken')} answer={t('faq.noMealsTaken')} /> */}
           {/* Temporary addendum for Covid-19 ( waiver allows meals to be taken home ) */}
-          <QuestionAnswerBlock
+          {/* <QuestionAnswerBlock
             question={t('faq.canMealsBeTaken')}
             answer={t('faq.takeMealsHomeWaiver')}
+          /> */}
+          {/* Supplementary temporary addendum for Covid-19 (some meals are grab and go until June 30) */}
+          <QuestionAnswerBlock
+            question={t('faq.canMealsBeTaken')}
+            answer={t('faq.grabAndGoMeals')}
           />
-          {/* <QuestionAnswerBlock question={t('faq.canMealsBeTaken')} answer={t('faq.noMealsTaken')} /> */}
 
           {/* 5. */}
           {/* How do I find a site near me? */}
