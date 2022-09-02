@@ -107,6 +107,12 @@ const LandingPage: FC<RouteComponentProps> = ({ history }) => {
                   click here
                 </a>
               </Trans>
+              <div className="tmp-grant-text">
+                We are grateful to our generous funders for helping fund outreach across the state
+                about summer meals. Tulsa-area outreach, including advertising, is supported in part
+                by federal award number SLT-1498 awarded to the City of Tulsa by the U.S. Department
+                of the Treasury.
+              </div>
             </p>
           </div>
           <PageFooter />
